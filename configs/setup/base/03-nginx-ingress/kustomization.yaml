@@ -16,11 +16,3 @@ patches:
       - op: add
         path: /metadata/annotations/ingressclass.kubernetes.io~1is-default-class
         value: "true"
-  # Use the host network to directly expose 80 and 443, without needing a high port numbered nodeport or loadbalancer
-  - target:
-      kind: Deployment
-      name: ingress-nginx-controller
-    patch: |-
-      - op: add
-        path: /spec/template/spec/hostNetwork
-        value: true
