@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-subdir-provisioner
+  namespace: argocd
+spec:
+  project: setup
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/setup/nfs-subdir-provisioner
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nfs-subdir-provisioner-system
+
