@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8s-gateway
+  namespace: argocd
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: git@github.com:Frontenac-Technology-Services/k8s-configs.git
+    targetRevision: master
+    path: configs/setup/k8s-gateway
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: k8s-gateway
+
