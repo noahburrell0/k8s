@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../base
+
+patchesStrategicMerge:
+  - argocd-install.yaml
+
+resources:
+  - argocd-ingress.yaml
+
+namespace: argocd
+
+patches:
+  # Add pod exec functionality to CR to enable websocket terminal in ArgoCD
+  - target:
+      kind: ClusterRole
+      name: argocd-server
+    patch: |-
+      - op: add
+        path: /rules/-
+        value:
+          apiGroups:
+          - ""
+          resources:
+          - pods/exec
+          verbs:
+          - create

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: setup
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/setup
+    kustomize: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd  
