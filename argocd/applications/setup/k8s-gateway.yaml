@@ -4,7 +4,7 @@ metadata:
   name: k8s-gateway
   namespace: argocd
 spec:
-  project: default
+  project: setup
   syncPolicy:
     automated: {}
     syncOptions:
