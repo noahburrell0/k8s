@@ -7,7 +7,7 @@ spec:
   syncPolicy:
     automated: {}
   source:
-    repoURL: git@github.com:noahburrell0/k8s.git
+    repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: argocd
     directory:
