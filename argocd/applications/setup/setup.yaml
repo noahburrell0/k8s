@@ -7,8 +7,8 @@ spec:
   project: default
   syncPolicy:
     automated: {}
-  source:
-    repoURL: https://github.com/noahburrell0/k8s.git
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/setup/base
   destination:
