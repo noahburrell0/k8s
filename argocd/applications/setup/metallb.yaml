@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: setup
+  namespace: argocd
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/setup/metallb
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metallb-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
+    - kind: CustomResourceDefinition
+      group: apiextensions.k8s.io
+      jsonPointers:
+      - /spec/conversion/webhook/clientConfig/caBundle
