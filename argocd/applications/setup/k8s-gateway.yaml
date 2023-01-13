@@ -10,7 +10,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - repoURL: git@github.com:Frontenac-Technology-Services/k8s-configs.git
+  - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: master
     path: configs/setup/k8s-gateway
   destination:
