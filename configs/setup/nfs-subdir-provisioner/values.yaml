@@ -4,7 +4,7 @@ nfs-rwx:
     path: /Media/Kubernetes
   storageClass:
     provisionerName: nfs-rwx
-    name: nfs
+    name: nfs-rwx
     reclaimPolicy: Retain
     accessModes: ReadWriteMany
 
