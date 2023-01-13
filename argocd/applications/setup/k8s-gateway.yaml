@@ -11,7 +11,7 @@ spec:
       - CreateNamespace=true
   sources:
   - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: master
+    targetRevision: main
     path: configs/setup/k8s-gateway
   destination:
     server: https://kubernetes.default.svc
