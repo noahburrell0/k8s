@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - deploy.yaml
+  - loadbalancer.yaml
 
 namespace: ingress-nginx
 
