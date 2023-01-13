@@ -9,10 +9,13 @@ spec:
     automated: {}
     syncOptions:
       - CreateNamespace=true
-  source:
-    repoURL: https://github.com/noahburrell0/k8s.git
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/setup/metallb
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/setup/metallb/configs
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system

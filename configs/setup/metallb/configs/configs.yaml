@@ -1,0 +1,31 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: bgp-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 172.19.0.0/16
+
+---
+
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: bgp-advertisement
+spec:
+  ipAddressPools:
+  - bgp-pool
+  aggregationLength: 32 # advertise each route as a /32
+
+---
+
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: tnsr-peer
+spec:
+  myASN: 64512
+  peerASN: 64512
+  peerAddress: 192.168.129.1
+  
