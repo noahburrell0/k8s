@@ -20,13 +20,17 @@ data:
     hs.message = "Controller doesn't report resource status"
     return hs
   url: "https://argocd.example.com"
-
+  accounts.noah: apiKey, login
+  accounts.noah.enabled: "true"
 ---
 
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-notifications-cm
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-rbac-cm
   namespace: argocd
 data:
-  # Will be used later
+  policy.default: role:admin
