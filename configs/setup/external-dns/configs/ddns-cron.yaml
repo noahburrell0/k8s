@@ -48,4 +48,4 @@ spec:
               value: proxied.ip.burrell.tech
             - name: IP_HOSTNAME_UNPROXIED
               value: unproxied.ip.burrell.tech
-          restartPolicy: OnFailure
+          restartPolicy: Never
