@@ -1,0 +1,15 @@
+# MySQL Wordpress Cluster
+apiVersion: mysql.presslabs.org/v1alpha1
+kind: MysqlCluster
+metadata:
+  name: wordpress-cluster
+spec:
+  replicas: 2
+  secretName: mysql-secret
+  volumeSpec:
+    persistentVolumeClaim:
+      storageClassName: nfs-rwo
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 50Gi 
