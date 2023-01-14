@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: ip
-            image: bitnami/kubectl:1.26.0
+            image: alpine/k8s:1.26.0
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
@@ -48,6 +48,4 @@ spec:
               value: proxied.ip.burrell.tech
             - name: IP_HOSTNAME_UNPROXIED
               value: unproxied.ip.burrell.tech
-            - name: KUBECONFIG
-              value: /var/run/secrets/kubernetes.io/serviceaccount
           restartPolicy: OnFailure
