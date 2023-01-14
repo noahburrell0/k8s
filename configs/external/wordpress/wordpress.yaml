@@ -55,7 +55,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs
+  storageClassName: nfs-rwx
   resources:
     requests:
       storage: 100Gi
