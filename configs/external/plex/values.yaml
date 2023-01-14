@@ -19,7 +19,7 @@ plex:
       type: LoadBalancer
       annotations:
         metallb.universe.tf/address-pool: bgp-pool
-        tnsr.frontenac.tech/tnsrACL: k8s-acl
+        tnsr.burrell.tech/tnsrACL: k8s-acl
       externalTrafficPolicy: Local
       ports:
         controller:
