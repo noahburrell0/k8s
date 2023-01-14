@@ -23,5 +23,5 @@ spec:
               name: https
   tls:
   - hosts:
-    - argocd.k8s.frontenac.tech
+    - argocd.k8s.burrell.tech
     secretName: argocd-secret
