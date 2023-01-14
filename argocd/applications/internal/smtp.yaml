@@ -4,7 +4,7 @@ metadata:
   name: smtp
   namespace: argocd
 spec:
-  project: setup
+  project: internal
   syncPolicy:
     automated: {}
     syncOptions:
