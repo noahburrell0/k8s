@@ -1,0 +1,50 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ip
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: ip
+            image: bitnami/kubectl
+            command:
+            - /bin/sh
+            - -c
+            - |
+              cat << EOF > /tmp/ingress.yml && kubectl apply -f /tmp/ingress.yml
+              apiVersion: networking.k8s.io/v1
+              kind: Ingress
+              metadata:
+                name: ip
+                annotations:
+                  kubernetes.io/ingress.class: nginx
+                  external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_PROXIED'
+                  external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
+                  external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+              spec:
+                rules:
+                - host: '$IP_HOSTNAME_PROXIED'
+              ---
+              apiVersion: networking.k8s.io/v1
+              kind: Ingress
+              metadata:
+                name: ip
+                annotations:
+                  kubernetes.io/ingress.class: nginx
+                  external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_UNPROXIED'
+                  external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
+                  external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
+              spec:
+                rules:
+                - host: '$IP_HOSTNAME_UNPROXIED'
+              EOF
+            env:
+            - name: IP_HOSTNAME_PROXIED
+              value: proxied.ip.burrell.tech
+            - name: IP_HOSTNAME_UNPROXIED
+              value: unproxied.ip.burrell.tech
+          restartPolicy: OnFailure
