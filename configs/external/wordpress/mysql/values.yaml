@@ -5,3 +5,5 @@ mysql-operator:
     secretName: wordpress-mysql-operator-orc
     persistence:
       storageClass: nfs-rwo
+  podDisruptionBudget:
+    enabled: false
