@@ -1,7 +1,0 @@
-# Mysql Operator
-mysql-operator:
-  watchNamespace: wordpress
-  orchestrator:
-    secretName: wordpress-mysql-operator-orc
-    persistence:
-      storageClass: nfs-rwo
