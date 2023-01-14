@@ -1,0 +1,42 @@
+ombi:
+
+  image:
+    pullPolicy: IfNotPresent
+    
+  env:
+    TZ: America/Toronto
+    PGID: 0
+    PUID: 0
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+      hosts:
+        - host: ombi.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: ombi.burrell.tech
+        hosts:
+        - ombi.burrell.tech
+
+  persistence:
+    config:
+      enabled: true
+      type: custom
+      volumeSpec:
+        iscsi:
+          targetPortal: 192.168.129.254:3260
+          iqn: iqn.2022-07.tech.frontenac.k8s.ombi.iscsi:Media.k8s-ombi
+          lun: 1
+          fsType: ext4
+          readOnly: false
+
