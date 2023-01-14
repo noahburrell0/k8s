@@ -5,7 +5,6 @@ external-dns:
   txtPrefix: external_dns_
   extraArgs:
     - --domain-filter=burrell.tech
-    - --cloudflare-proxied
 
   env:
     - name: CF_API_KEY
