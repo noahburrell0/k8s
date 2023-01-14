@@ -45,7 +45,7 @@ kind: ConfigMap
 metadata:
   name: tnsr-controller-cm
 data:
-  SERVER: "https://tnsr.burrell.tech"
+  SERVER: "https://192.168.1.9"
   USER: "tnsr"
 ---
 apiVersion: bitnami.com/v1alpha1
