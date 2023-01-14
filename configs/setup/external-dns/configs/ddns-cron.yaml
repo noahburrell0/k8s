@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: ip
-            image: bitnami/kubectl
+            image: bitnami/kubectl:1.26.0
             imagePullPolicy: IfNotPresent
             command:
             - install_packages curl ca-certificates
