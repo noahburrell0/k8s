@@ -1,0 +1,38 @@
+ghost:
+  ghostUsername: noah
+  ghostEmail: noah@burrell.tech
+  existingSecret: ghost-credentials
+  ghostBlogTitle: Burrell Tech
+  ghostHost: https://blog.burrell.tech
+  ghostEnableHttps: true
+  allowEmptyPassword: false
+
+  smtpHost: smtp.smtp
+  smtpPort: 25
+
+  ingress:
+    enabled: true
+    hostname: blog.burrell.tech
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+      nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+      nginx.ingress.kubernetes.io/proxy-body-size: 40m
+      external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+    tls: true
+
+  persistence:
+    enabled: true
+    storageClass: nfs-rwo
+    size: 50Gi
+
+  mysql:
+    enabled: true
+    auth:
+      existingSecret: ghost-credentials
+    primary:
+      persistence:
+        enabled: true
+        storageClass: nfs-rwo
+        size: 25Gi

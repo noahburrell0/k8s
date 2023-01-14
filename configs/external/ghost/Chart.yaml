@@ -1,0 +1,10 @@
+apiVersion: v2
+name: ghost
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+
+dependencies:
+- name: ghost
+  version: 19.1.58
+  repository: https://charts.bitnami.com/bitnami
