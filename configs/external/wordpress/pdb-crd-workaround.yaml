@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   name: poddisruptionbudgets.policy
 spec:
-  group: policy
+  group: policy.
   names:
     kind: PodDisruptionBudget
     plural: poddisruptionbudgets
