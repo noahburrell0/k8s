@@ -16,6 +16,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: ddns
+  namespace: external-dns
 roleRef:
   kind: Role
   name: ddns
