@@ -79,6 +79,6 @@ spec:
             - name: IP_HOSTNAME_PROXIED
               value: burrell.tech
             - name: IP_HOSTNAME_UNPROXIED
-              value: unproxied.ip.burrell.tech
+              value: unproxied.burrell.tech
           restartPolicy: OnFailure
         
