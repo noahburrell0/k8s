@@ -78,7 +78,7 @@ Most of the applications being deployed rely heavily on Helm Charts and Docker i
 
 # Hire Me!
 
-Need help getting started with Kubernetes (or DevOps, or GitOps), or have a project you need an extra set of hands with? I'm available for freelance and consulting work! I'm a CKA certified Kubernetes (and Linux) administrator and DevOps engineer during the day in the financial services industry, and I also do a lot of this sort of stuff in my spare time for fun.
+Need help getting started with Kubernetes (or DevOps, or GitOps), or have a project you need an extra set of hands with? I'm available for freelance and consulting work! I'm a CKA certified Kubernetes (and Linux) administrator and DevOps engineer during the day in the financial services industry, and I also do a lot of the same sort of stuff in my spare time for fun.
 
 ## Areas of Expertise
 
