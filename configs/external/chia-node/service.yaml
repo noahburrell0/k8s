@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/address-pool: bgp-pool
+    tnsr.frontenac.tech/tnsrACL: k8s-acl
+  labels:
+    app.kubernetes.io/instance: chia-node
+    app.kubernetes.io/name: chia-node
+    app.kubernetes.io/version: 1.6.0
+  name: chia-node
+  namespace: chia-node
+spec:
+  externalTrafficPolicy: Local
+  ports:
+    - name: node
+      port: 8444
+      protocol: TCP
+      targetPort: 8444
+  selector:
+    app.kubernetes.io/instance: chia-node
+    app.kubernetes.io/name: chia-node
+  type: LoadBalancer
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/address-pool: bgp-pool
+    coredns.io/hostname: chia-farmer.k8s.frontenac.tech
+  labels:
+    app.kubernetes.io/instance: chia-node
+    app.kubernetes.io/name: chia-node
+    app.kubernetes.io/version: 1.6.0
+  name: chia-farmer
+  namespace: chia-node
+spec:
+  externalTrafficPolicy: Local
+  ports:
+    - name: farmer
+      port: 8447
+      protocol: TCP
+      targetPort: 8447
+  selector:
+    app.kubernetes.io/instance: chia-node
+    app.kubernetes.io/name: chia-node
+  type: LoadBalancer
