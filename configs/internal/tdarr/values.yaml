@@ -1,0 +1,83 @@
+tdarr:
+
+  env:
+    TZ: America/Toronto
+    PUID: 0
+    PGUID: 0
+
+  service:
+    server:       
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        metallb.universe.tf/address-pool: bgp-pool
+        coredns.io/hostname: server.tdarr.home.burrell.tech
+      externalTrafficPolicy: Local
+      ports:
+        controller-lb:
+          enabled: true
+          port: 8266
+          nodePort: 8266
+          targetPort: 8266
+          protocol: TCP
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
+        external-dns.alpha.kubernetes.io/exclude: 'true'
+      hosts:
+        - host: tdarr.home.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: tdarr.home.burrell.tech
+        hosts:
+        - tdarr.home.burrell.tech
+  
+  node:
+    enabled: true
+    id: k8s-node
+    image:
+      tag: 2.00.18.2
+    resources:
+      limits:
+        cpu: 4
+        memory: 4Gi
+      requests:
+        cpu: 1m
+        memory: 1Mi
+
+  persistence:
+    config:
+      enabled: true
+      storageClass: nfs-rwx
+      size: 10Gi
+      accessMode: ReadWriteMany
+    data:
+      enabled: true
+      storageClass: nfs-rwx
+      size: 30Gi
+      accessMode: ReadWriteMany
+    media:
+      enabled: true
+      type: nfs
+      server: 192.168.129.254
+      path: /Media
+      mountPath: /media
+
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
+
+  probes:
+    startup:
+      spec:
+        failureThreshold: 2000
