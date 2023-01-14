@@ -12,7 +12,7 @@ metadata:
   name: wordpress-ingress
 spec:
   rules:
-    - host: blog.frontenac.tech
+    - host: blog.burrell.tech
       http:
         paths:
           - backend:
@@ -24,8 +24,8 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - blog.frontenac.tech
-      secretName: blog.frontenac.tech-tls
+        - blog.burrell.tech
+      secretName: blog.burrell.tech-tls
 
 ---
 
