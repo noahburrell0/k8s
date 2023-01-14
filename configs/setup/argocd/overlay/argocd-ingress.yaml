@@ -24,4 +24,4 @@ spec:
   tls:
   - hosts:
     - argocd.k8s.burrell.tech
-    secretName: argocd-secret
+    secretName: argocd.k8s.burrell.tech-tls
