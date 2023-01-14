@@ -1,0 +1,84 @@
+plex:
+
+  image:
+    pullPolicy: IfNotPresent
+    repository: ghcr.io/onedr0p/plex
+    tag: 1.29.0.6244-819d3678c
+
+  hostNetwork: true
+
+  env:
+    TZ: America/Toronto
+
+  service:
+    main: 
+      primary: false
+      enabled: false
+    lb-bgp: 
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        metallb.universe.tf/address-pool: bgp-pool
+        tnsr.frontenac.tech/tnsrACL: k8s-acl
+      externalTrafficPolicy: Local
+      ports:
+        controller:
+          enabled: true
+          port: 32400
+          nodePort: 32400
+          targetPort: 32400
+          protocol: TCP
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
+
+      hosts:
+        - host: plex.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: plex.burrell.tech
+        hosts:
+        - plex.burrell.tech
+
+  persistence:
+    config:
+      enabled: true
+      type: custom
+      volumeSpec:
+        iscsi:
+          targetPortal: 192.168.129.254:3260
+          iqn: iqn.2022-07.tech.frontenac.k8s.plex.iscsi:Media.k8s-plex
+          lun: 1
+          fsType: ext4
+          readOnly: false
+    transcode:
+      enabled: true
+      type: emptyDir
+      size: 16Gi
+      mountPath: /transcode
+    media-tv:
+      enabled: true
+      type: nfs
+      server: 192.168.129.254
+      path: /Media/Television
+      mountPath: /mnt/Media/Television
+    media-movies: 
+      enabled: true
+      type: nfs
+      server: 192.168.129.254
+      path: /Media/Movies
+      mountPath: /mnt/Media/Movies
+
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 0
