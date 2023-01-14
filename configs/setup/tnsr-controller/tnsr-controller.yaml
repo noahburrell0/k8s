@@ -16,7 +16,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-        - image: 'ghcr.io/noahburrell0/tnsr-controller:dev-48473d47bf829a3f72f0ccfe256542bdd44bc006'
+        - image: 'ghcr.io/noahburrell0/tnsr-controller:dev-1fcc85aa190dfcfb651d6d2d420c4973a4dd95a8'
           imagePullPolicy: IfNotPresent
           name: tnsr-controller
           ports:
