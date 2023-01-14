@@ -27,17 +27,3 @@ patches:
           - pods/exec
           verbs:
           - create
-  # Preserve Source IP
-  - target:
-      kind: ClusterRole
-      name: argocd-server
-    patch: |-
-      - op: add
-        path: /rules/-
-        value:
-          apiGroups:
-          - ""
-          resources:
-          - pods/exec
-          verbs:
-          - create
