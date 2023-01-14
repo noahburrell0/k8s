@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: main-site
+  namespace: argocd
+spec:
+  project: external
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/external/main-site
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: main-site
+
