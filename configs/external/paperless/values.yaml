@@ -1,0 +1,77 @@
+paperless:
+
+  image:
+    pullPolicy: IfNotPresent
+    
+  env:
+    PAPERLESS_TIME_ZONE: America/New_York
+    PAPERLESS_OCR_LANGUAGE: eng
+    PAPERLESS_CONSUMER_POLLING: 60
+    PAPERLESS_REDIS: redis://paperless-redis-headless:6379
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+
+      hosts:
+        - host: paperless.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: paperless.burrell.tech
+        hosts:
+        - paperless.burrell.tech
+
+  persistence:
+    consume:
+      enabled: true
+      type: nfs
+      server: storage.burrell.tech
+      path: /Media/Storage/paperless-ng/consume
+      mountPath: /usr/src/paperless/consume
+    data:
+      enabled: true
+      type: custom
+      volumeSpec:
+        iscsi:
+          targetPortal: 192.168.129.254:3260
+          iqn: iqn.2022-07.tech.frontenac.k8s.paperless.iscsi:Media.k8s-paperless
+          lun: 1
+          fsType: ext4
+          readOnly: false
+    media:
+      enabled: true
+      storageClass: nfs-rwx
+      size: 25Gi
+      mountPath: /usr/src/paperless/media
+    export:
+      enabled: true
+      storageClass: nfs-rwx
+      size: 25Gi
+      mountPath: /usr/src/paperless/export
+
+  redis:
+    enabled: true
+
+    global:
+      storageClass: nfs-rwx
+
+    image:
+      pullPolicy: IfNotPresent
+      
+    architecture: standalone
+    auth:
+      enabled: false
+
+    persistence:
+      enabled: true
+      storageClass: nfs-rwx
