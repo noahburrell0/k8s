@@ -89,6 +89,7 @@ Need help getting started with Kubernetes (or DevOps, or GitOps), or have a proj
 - General GitOps/DevOps principles
 - Linux system administration
 - Enterprise scale networking
+- GCP and Azure
 
 ## Contact Me
 
