@@ -1,0 +1,16 @@
+apiVersion: metacontroller.k8s.io/v1alpha1
+kind: CompositeController
+metadata:
+  name: tnsr-nat-composite
+spec:
+  generateSelector: true
+  parentResource:
+    apiVersion: burrell.tech/v1
+    resource: tnsrnats
+  hooks:
+    sync:
+      webhook:
+        url: http://tnsr-controller.tnsr-controller/nat/sync
+    finalize:
+      webhook:
+        url: http://tnsr-controller.tnsr-controller/nat/finalize

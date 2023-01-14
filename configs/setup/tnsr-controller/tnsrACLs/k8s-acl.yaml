@@ -1,0 +1,8 @@
+apiVersion: burrell.tech/v1
+kind: tnsrACL
+metadata:
+  name: k8s-acl
+spec:
+  name: k8s-acl
+  interface: WAN
+  sequence: 101
