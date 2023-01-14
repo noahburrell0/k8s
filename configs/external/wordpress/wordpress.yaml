@@ -48,7 +48,7 @@ spec:
 ---
 
 # PVC
-ind: PersistentVolumeClaim
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: wordpress-pvc
