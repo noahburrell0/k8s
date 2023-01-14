@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: ddns
 rules:
-- apiGroups: [""]
+- apiGroups: ["networking.k8s.io"]
   resources: ["ingresses"]
   verbs: ["*"]
 
