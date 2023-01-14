@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: ddns
 rules:
-- apiGroups: [""] # "" indicates the core API group
+- apiGroups: [""]
   resources: ["ingresses"]
   verbs: ["*"]
 
@@ -15,11 +15,18 @@ metadata:
   name: ddns
 subjects:
 - kind: ServiceAccount
-  name: external-dns
+  name: ddns
 roleRef:
   kind: Role
   name: ddns
   apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ddns
 
 ---
 
@@ -33,6 +40,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: ddns
           containers:
           - name: ddns
             image: alpine/k8s:1.26.0
@@ -47,7 +55,6 @@ spec:
               metadata:
                 name: ip-proxied
                 annotations:
-                  kubernetes.io/ingress.class: nginx
                   external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_PROXIED'
                   external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
                   external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
@@ -60,7 +67,6 @@ spec:
               metadata:
                 name: ip-unproxied
                 annotations:
-                  kubernetes.io/ingress.class: nginx
                   external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_UNPROXIED'
                   external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
                   external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
