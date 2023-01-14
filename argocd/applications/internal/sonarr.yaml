@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarr
+  namespace: argocd
+spec:
+  project: internal
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/internal/sonarr
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sonarr
+

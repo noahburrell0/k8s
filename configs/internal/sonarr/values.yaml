@@ -1,0 +1,57 @@
+sonarr:
+
+  image:
+    pullPolicy: IfNotPresent
+    
+  env:
+    TZ: America/Toronto
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
+        nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        external-dns.alpha.kubernetes.io/exclude: 'true'
+      hosts:
+        - host: sonarr.home.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: sonarr.home.burrell.tech
+        hosts:
+        - sonarr.home.burrell.tech
+
+  persistence:
+    media:
+      enabled: true
+      type: nfs
+      server: storage.burrell.tech
+      path: /Media/Television
+      mountPath: /media
+    nzbget:
+      enabled: true
+      type: nfs
+      server: storage.burrell.tech
+      path: /Media/Kubernetes/nzbget
+      mountPath: /nzbget
+    config:
+      enabled: true
+      type: custom
+      volumeSpec:
+        iscsi:
+          targetPortal: 192.168.129.254:3260
+          iqn: iqn.2022-07.tech.frontenac.k8s.sonarr.iscsi:Media.k8s-sonarr
+          lun: 1
+          fsType: ext4
+          readOnly: false
+
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
