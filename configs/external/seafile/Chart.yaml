@@ -1,0 +1,13 @@
+apiVersion: v2
+name: seafile
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+
+dependencies:
+- name: seafile
+  version: 2.2.2
+  repository: https://k8s-at-home.com/charts/
+- name: memcached
+  version: 6.1.4
+  repository: https://charts.bitnami.com/bitnami

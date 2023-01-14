@@ -1,0 +1,82 @@
+seafile:
+
+  image: 
+    repository: docker.seadrive.org/seafileltd/seafile-pro-mc
+    tag: 9.0.5
+
+  imagePullSecrets:
+    - name: image-pull-secret
+
+  env:
+    SEAFILE_ADMIN_EMAIL: noah@burrell.tech
+    SEAFILE_SERVER_HOSTNAME: seafile.burrell.tech
+    SEAFILE_ADMIN_PASSWORD:
+      valueFrom:
+       secretKeyRef:
+         name: seafile-sealed-secret
+         key: SEAFILE_ADMIN_PASSWORD
+    DB_ROOT_PASSWD:
+      valueFrom:
+       secretKeyRef:
+         name: seafile-sealed-secret
+         key: DB_ROOT_PASSWD
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+
+      hosts:
+        - host: seafile.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: seafile.burrell.tech
+        hosts:
+        - seafile.burrell.tech
+    sso:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true" 
+        nginx.ingress.kubernetes.io/permanent-redirect: "https://seafile.burrell.tech/sso/?next=/"  
+      hosts:
+        - host: seafile.burrell.tech
+          paths:
+          - path: /accounts/login/
+            pathType: Prefix
+      tls:
+      - secretName: seafile.burrell.tech
+        hosts:
+        - seafile.burrell.tech
+
+  persistence:
+    shared:
+      enabled: true
+      type: pvc
+      storageClass: nfs-rwx
+      accessMode: ReadWriteMany
+      size: 8Ti
+
+  mariadb:
+    enabled: true
+    architecture: standalone
+    auth:
+      database: seafile
+      username: seafile
+      existingSecret: seafile-sealed-secret
+    primary:
+      persistence:
+        enabled: true
+        storageClass: nfs-rwx
+        size: 25Gi
+
+memcached: {}
