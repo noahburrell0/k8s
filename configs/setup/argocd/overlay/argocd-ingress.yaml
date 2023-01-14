@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"  # Fixes infinite 307 redirects.
     cert-manager.io/cluster-issuer: letsencrypt # Generate a letsencrypt cert when cert-manager becomes available
-    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16" # Forbid access from external networks
+    # nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16" # Forbid access from external networks
     external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
 spec:
   ingressClassName: nginx
