@@ -2,7 +2,7 @@ ghost:
   ghostUsername: noah
   ghostEmail: noah@burrell.tech
   existingSecret: ghost-credentials
-  ghostBlogTitle: Burrell Tech
+  ghostBlogTitle: The Burrell Blog
   ghostHost: https://blog.burrell.tech
   ghostEnableHttps: true
   allowEmptyPassword: false
