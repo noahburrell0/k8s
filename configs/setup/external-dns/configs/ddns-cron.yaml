@@ -1,3 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ddns
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["ingresses"]
+  verbs: ["*"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ddns
+subjects:
+- kind: ServiceAccount
+  name: external-dns
+roleRef:
+  kind: Role
+  name: ddns
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
 apiVersion: batch/v1
 kind: CronJob
 metadata:
