@@ -11,6 +11,7 @@ spec:
           containers:
           - name: ip
             image: bitnami/kubectl
+            imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
             - -c
