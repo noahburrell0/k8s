@@ -5,6 +5,7 @@ external-dns:
   txtPrefix: external_dns_
   extraArgs:
     - --domain-filter=burrell.tech
+    - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
 
   env:
     - name: CF_API_KEY
