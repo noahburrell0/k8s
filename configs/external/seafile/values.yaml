@@ -31,6 +31,7 @@ seafile:
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/proxy-body-size: 1024m
         external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
 
       hosts:
         - host: seafile.burrell.tech
