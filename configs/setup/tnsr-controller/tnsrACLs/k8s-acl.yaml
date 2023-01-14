@@ -5,4 +5,4 @@ metadata:
 spec:
   name: k8s-acl
   interface: WAN
-  sequence: 101
+  sequence: 100
