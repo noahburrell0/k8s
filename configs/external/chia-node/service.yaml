@@ -3,7 +3,7 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/address-pool: bgp-pool
-    tnsr.frontenac.tech/tnsrACL: k8s-acl
+    tnsr.burrell.tech/tnsrACL: k8s-acl
   labels:
     app.kubernetes.io/instance: chia-node
     app.kubernetes.io/name: chia-node
@@ -29,7 +29,7 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/address-pool: bgp-pool
-    coredns.io/hostname: chia-farmer.k8s.frontenac.tech
+    coredns.io/hostname: chia-farmer.k8s.burrell.tech
   labels:
     app.kubernetes.io/instance: chia-node
     app.kubernetes.io/name: chia-node
