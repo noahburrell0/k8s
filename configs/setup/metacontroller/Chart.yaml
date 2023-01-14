@@ -1,0 +1,11 @@
+apiVersion: v2
+name: metacontroller
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+
+dependencies:
+- alias: metacontroller
+  name: metacontroller-helm
+  version: v4.5.2
+  repository: oci://ghcr.io/metacontroller
