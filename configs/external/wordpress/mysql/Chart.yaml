@@ -6,5 +6,5 @@ appVersion: "0.0.1"
 
 dependencies:
 - name: mysql-operator
-  version: 0.6.1
+  version: 0.6.2
   repository: https://helm-charts.bitpoke.io
