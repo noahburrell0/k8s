@@ -1,5 +1,6 @@
 minio:
   existingSecret: minio-credentials
+  replicas: 3
   persistence:
     storageClass: nfs-rwo
     accessMode: ReadWriteOnce
