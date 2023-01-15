@@ -14,14 +14,40 @@ metadata:
 data:
   exec.enabled: "true"
   exec.shells: "bash,sh,powershell,cmd,dash,ash,ksh"
+  statusbadge.enabled: "true"
   resource.customizations.health.bitnami.com_SealedSecret: |
     hs = {}
     hs.status = "Healthy"
     hs.message = "Controller doesn't report resource status"
     return hs
-  url: "https://argocd.example.com"
+  url: "https://argocd.k8s.burrell.tech"
   accounts.noah: apiKey, login
   accounts.noah.enabled: "true"
+  dex.config: |
+  connectors:
+  - type: ldap
+    name: burrell.tech
+    id: ad
+    config:
+      host: ad.burrell.tech:389
+      insecureNoSSL: true
+      insecureSkipVerify: true
+      bindDN: "$argocd-ldap-secret:dex.ldap.bindDN"
+      bindPW: "$argocd-ldap-secret:dex.ldap.bindPW"
+      usernamePrompt: Username
+      userSearch:
+        baseDN: "OU=Users,DC=burrell,DC=tech"
+        filter: ""
+        username: sAMAccountName
+        idAttr: distinguishedName
+        emailAttr: mail
+        nameAttr: displayName
+      groupSearch:
+        baseDN: "OU=Users,DC=empire,DC=corp"
+        filter: ""
+        userAttr: distinguishedName
+        groupAttr: member
+        nameAttr: name
 ---
 
 apiVersion: v1
@@ -33,4 +59,7 @@ metadata:
   name: argocd-rbac-cm
   namespace: argocd
 data:
-  policy.default: role:admin
+  policy.default: role:none
+  scopes: '[groups, email]'
+  policy.csv: |
+    g, ArgoCD, role:admin
