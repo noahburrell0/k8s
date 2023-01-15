@@ -14,7 +14,7 @@ spec:
     path: configs/external/minio
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/external/configs
+    path: configs/external/minio/configs
   destination:
     server: https://kubernetes.default.svc
     namespace: minio
