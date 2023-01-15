@@ -24,30 +24,30 @@ data:
   accounts.noah: apiKey, login
   accounts.noah.enabled: "true"
   dex.config: |
-  connectors:
-  - type: ldap
-    name: burrell.tech
-    id: ad
-    config:
-      host: ad.burrell.tech:389
-      insecureNoSSL: true
-      insecureSkipVerify: true
-      bindDN: "$argocd-ldap-secret:dex.ldap.bindDN"
-      bindPW: "$argocd-ldap-secret:dex.ldap.bindPW"
-      usernamePrompt: Username
-      userSearch:
-        baseDN: "OU=Users,DC=burrell,DC=tech"
-        filter: ""
-        username: sAMAccountName
-        idAttr: distinguishedName
-        emailAttr: mail
-        nameAttr: displayName
-      groupSearch:
-        baseDN: "OU=Users,DC=empire,DC=corp"
-        filter: ""
-        userAttr: distinguishedName
-        groupAttr: member
-        nameAttr: name
+    connectors:
+    - type: ldap
+      name: burrell.tech
+      id: ad
+      config:
+        host: ad.burrell.tech:389
+        insecureNoSSL: true
+        insecureSkipVerify: true
+        bindDN: "$argocd-ldap-secret:dex.ldap.bindDN"
+        bindPW: "$argocd-ldap-secret:dex.ldap.bindPW"
+        usernamePrompt: Username
+        userSearch:
+          baseDN: "OU=Users,DC=burrell,DC=tech"
+          filter: ""
+          username: sAMAccountName
+          idAttr: distinguishedName
+          emailAttr: mail
+          nameAttr: displayName
+        groupSearch:
+          baseDN: "OU=Users,DC=empire,DC=corp"
+          filter: ""
+          userAttr: distinguishedName
+          groupAttr: member
+          nameAttr: name
 ---
 
 apiVersion: v1
