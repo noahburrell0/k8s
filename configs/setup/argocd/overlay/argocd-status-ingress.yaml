@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-status-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"  # Fixes infinite 307 redirects.
+    cert-manager.io/cluster-issuer: letsencrypt # Generate a letsencrypt cert when cert-manager becomes available
+    external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app-status.burrell.tech
+    http:
+      paths:
+      - path: /api/badge
+        pathType: Exact
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              name: https
+  tls:
+  - hosts:
+    - app-status.burrell.tech
+    secretName: app-status.burrell.tech-tls
