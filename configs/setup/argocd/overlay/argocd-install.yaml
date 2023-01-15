@@ -21,8 +21,6 @@ data:
     hs.message = "Controller doesn't report resource status"
     return hs
   url: "https://argocd.k8s.burrell.tech"
-  accounts.noah: apiKey, login
-  accounts.noah.enabled: "true"
   dex.config: |
     connectors:
     - type: ldap
