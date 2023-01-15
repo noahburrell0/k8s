@@ -20,3 +20,6 @@ minio:
       - secretName: minio.k8s.burrell.tech-tls
         hosts:
         - minio.k8s.burrell.tech
+  resources:
+    requests:
+      memory: 4Gi
