@@ -14,21 +14,6 @@ Applications are divided into ArgoCD projects by their respective types.
   - ArgoCD Application Definitions: `argocd/applications/internal`
   - Configurations: `configs/internal/`
 
-## Bootstrapping
-
-ArgoCD needs to be manually bootstrapped before it can self-manage. The only pre-requisite is a Kubernetes cluster with a CNI installed. All other required components will be install after bootstrapping.
-
-```
-kubectl apply -k configs/setup/argocd/
-kubectl apply -f argocd/app-of-apps.yaml -n argocd
-```
-
-The above commands will deploy ArgoCD and the `app-of-apps` application which will be used to discover and deploy all other applications out of this repository. From this point forward, ArgoCD will also self-manage. Any updates to `configs/setup/argocd/` will be automatically discovered and applied.
-
-## Secrets
-
-All secrets are encrypted and stored in this repository using [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) by Bitnami. Only I hold the decryption keys for the secrets in this repository. If you are using this repository as the basis for you own homelab or Kubernetes cluster, be aware that none of the sealed secrets here will unseal for you. You will need seal your own secrets and replace mine. As a result, if you try to deploy the applications contained in this repository using my configurations, the application will most likely be broken.
-
 ## Applications
 
 [![App Status](https://app-status.burrell.tech/api/badge?name=app-of-apps&revision=true)]() [`app-of-apps`](argocd/app-of-apps.yaml)
@@ -66,6 +51,21 @@ All secrets are encrypted and stored in this repository using [sealed-secrets](h
 - [![App Status](https://app-status.burrell.tech/api/badge?name=smtp&revision=true)]() [`smtp`](https://github.com/djjudas21/smtp-relay) - A local SMTP relay to centralize a point in the cluster from which to send emails
 - [![App Status](https://app-status.burrell.tech/api/badge?name=tdarr&revision=true)]() [`tdarr`](https://tdarr.io/) - An automatic multimedia transcoder
 - [![App Status](https://app-status.burrell.tech/api/badge?name=unifi&revision=true)]() [`unifi`](https://www.ui.com/download/unifi/) - The Uniquiti Unifi controller for managing Ubiquiti network devices
+
+## Bootstrapping
+
+ArgoCD needs to be manually bootstrapped before it can self-manage. The only pre-requisite is a Kubernetes cluster with a CNI installed. All other required components will be install after bootstrapping.
+
+```
+kubectl apply -k configs/setup/argocd/
+kubectl apply -f argocd/app-of-apps.yaml -n argocd
+```
+
+The above commands will deploy ArgoCD and the `app-of-apps` application which will be used to discover and deploy all other applications out of this repository. From this point forward, ArgoCD will also self-manage. Any updates to `configs/setup/argocd/` will be automatically discovered and applied.
+
+## Secrets
+
+All secrets are encrypted and stored in this repository using [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) by Bitnami. Only I hold the decryption keys for the secrets in this repository. If you are using this repository as the basis for you own homelab or Kubernetes cluster, be aware that none of the sealed secrets here will unseal for you. You will need seal your own secrets and replace mine. As a result, if you try to deploy the applications contained in this repository using my configurations, the application will most likely be broken.
 
 ## Special Mentions
 
