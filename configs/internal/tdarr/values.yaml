@@ -4,6 +4,7 @@ tdarr:
     TZ: America/Toronto
     PUID: 0
     PGUID: 0
+    THREADS_WORKER_INIT_TIMEOUT: 200000
 
   service:
     server:       
