@@ -14,11 +14,11 @@ minio:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
       nginx.ingress.kubernetes.io/proxy-body-size: 1024m
     hosts:
-      - static.burrell.tech
+      - s3.burrell.tech
     tls:
-      - secretName: static.burrell.tech-tls
+      - secretName: s3.burrell.tech-tls
         hosts:
-        - static.burrell.tech
+        - s3.burrell.tech
   consoleIngress:
     enabled: true
     annotations:
