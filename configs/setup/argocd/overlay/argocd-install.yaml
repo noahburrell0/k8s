@@ -38,12 +38,12 @@ data:
         userSearch:
           baseDN: "OU=Users,DC=burrell,DC=tech"
           filter: ""
-          username: sAMAccountName
-          idAttr: distinguishedName
+          username: userPrincipalName
+          idAttr: userPrincipalName
           emailAttr: mail
           nameAttr: displayName
         groupSearch:
-          baseDN: "OU=Users,DC=empire,DC=corp"
+          baseDN: "OU=Users,DC=burrell,DC=tech"
           filter: ""
           userAttr: distinguishedName
           groupAttr: member
