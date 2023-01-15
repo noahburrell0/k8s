@@ -38,8 +38,8 @@ data:
         userSearch:
           baseDN: "CN=Users,DC=burrell,DC=tech"
           filter: ""
-          username: userPrincipalName
-          idAttr: userPrincipalName
+          username: sAMAccountName
+          idAttr: distinguishedName
           emailAttr: mail
           nameAttr: displayName
         groupSearch:
