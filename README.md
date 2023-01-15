@@ -31,39 +31,41 @@ All secrets are encrypted and stored in this repository using [sealed-secrets](h
 
 ## Applications
 
+[![App Status](https://app-status.burrell.tech/api/badge?name=app-of-apps&revision=true)]() [`app-of-apps`](argocd/app-of-apps.yaml)
+
 ### Setup
 
-- [`argocd`](https://argoproj.github.io/cd/) - The GitOps operator responsible for managing the cluster
-- [`cert-manager`](https://cert-manager.io/) - Automatic SSL certificate generation, configured for Cloudflare
-- [`external-dns`](https://github.com/kubernetes-sigs/external-dns) - Automatically create DNS entries, configured for Lets Encrypt (Kubernetes SIG project)
-- [`k8s-gateway`](https://github.com/ori-edge/k8s_gateway) - CoreDNS based controller to act as a secondary DNS zone for `burrell.tech`
-- [`metacontroller`](https://metacontroller.github.io/metacontroller/intro.html) - For rapid prototyping an deployment of custom Kubernetes controllers (used for `tnsr-controller`)
-- [`metallb`](https://metallb.universe.tf/) - A loadbalancer for non-cloud deployments, configured for BGP and peering with local TNSR installation
-- [`metrics-server`](https://github.com/kubernetes-sigs/metrics-server) - Reports resource usage when running `kubectl top` (Kubernetes SIG project)
-- [`nfs-subdir-provisioner`](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) - Automatically provisions subdirectories against an NFS share (Kubernetes SIG project)
-- [`nginx-ingress`](https://github.com/kubernetes/ingress-nginx) - The ingress controller for the cluster (Offical Kubernetes Ingress)
-- [`sealed-secrets`](https://github.com/bitnami-labs/sealed-secrets) - A controller for encrypting and decrypting secrets that can be stored on the open internet
-- [`tnsr-controller`](https://github.com/noahburrell0/tnsr-controller)- A homebrew controller that automatically adds firewall and NAT rules to TNSR (very alpha and buggy, do not use)
+- [![App Status](https://app-status.burrell.tech/api/badge?name=argocd&revision=true)]() [`argocd`](https://argoproj.github.io/cd/) - The GitOps operator responsible for managing the cluster
+- [![App Status](https://app-status.burrell.tech/api/badge?name=cert-manager&revision=true)]() [`cert-manager`](https://cert-manager.io/) - Automatic SSL certificate generation, configured for Cloudflare
+- [![App Status](https://app-status.burrell.tech/api/badge?name=external-dns&revision=true)]() [`external-dns`](https://github.com/kubernetes-sigs/external-dns) - Automatically create DNS entries, configured for Lets Encrypt (Kubernetes SIG project)
+- [![App Status](https://app-status.burrell.tech/api/badge?name=k8s-gateway&revision=true)]() [`k8s-gateway`](https://github.com/ori-edge/k8s_gateway) - CoreDNS based controller to act as a secondary DNS zone for `burrell.tech`
+- [![App Status](https://app-status.burrell.tech/api/badge?name=metacontroller&revision=true)]() [`metacontroller`](https://metacontroller.github.io/metacontroller/intro.html) - For rapid prototyping an deployment of custom Kubernetes controllers (used for `tnsr-controller`)
+- [![App Status](https://app-status.burrell.tech/api/badge?name=metallb&revision=true)]() [`metallb`](https://metallb.universe.tf/) - A loadbalancer for non-cloud deployments, configured for BGP and peering with local TNSR installation
+- [![App Status](https://app-status.burrell.tech/api/badge?name=metrics-server&revision=true)]() [`metrics-server`](https://github.com/kubernetes-sigs/metrics-server) - Reports resource usage when running `kubectl top` (Kubernetes SIG project)
+- [![App Status](https://app-status.burrell.tech/api/badge?name=nfs-subdir-provisioner&revision=true)]() [`nfs-subdir-provisioner`](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) - Automatically provisions subdirectories against an NFS share (Kubernetes SIG project)
+- [![App Status](https://app-status.burrell.tech/api/badge?name=nginx-ingress&revision=true)]() [`nginx-ingress`](https://github.com/kubernetes/ingress-nginx) - The ingress controller for the cluster (Offical Kubernetes Ingress)
+- [![App Status](https://app-status.burrell.tech/api/badge?name=sealed-secrets&revision=true)]() [`sealed-secrets`](https://github.com/bitnami-labs/sealed-secrets) - A controller for encrypting and decrypting secrets that can be stored on the open internet
+- [![App Status](https://app-status.burrell.tech/api/badge?name=tnsr-controller&revision=true)]() [`tnsr-controller`](https://github.com/noahburrell0/tnsr-controller)- A homebrew controller that automatically adds firewall and NAT rules to TNSR (very alpha and buggy, do not use)
 
 ### External
 
-- [`chia-node`](https://github.com/Chia-Network/chia-docker) - A Chia node for the Chia cryptocurrency
-- [`ghost`](https://ghost.org/) - Blogging software
-- [`main-site`](https://github.com/noahburrell0/burrell-tech) - Combines the Bitnami Nginx and Error Pages charts to deploy my personal website
-- [`minio`](https://min.io/) - An S3 compliant object storage system
-- [`ombi`](https://ombi.io/) - A multimedia request platform for Plex
-- [`paperless`](https://docs.paperless-ngx.com/) - A document management system
-- [`plex`](https://www.plex.tv/) - A multimedia server 
-- [`seafile`](https://www.seafile.com/) - Self-hosted cloud storage system
+- [![App Status](https://app-status.burrell.tech/api/badge?name=chia-node&revision=true)]() [`chia-node`](https://github.com/Chia-Network/chia-docker) - A Chia node for the Chia cryptocurrency
+- [![App Status](https://app-status.burrell.tech/api/badge?name=ghost&revision=true)]() [`ghost`](https://ghost.org/) - Blogging software
+- [![App Status](https://app-status.burrell.tech/api/badge?name=main-site&revision=true)]() [`main-site`](https://github.com/noahburrell0/burrell-tech) - Combines the Bitnami Nginx and Error Pages charts to deploy my personal website
+- [![App Status](https://app-status.burrell.tech/api/badge?name=minio&revision=true)]() [`minio`](https://min.io/) - An S3 compliant object storage system
+- [![App Status](https://app-status.burrell.tech/api/badge?name=ombi&revision=true)]() [`ombi`](https://ombi.io/) - A multimedia request platform for Plex
+- [![App Status](https://app-status.burrell.tech/api/badge?name=paperless&revision=true)]() [`paperless`](https://docs.paperless-ngx.com/) - A document management system
+- [![App Status](https://app-status.burrell.tech/api/badge?name=plex&revision=true)]() [`plex`](https://www.plex.tv/) - A multimedia server 
+- [![App Status](https://app-status.burrell.tech/api/badge?name=seafile&revision=true)]() [`seafile`](https://www.seafile.com/) - Self-hosted cloud storage system
 
 ### Internal
 
-- [`nzbget`](https://nzbget.net/) - A Usenet download platform
-- [`radarr`](https://radarr.video/) - Automatically search, download, and manage movies
-- [`sonarr`](https://sonarr.tv/) - Automatically search, download, and manage television series
-- [`smtp`](https://github.com/djjudas21/smtp-relay) - A local SMTP relay to centralize a point in the cluster from which to send emails
-- [`tdarr`](https://tdarr.io/) - An automatic multimedia transcoder
-- [`unifi`](https://www.ui.com/download/unifi/) - The Uniquiti Unifi controller for managing Ubiquiti network devices
+- [![App Status](https://app-status.burrell.tech/api/badge?name=nzbget&revision=true)]() [`nzbget`](https://nzbget.net/) - A Usenet download platform
+- [![App Status](https://app-status.burrell.tech/api/badge?name=radarr&revision=true)]() [`radarr`](https://radarr.video/) - Automatically search, download, and manage movies
+- [![App Status](https://app-status.burrell.tech/api/badge?name=sonarr&revision=true)]() [`sonarr`](https://sonarr.tv/) - Automatically search, download, and manage television series
+- [![App Status](https://app-status.burrell.tech/api/badge?name=smtp&revision=true)]() [`smtp`](https://github.com/djjudas21/smtp-relay) - A local SMTP relay to centralize a point in the cluster from which to send emails
+- [![App Status](https://app-status.burrell.tech/api/badge?name=tdarr&revision=true)]() [`tdarr`](https://tdarr.io/) - An automatic multimedia transcoder
+- [![App Status](https://app-status.burrell.tech/api/badge?name=unifi&revision=true)]() [`unifi`](https://www.ui.com/download/unifi/) - The Uniquiti Unifi controller for managing Ubiquiti network devices
 
 ## Special Mentions
 
