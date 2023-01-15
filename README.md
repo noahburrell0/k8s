@@ -50,6 +50,7 @@ All secrets are encrypted and stored in this repository using [sealed-secrets](h
 - [`chia-node`](https://github.com/Chia-Network/chia-docker) - A Chia node for the Chia cryptocurrency
 - [`ghost`](https://ghost.org/) - Blogging software
 - [`main-site`](https://github.com/noahburrell0/burrell-tech) - Combines the Bitnami Nginx and Error Pages charts to deploy my personal website
+- [`minio`](https://min.io/) - An S3 compliant object storage system
 - [`ombi`](https://ombi.io/) - A multimedia request platform for Plex
 - [`paperless`](https://docs.paperless-ngx.com/) - A document management system
 - [`plex`](https://www.plex.tv/) - A multimedia server 
