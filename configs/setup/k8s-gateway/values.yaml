@@ -4,4 +4,4 @@ k8s-gateway:
     annotations:
       metallb.universe.tf/address-pool: bgp-pool
     loadBalancerIP: 172.19.0.1
-  extraZonePlugins: forward . /etc/resolv.conf
+  extraZonePlugins: "forward . /etc/resolv.conf"
