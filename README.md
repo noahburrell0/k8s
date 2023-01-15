@@ -1,6 +1,6 @@
 # Self-Managing Kubernetes Homelab w/ ArgoCD
 
-This repository serves as the immutable source of configurations for my personal homelab and are deployed using ArgoCD. The configurations contained in the repository also self-manage the cluster.
+This repository serves as the immutable source of configurations for my personal homelab and are deployed using ArgoCD. The configurations contained in the repository self-manage the ArgoCD as well as the applications.
 
 Applications are divided into ArgoCD projects by their respective types.
 
