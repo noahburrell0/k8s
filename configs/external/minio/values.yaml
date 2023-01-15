@@ -5,6 +5,20 @@ minio:
     storageClass: nfs-rwo
     accessMode: ReadWriteOnce
     size: 500Gi
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+    hosts:
+      - static.burrell.tech
+    tls:
+      - secretName: static.burrell.tech-tls
+        hosts:
+        - static.burrell.tech
   consoleIngress:
     enabled: true
     annotations:
