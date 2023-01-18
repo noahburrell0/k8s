@@ -28,7 +28,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-        - image: 'ghcr.io/noahburrell0/contact-api:v0.1.0'
+        - image: 'ghcr.io/noahburrell0/contact-api:v0.1.1'
           imagePullPolicy: IfNotPresent
           name: contact-api
           ports:
@@ -63,6 +63,11 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/target: 'burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+    # Temporary CORS enabled
+    nginx.ingress.kubernetes.io/cors-allow-methods: POST
+    nginx.ingress.kubernetes.io/cors-allow-origin: 'http://localhost,http://192.168.1.2'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+
 spec:
   ingressClassName: nginx
   rules:
