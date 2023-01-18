@@ -35,6 +35,7 @@ Applications are divided into ArgoCD projects by their respective types.
 ### External
 
 - ![App Status](https://app-status.burrell.tech/api/badge?name=chia-node&revision=true) [`chia-node`](https://github.com/Chia-Network/chia-docker) - A Chia node for the Chia cryptocurrency
+- ![App Status](https://app-status.burrell.tech/api/badge?name=contact-api&revision=true) [`contact-api`](https://github.com/noahburrell0/contact-api) - A small API to submit form data from my website to an SMTP relay
 - ![App Status](https://app-status.burrell.tech/api/badge?name=ghost&revision=true) [`ghost`](https://ghost.org/) - Blogging software
 - ![App Status](https://app-status.burrell.tech/api/badge?name=main-site&revision=true) [`main-site`](https://github.com/noahburrell0/burrell-tech) - Combines the Bitnami Nginx and Error Pages charts to deploy my website
 - ![App Status](https://app-status.burrell.tech/api/badge?name=minio&revision=true) [`minio`](https://min.io/) - An S3 compliant object storage system
