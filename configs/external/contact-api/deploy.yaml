@@ -64,7 +64,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: 'burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
     nginx.ingress.kubernetes.io/cors-allow-methods: POST
-    nginx.ingress.kubernetes.io/cors-allow-origin: 'https://burrell.tech/,http://localhost,http://192.168.1.2'
+    nginx.ingress.kubernetes.io/cors-allow-origin: 'https://burrell.tech,http://localhost,http://192.168.1.2'
     nginx.ingress.kubernetes.io/enable-cors: 'true'
 
 spec:
