@@ -16,3 +16,12 @@ patches:
       - op: add
         path: /metadata/annotations/ingressclass.kubernetes.io~1is-default-class
         value: "true"
+
+  # Make sure the --publish-service flag is set to the MetalLB service
+  - target:
+      kind: Deployment
+      name: ingress-nginx-controller
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers[0]/args/
+        value: "'--publish-service=nginx-metallb'"
