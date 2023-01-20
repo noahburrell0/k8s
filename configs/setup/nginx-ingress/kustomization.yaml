@@ -23,5 +23,5 @@ patches:
       name: ingress-nginx-controller
     patch: |-
       - op: add
-        path: /spec/template/spec/containers[0]/args/[]
+        path: /spec/template/spec/containers[0]/args/-
         value: "'--publish-service=nginx-metallb'"
