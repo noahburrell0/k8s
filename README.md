@@ -84,17 +84,4 @@ Most of the applications being deployed rely heavily on Helm Charts and Docker i
 
 Need help getting started with Kubernetes (or DevOps, or GitOps), or have a project you need an extra set of hands with? I'm available for freelance and consulting work! I'm a CKA certified Kubernetes (and Linux) administrator and DevOps engineer during the day in the financial services industry, and I also do a lot of the same sort of stuff in my spare time for fun.
 
-## Areas of Expertise
-
-- Kubernetes
-- Helm
-- ArgoCD
-- Docker
-- General GitOps/DevOps principles
-- Linux system administration
-- Enterprise scale networking
-- GCP and Azure
-
-## Contact Me
-
 Email me directly at [noah@burrell.tech](mailto:noah@burrell.tech), or visit my website at [burrell.tech](https://burrell.tech). I promise I don't bite.
