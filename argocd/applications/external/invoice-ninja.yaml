@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: invoice-ninja
+  namespace: argocd
+spec:
+  project: external
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/external/invoiceninja
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/external/invoiceninja/configs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: invoice-ninja
+

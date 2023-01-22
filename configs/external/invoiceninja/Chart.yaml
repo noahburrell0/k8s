@@ -1,0 +1,10 @@
+apiVersion: v2
+name: invoiceninja
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+
+dependencies:
+- name: invoiceninja
+  version: 0.10.1
+  repository: https://invoiceninja.github.io/dockerfiles
