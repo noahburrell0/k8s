@@ -37,7 +37,5 @@ invoiceninja:
       persistence:
         storageClass: nfs-rwo
   redis:   
-    replica: 
-      replicaCount: 1
-      persistence:
-        storageClass: nfs-rwo
+    global:
+      storageClass: nfs-rwo
