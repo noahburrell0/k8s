@@ -6,9 +6,8 @@ data:
   APP_ENV: production
   APP_CIPHER: AES-256-CBC
   APP_LOCALE: en
-  MAIL_DRIVER: smtp
+  MAIL_MAILER: smtp
+  MAIL_HOST: smtp.smtp
   MAIL_PORT: '25'
-  MAIL_ENCRYPTION: none
-  MAIL_HOST: smpt.smtp
-  MAIL_FROM_ADDRESS: noah@burrell.tech
-  MAIL_FROM_NAME: Noah Burrell
+  MAIL_FROM_ADDRESS: 'noah@burrell.tech'
+  MAIL_FROM_NAME: 'Noah Burrell'
