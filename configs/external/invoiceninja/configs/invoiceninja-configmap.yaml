@@ -4,11 +4,10 @@ metadata:
   name: invoiceninja-configmap
 data:
   APP_ENV: production
-  APP_DEBUG: 'false'
   APP_CIPHER: AES-256-CBC
   APP_LOCALE: en
   MAIL_DRIVER: smtp
-  MAIL_PORT: 25
+  MAIL_PORT: '25'
   MAIL_ENCRYPTION: none
   MAIL_HOST: smpt.smtp
   MAIL_FROM_ADDRESS: noah@burrell.tech
