@@ -1,4 +1,5 @@
 invoiceninja:
+  extraEnvVarsCM: invoiceninja-configmap
   appURL: https://billing.burrell.tech
   userEmail: noah@burrell.tech
   existingSecret: invoiceninja-secrets
