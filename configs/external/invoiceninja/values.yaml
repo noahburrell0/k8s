@@ -31,4 +31,8 @@ invoiceninja:
       size: 25Gi
   mariadb:
     enabled: true
-    existingSecret: invoiceninja-secrets
+    auth:
+      existingSecret: invoiceninja-secrets
+    primary:
+      persistence:
+        storageClass: nfs-rwo
