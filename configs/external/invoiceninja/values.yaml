@@ -1,0 +1,43 @@
+invoiceninja:
+  extraEnvVarsCM: invoiceninja-configmap
+  appURL: https://billing.burrell.tech
+  userEmail: noah@burrell.tech
+  existingSecret: invoiceninja-secrets
+  mailer: smtp
+  volumePermissions:
+    enabled: true
+  updateStrategy:
+    type: Recreate
+  ingress:
+    hostname: billing.burrell.tech
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+      nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+      nginx.ingress.kubernetes.io/proxy-body-size: 50m
+      external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+    tls: true
+    certManager: true
+  persistence:
+    public:
+      enabled: true
+      storageClass: "nfs-rwo"
+      accessMode: ReadWriteOnce
+      size: 25Gi
+    storage:
+      enabled: true
+      storageClass: "nfs-rwo"
+      accessMode: ReadWriteOnce
+      size: 25Gi
+  mariadb:
+    enabled: true
+    auth:
+      existingSecret: invoiceninja-secrets
+    primary:
+      persistence:
+        storageClass: nfs-rwo
+  redis:   
+    replica:
+      persistence:
+        storageClass: nfs-rwo
