@@ -12,6 +12,7 @@ kind: ConfigMap
 metadata:
   name: argocd-cm
 data:
+  timeout.reconciliation: 60s
   exec.enabled: "true"
   exec.shells: "bash,sh,powershell,cmd,dash,ash,ksh"
   statusbadge.enabled: "true"
