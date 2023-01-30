@@ -2,8 +2,8 @@ plex:
 
   image:
     pullPolicy: IfNotPresent
-    repository: ghcr.io/onedr0p/plex
-    tag: 1.29.0.6244-819d3678c
+    repository: linuxserver/plex
+    tag: 1.30.2
 
   hostNetwork: true
 
