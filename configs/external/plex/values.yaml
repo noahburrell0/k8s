@@ -1,14 +1,17 @@
 plex:
 
   image:
-    pullPolicy: IfNotPresent
-    repository: ghcr.io/onedr0p/plex
-    tag: 1.29.0.6244-819d3678c
+    pullPolicy: Always
+    repository: linuxserver/plex
+    tag: latest
 
   hostNetwork: true
 
   env:
     TZ: America/Toronto
+    PUID: "0"
+    PGID: "0"
+    VERSION: latest
 
   service:
     main: 
