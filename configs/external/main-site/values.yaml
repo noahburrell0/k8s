@@ -57,5 +57,6 @@ error-pages:
     TZ: America/Toronto
     SHOW_DETAILS: "false"
     TEMPLATE_NAME: connection
+    test: test
   image:
     tag: 2.19.0
