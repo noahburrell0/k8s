@@ -68,20 +68,10 @@ The above commands will deploy ArgoCD and the `app-of-apps` application which wi
 
 All secrets are encrypted and stored in this repository using [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) by Bitnami. Only I hold the decryption keys for the secrets in this repository. If you are using this repository as the basis for you own homelab or Kubernetes cluster, be aware that none of the sealed secrets here will unseal for you. You will need seal your own secrets and replace mine. As a result, if you try to deploy the applications contained in this repository using my configurations, the application will most likely be broken.
 
-## Special Mentions
-
-Most of the applications being deployed rely heavily on Helm Charts and Docker images provided by 3rd parties. It would be a lot more difficult and time consuming to do this without the organizations and projects and maintain these.
-
-### Containers - [onedr0p](https://github.com/onedr0p/containers) 
-
-### Helm Charts - [Kubernetes @Home](https://github.com/k8s-at-home) (Archived) and the new maintainer [bjw-s](https://github.com/bjw-s)
-
-### Helm Charts and Containers - [Bitnami](https://bitnami.com/stacks/helm)
-
 ---
 
 # Hire Me!
 
 Need help getting started with Kubernetes (or DevOps, or GitOps), or have a project you need an extra set of hands with? I'm available for freelance and consulting work! I'm a CKA certified Kubernetes (and Linux) administrator and DevOps engineer during the day in the financial services industry, and I also do a lot of the same sort of stuff in my spare time for fun.
 
-Email me directly at [noah@burrell.tech](mailto:noah@burrell.tech), or visit my website at [burrell.tech](https://burrell.tech). I promise I don't bite.
+Email me directly at [noah@burrell.tech](mailto:noah@burrell.tech), or visit my website at [burrell.tech](https://burrell.tech).
