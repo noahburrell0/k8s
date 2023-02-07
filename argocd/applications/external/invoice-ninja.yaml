@@ -20,10 +20,11 @@ spec:
     namespace: invoice-ninja
   ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
     - kind: Secret
+      group: *
       name: invoice-ninja-redis
       jsonPointers:
       - /data/redis-password
     - kind: StatefulSet
-      name: invoice-ninja-redis-node
+      group: apps
       jsonPointers:
       - /spec/template/metadata/annotations/checksum~1secret
