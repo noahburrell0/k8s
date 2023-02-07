@@ -18,4 +18,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: invoice-ninja
-
+  ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
+    - kind: Secret
+      name: invoice-ninja-redis
+      jsonPointers:
+      - /data/redis-password
+    - kind: StatefulSet
+      name: invoice-ninja-redis-node
+      jsonPointers:
+      - /spec/template/metadata/annotations/checksum~1secret
