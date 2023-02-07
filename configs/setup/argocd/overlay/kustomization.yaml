@@ -9,7 +9,7 @@ patchesStrategicMerge:
 
 resources:
   - argocd-ingress.yaml
-  - argocd-status-ingress.yaml
+  - argocd-external-ingress.yaml
   - argocd-ldap-secret.yaml
 
 namespace: argocd

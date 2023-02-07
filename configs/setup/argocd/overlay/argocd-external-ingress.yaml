@@ -22,7 +22,20 @@ spec:
             name: argocd-server
             port: 
               name: https
+  - host: api.burrell.tech
+    http:
+      paths:
+      - path: /api/webhook
+        pathType: Exact
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              name: https
   tls:
   - hosts:
     - app-status.burrell.tech
     secretName: app-status.burrell.tech-tls
+  - hosts:
+    - api.burrell.tech
+    secretName: api.burrell.tech-tls
