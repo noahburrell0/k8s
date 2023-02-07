@@ -8,8 +8,8 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-  source:
-    repoURL: https://github.com/noahburrell0/k8s.git
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/external/main-site
   destination:
