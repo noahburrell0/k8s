@@ -12,16 +12,6 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: app-status.burrell.tech
-    http:
-      paths:
-      - path: /api/badge
-        pathType: Exact
-        backend:
-          service:
-            name: argocd-server
-            port: 
-              name: https
   - host: api.burrell.tech
     http:
       paths:
@@ -32,10 +22,14 @@ spec:
             name: argocd-server
             port: 
               name: https
+      - path: /api/badge
+        pathType: Exact
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              name: https
   tls:
-  - hosts:
-    - app-status.burrell.tech
-    secretName: app-status.burrell.tech-tls
   - hosts:
     - api.burrell.tech
     secretName: api.burrell.tech-tls
