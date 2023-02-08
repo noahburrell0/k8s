@@ -18,21 +18,21 @@ spec:
   orphanedResources:
     warn: false
   roles:
-  - name: pilot-dev-sync
+  - name: argo-test
     policies: 
       # List applications in this project
-      - p, proj:external:pilot-dev-sync, applications, get, external/*, allow
+      - p, proj:external:argo-test, applications, get, external/*, allow
 
       # Allow syncing applications in this project
-      - p, proj:external:pilot-dev-sync, applications, sync, external/*, allow
+      - p, proj:external:argo-test, applications, sync, external/*, allow
 
       # Allow deleting resources in applications in this project
-      - p, proj:external:pilot-dev-sync, applications, delete, external/*, allow
+      - p, proj:external:argo-test, applications, delete, external/*, allow
 
       # Allow restarting deployment resources in applications in this project
-      - p, proj:external:pilot-dev-sync, applications, action/apps/Deployment/restart, external/*
+      - p, proj:external:argo-test, applications, action/apps/Deployment/restart, external/*
 
       # Allow access to web terminal in applications in this project
-      - p, proj:external:pilot-dev-sync, exec, create, external/*, allow
+      - p, proj:external:argo-test, exec, create, external/*, allow
     groups:
       - ArgoCD-Test
