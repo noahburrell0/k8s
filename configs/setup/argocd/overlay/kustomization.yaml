@@ -12,7 +12,7 @@ resources:
   - argocd-external-ingress.yaml
   - argocd-ldap-secret.yaml
   - argocd-ldap-secret.yaml
-  - clusterrole-argocd-update-patch
+  - clusterrole-argocd-update-patch.yaml
 
 namespace: argocd
 
