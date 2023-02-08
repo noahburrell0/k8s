@@ -61,4 +61,6 @@ data:
   policy.default: role:none
   scopes: '[groups, email]'
   policy.csv: |
+    p, role:get-repos, repositories, get, *, allow
     g, ArgoCD, role:admin
+    g, ArgoCD-Test, role:get-repos
