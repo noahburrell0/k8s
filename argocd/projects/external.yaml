@@ -18,21 +18,21 @@ spec:
   orphanedResources:
     warn: false
   roles:
-  - name: argo-test
+  - name: external-argo-test
     policies: 
       # List applications in this project
-      - p, proj:external:argo-test, applications, get, external/*, allow
+      - p, proj:external:external-argo-test, applications, get, external/*, allow
 
       # Allow syncing applications in this project
-      - p, proj:external:argo-test, applications, sync, external/*, allow
+      - p, proj:external:external-argo-test, applications, sync, external/*, allow
 
       # Allow deleting resources in applications in this project
-      - p, proj:external:argo-test, applications, delete, external/*, allow
+      - p, proj:external:external-argo-test, applications, delete, external/*, allow
 
       # Allow restarting deployment resources in applications in this project
-      - p, proj:external:argo-test, applications, action/apps/Deployment/restart, external/*, allow
+      - p, proj:external:external-argo-test, applications, action/apps/Deployment/restart, external/*, allow
 
       # Allow access to web terminal in applications in this project
-      - p, proj:external:argo-test, exec, create, external/*, allow
+      - p, proj:external:external-argo-test, exec, create, external/*, allow
     groups:
       - ArgoCD-Test

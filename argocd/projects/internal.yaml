@@ -18,3 +18,21 @@ spec:
   orphanedResources:
     warn: false
   roles:
+  - name: internal-argo-test
+    policies: 
+      # List applications in this project
+      - p, proj:internal:internal-argo-test, applications, get, internal/*, allow
+
+      # Allow syncing applications in this project
+      - p, proj:internal:internal-argo-test, applications, sync, internal/*, allow
+
+      # Allow deleting resources in applications in this project
+      - p, proj:internal:internal-argo-test, applications, delete, internal/*, allow
+
+      # Allow restarting deployment resources in applications in this project
+      - p, proj:internal:internal-argo-test, applications, action/apps/Deployment/restart, internal/*, allow
+
+      # Allow access to web terminal in applications in this project
+      - p, proj:internal:internal-argo-test, exec, create, internal/*, allow
+    groups:
+      - ArgoCD-Test
