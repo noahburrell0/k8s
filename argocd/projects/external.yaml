@@ -30,7 +30,7 @@ spec:
       - p, proj:external:argo-test, applications, delete, external/*, allow
 
       # Allow restarting deployment resources in applications in this project
-      - p, proj:external:argo-test, applications, action/apps/Deployment/restart, external/*
+      - p, proj:external:argo-test, applications, action/apps/Deployment/restart, external/*, allow
 
       # Allow access to web terminal in applications in this project
       - p, proj:external:argo-test, exec, create, external/*, allow
