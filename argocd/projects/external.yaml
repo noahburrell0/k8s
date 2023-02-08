@@ -27,7 +27,7 @@ spec:
       - p, proj:external:external-argo-test, applications, sync, external/*, allow
 
       # Allow updating applications in this project
-      - p, proj:internal:internal-argo-test, applications, update, internal/*, allow
+      - p, proj:external:external-argo-test, applications, update, external/*, allow
 
       # Allow deleting resources in applications in this project
       - p, proj:external:external-argo-test, applications, delete, external/*, allow
