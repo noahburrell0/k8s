@@ -17,3 +17,26 @@ rules:
   verbs:
   - update
   - patch
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: resource-editor-binding
+subjects:
+- kind: User
+  name: system:serviceaccount:resource-editor
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: argocd-update-patch
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: resource-editor
+automountServiceAccountToken: false
