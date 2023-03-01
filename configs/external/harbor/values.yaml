@@ -25,6 +25,10 @@ harbor:
         storageClass: "nfs-rwo"
         accessMode: ReadWriteOnce
         size: 1Ti
+      chartmuseum:
+        storageClass: "nfs-rwo"
+        accessMode: ReadWriteOnce
+        size: 10Gi
       jobservice:
         jobLog:
           storageClass: "nfs-rwo"
