@@ -18,4 +18,16 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
-
+  ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
+  - kind: Deployment
+    group: apps
+    jsonPointers:
+    - /spec/template/metadata/annotations/checksum~1secret
+    - /spec/template/metadata/annotations/checksum~1secret-core
+    - /spec/template/metadata/annotations/checksum~1secret-jobservice
+  - kind: Secret
+    jsonPointers:
+    - /data/CSRF_KEY
+    - /data/secret
+    - /data/JOBSERVICE_SECRET
+    - /data/REGISTRY_HTTP_SECRET
