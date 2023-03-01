@@ -1,0 +1,47 @@
+harbor:
+
+  expose:
+    type: ingress
+    ingress:
+      hosts:
+        core: registry.burrell.tech
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+
+  trivy:
+    enabled: false
+  notary:
+    enabled: false
+
+  persistence:
+    persistentVolumeClaim:
+      registry:
+        storageClass: "nfs-rwo"
+        accessMode: ReadWriteOnce
+        size: 1Ti
+      jobservice:
+        jobLog:
+          storageClass: "nfs-rwo"
+          accessMode: ReadWriteOnce
+          size: 5Gi
+      database:
+        storageClass: "nfs-rwo"
+        accessMode: ReadWriteOnce
+        size: 10Gi
+      redis:
+        storageClass: "nfs-rwo"
+        accessMode: ReadWriteOnce
+        size: 10Gi
+
+  updateStrategy:
+    type: Recreate
+
+  existingSecretSecretKey: harbor-sealed-secrets
+  existingSecretAdminPasswordKey: harbor-sealed-secrets
+
+  registry:
+    credentials:
+      username: root
+      existingSecret: harbor-sealed-secrets
