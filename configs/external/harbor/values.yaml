@@ -1,5 +1,7 @@
 harbor:
 
+  externalURL: https://registry.burrell.tech
+
   expose:
     type: ingress
     ingress:
