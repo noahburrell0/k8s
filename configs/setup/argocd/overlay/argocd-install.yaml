@@ -4,6 +4,7 @@ metadata:
   name: argocd-cmd-params-cm
 data:
   server.enable.gzip: "true"
+  application.namespaces: "argocd, deploymysite-deployments"
 
 ---
 
