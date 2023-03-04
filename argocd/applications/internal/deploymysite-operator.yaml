@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: deploymysite-operator
+  namespace: argocd
+spec:
+  project: internal
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/noahburrell0/deploymysite-operator.git
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: deploymysite-operator
+
