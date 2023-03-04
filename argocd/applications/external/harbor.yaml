@@ -26,6 +26,11 @@ spec:
     - /spec/template/metadata/annotations/checksum~1secret-core
     - /spec/template/metadata/annotations/checksum~1secret-jobservice
   - kind: Secret
+    name: harbor-core
+    jsonPointers:
+    - /data/tls.crt
+    - /data/tls.key
+  - kind: Secret
     jsonPointers:
     - /data/CSRF_KEY
     - /data/secret
