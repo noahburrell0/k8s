@@ -12,6 +12,7 @@ resources:
   - argocd-external-ingress.yaml
   - argocd-ldap-secret.yaml
   - clusterrole-argocd-update-patch.yaml
+  - github-credentials.yaml
 
 namespace: argocd
 
