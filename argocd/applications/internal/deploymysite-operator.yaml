@@ -9,7 +9,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - repoURL: https://github.com/noahburrell0/deploymysite-operator.git
+  - repoURL: git@github.com:noahburrell0/deploymysite-operator.git
     targetRevision: main
     path: manifests
   destination:
