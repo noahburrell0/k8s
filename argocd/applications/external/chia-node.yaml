@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: chia-node
   namespace: argocd
-  labels:
-    chia-node: ""
 spec:
   project: external
   syncPolicy:
