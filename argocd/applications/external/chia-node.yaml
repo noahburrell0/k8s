@@ -4,7 +4,7 @@ metadata:
   name: chia-node
   namespace: argocd
   labels:
-    application: test
+    chia-node:
 spec:
   project: external
   syncPolicy:
