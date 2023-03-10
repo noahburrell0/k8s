@@ -4,7 +4,7 @@ metadata:
   name: chia-node
   namespace: argocd
   labels:
-    app.kubernetes.io/instance: test
+    application: test
 spec:
   project: external
   syncPolicy:
