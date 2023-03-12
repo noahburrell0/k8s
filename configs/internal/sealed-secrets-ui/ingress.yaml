@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/exclude: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/16
+  labels:
+    app.kubernetes.io/instance: sealed-secrets-ui
+    app.kubernetes.io/name: sealed-secrets-ui
+  name: sealed-secrets-ui-ingress
+  namespace: sealed-secrets-ui
+spec:
+  rules:
+    - host: secrets.k8s.burrell.tech
+      http:
+        paths:
+          - backend:
+              service:
+                name: sealed-secrets-ui-svc
+                port:
+                  number: 5000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - secrets.k8s.burrell.tech
+      secretName: secrets.k8s.burrell.tech

@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  KUBECONF_DIR: "/kubeconfs"
+  BASE_PATH: ""
+  DEFAULT_SCOPE: "cluster-wide"
+  SCOPE_TOOLTIP: "Most sealed secrets are already using cluster-wide, it is suggested to keep that the same."
+  DEBUG: "False"
+kind: ConfigMap
+metadata:
+  name: sealed-secrets-ui-cm
+  namespace: sealed-secrets-ui
