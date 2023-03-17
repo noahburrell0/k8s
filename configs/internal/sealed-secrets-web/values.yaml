@@ -14,12 +14,12 @@ sealed-secrets-ui:
       hosts:
         - sswui.k8s.burrell.tech
 
-  configs:
+  # configs:
     # kubeconfigDir: /kubeconfigs # No trailing "/"
     # basePath: "" # No trailing "/"
-    defaultScope: "cluster-wide" # Valid options: "strict", "namespace-wide", "cluster-wide"
-    scopeToolTip: "Test Tooltip"
-    debug: "True"
+    # defaultScope: "cluster-wide" # Valid options: "strict", "namespace-wide", "cluster-wide"
+    # scopeToolTip: "Test Tooltip"
+    # debug: "True"
 
   kubeconfig:
     sealedSecretConfig:
