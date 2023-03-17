@@ -15,7 +15,7 @@ sealed-secrets-ui:
         - sswui.k8s.burrell.tech
 
   configs:
-    kubeconfigDir: /kubeconf # No trailing "/"
+    kubeconfigDir: /kubeconfigs # No trailing "/"
     basePath: "/test" # No trailing "/"
     defaultScope: "cluster-wide" # Valid options: "strict", "namespace-wide", "cluster-wide"
     scopeToolTip: "Test Tooltip"
