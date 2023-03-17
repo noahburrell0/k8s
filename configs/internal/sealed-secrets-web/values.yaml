@@ -16,7 +16,7 @@ sealed-secrets-ui:
 
   configs:
     kubeconfigDir: /kubeconf # No trailing "/"
-    basePath: "test" # No leading or trailing "/"
+    basePath: "/test" # No trailing "/"
     defaultScope: "cluster-wide" # Valid options: "strict", "namespace-wide", "cluster-wide"
     scopeToolTip: "Test Tooltip"
     debug: "True"
