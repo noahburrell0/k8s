@@ -1,0 +1,10 @@
+apiVersion: v2
+name: sealed-secrets-ui
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+
+dependencies:
+- name: sealed-secrets-ui
+  version: 0.1.0
+  repository: https://noahburrell0.github.io/sealed-secrets-ui/
