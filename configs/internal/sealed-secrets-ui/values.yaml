@@ -1,7 +1,7 @@
 sealed-secrets-ui:
 
   ingress:
-    host: sswui.k8s.burrell.tech
+    host: secrets.k8s.burrell.tech
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/exclude: 'true'
@@ -10,16 +10,12 @@ sealed-secrets-ui:
       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
       nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/16
     tls:
-    - secretName: sswui.k8s.burrell.tech
+    - secretName: secrets.k8s.burrell.tech
       hosts:
-        - sswui.k8s.burrell.tech
+        - secrets.k8s.burrell.tech
 
-  # configs:
-    # kubeconfigDir: /kubeconfigs # No trailing "/"
-    # basePath: "" # No trailing "/"
-    # defaultScope: "cluster-wide" # Valid options: "strict", "namespace-wide", "cluster-wide"
-    # scopeToolTip: "Test Tooltip"
-    # debug: "True"
+  configs:
+    defaultScope: "cluster-wide"
 
   kubeconfig:
     sealedSecretConfig:
