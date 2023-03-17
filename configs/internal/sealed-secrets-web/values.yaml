@@ -22,7 +22,7 @@ sealed-secrets-ui:
     debug: "True"
 
   kubeconfig:
-    type: secret
+    sealedSecret: false
     files:
       kubeconfig: |
         apiVersion: v1
