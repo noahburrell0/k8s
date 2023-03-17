@@ -24,7 +24,7 @@ sealed-secrets-ui:
   kubeconfig:
     type: secret
     files:
-      kubeconfig: >-
+      kubeconfig: |
         apiVersion: v1
         clusters:
         - cluster:
