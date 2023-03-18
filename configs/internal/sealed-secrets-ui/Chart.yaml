@@ -6,5 +6,5 @@ appVersion: "0.0.1"
 
 dependencies:
 - name: sealed-secrets-ui
-  version: 0.0.1
+  version: 0.0.2
   repository: https://noahburrell0.github.io/sealed-secrets-ui/
