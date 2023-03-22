@@ -1,1 +1,5 @@
-kong: {}
+kong:
+  ingressController:
+    enabled: true
+    gatewayDiscovery:
+      enabled: true
