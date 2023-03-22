@@ -9,11 +9,10 @@ spec:
   - name: kong
     namespace: kong
   hostnames:
-  
-    - "back2future.kongproxy.me"
+  - "back2future.kongproxy.me"
   rules:
   - matches:
-      path:
+    - path:
         type: PathPrefix
         value: "/test"
     backendRefs:
