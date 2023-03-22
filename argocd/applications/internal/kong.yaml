@@ -13,7 +13,7 @@ spec:
     targetRevision: main
     path: 'configs/internal/kong'
   destination:
-    name: '{{cluster}}'
+    server: https://kubernetes.default.svc
     namespace: kong
   syncPolicy:
     syncOptions:
