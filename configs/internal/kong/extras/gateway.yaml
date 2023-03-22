@@ -4,7 +4,6 @@ metadata:
   name: kong
   annotations:
     konghq.com/gatewayclass-unmanaged: 'true'
-    cert-manager.io/issuer: letsencrypt
 spec:
   controllerName: konghq.com/kic-gateway-controller
 ---
@@ -12,6 +11,8 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 kind: Gateway
 metadata:
   name: kong
+  annotations:
+    cert-manager.io/issuer: letsencrypt
 spec:
   gatewayClassName: kong
   listeners:
