@@ -8,9 +8,11 @@ spec:
   parentRefs:
   - name: kong
     namespace: kong
+  hostnames:
+  
+    - "back2future.kongproxy.me"
   rules:
   - matches:
-    - hostname: burrell.tech
       path:
         type: PathPrefix
         value: "/test"
