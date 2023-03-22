@@ -1,6 +1,8 @@
 adguard-home:
 
   image:
+    repository: adguard/adguardhome
+    tag: v0.107.26
     pullPolicy: IfNotPresent
 
   persistence:
