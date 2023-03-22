@@ -3,6 +3,13 @@ adguard-home:
   image:
     pullPolicy: IfNotPresent
 
+  persistence:
+    config:
+      enabled: true
+      mountPath: /opt/adguardhome/conf
+      storageClass: nfs-rwo
+      size: 1Gi
+
   service:
     main:
       primary: true
