@@ -11,7 +11,7 @@ spec:
     path: 'configs/internal/kong'
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: 'configs/internal/kong'
+    path: 'configs/internal/kong/extras'
   destination:
     server: https://kubernetes.default.svc
     namespace: kong
