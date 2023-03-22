@@ -9,7 +9,7 @@ spec:
   - name: kong
     namespace: kong
   hostnames:
-  - "back2future.kongproxy.me"
+  - "burrell.tech"
   rules:
   - matches:
     - path:
