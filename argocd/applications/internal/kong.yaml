@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kong
+  namespace: argocd
+spec:
+  project: tech-inf
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: 'configs/internal/kong'
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: 'configs/internal/kong'
+  destination:
+    name: '{{cluster}}'
+    namespace: kong
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
