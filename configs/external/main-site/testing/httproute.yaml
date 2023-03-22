@@ -12,8 +12,8 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: "/cd-example-demo"
+        value: "/test"
     backendRefs:
-    - name: cd-example-api-svc
+    - name: main-site-nginx
       kind: Service
       port: 8080
