@@ -16,13 +16,15 @@ metadata:
 spec:
   gatewayClassName: kong
   listeners:
-  - allowedRoutes:
+  - hostname: burrell.tech
+    allowedRoutes:
       namespaces:
         from: All
     name: proxy
     port: 80
     protocol: HTTP
-  - allowedRoutes:
+  - hostname: burrell.tech
+    allowedRoutes:
       namespaces:
         from: All
     name: proxy-ssl
