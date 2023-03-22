@@ -4,7 +4,7 @@ metadata:
   name: kong
   annotations:
     konghq.com/gatewayclass-unmanaged: 'true'
-
+    cert-manager.io/issuer: letsencrypt
 spec:
   controllerName: konghq.com/kic-gateway-controller
 ---
@@ -21,6 +21,13 @@ spec:
     name: proxy
     port: 80
     protocol: HTTP
-  # - name: proxy-ssl
-  #   port: 443
-  #   protocol: HTTPS
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: proxy-ssl
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: burrell-tech-tls
