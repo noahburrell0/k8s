@@ -10,7 +10,8 @@ spec:
     namespace: kong
   rules:
   - matches:
-    - path:
+    - hostname: burrell.tech
+      path:
         type: PathPrefix
         value: "/test"
     backendRefs:
