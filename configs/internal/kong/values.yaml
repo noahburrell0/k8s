@@ -1,5 +1,7 @@
 kong:
   ingressController:
     enabled: true
+    args:
+    - --feature-gates=Gateway=true
     gatewayDiscovery:
       enabled: true
