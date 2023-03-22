@@ -47,6 +47,27 @@ adguard-home:
           targetPort: 53
       externalTrafficPolicy: Local
 
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        external-dns.alpha.kubernetes.io/exclude: 'true'
+      hosts:
+        - host: adguard.home.burrell.tech
+          paths:
+          - path: /
+            pathType: Prefix
+      tls:
+      - secretName: adguard.home.burrell.tech
+        hosts:
+        - adguard.home.burrell.tech
+
   config: |
     bind_host: 0.0.0.0
     bind_port: 3000
