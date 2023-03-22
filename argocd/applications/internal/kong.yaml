@@ -4,7 +4,7 @@ metadata:
   name: kong
   namespace: argocd
 spec:
-  project: tech-inf
+  project: internal
   sources:
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
