@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: guestbook-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt # Generate a letsencrypt cert when cert-manager becomes available
+spec:
+  rules:
+  - host: guestbook.k8s.burrell.tech
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: guestbook-ui
+            port:
+              name: http
+  tls:
+  - hosts:
+    - guestbook.k8s.burrell.tech
+    secretName: guestbook.k8s.burrell.tech
