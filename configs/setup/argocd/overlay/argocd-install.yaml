@@ -64,4 +64,3 @@ data:
   policy.csv: |
     p, role:get-repos, repositories, get, *, allow
     g, ArgoCD, role:admin
-    g, ArgoCD-Test, role:get-repos
