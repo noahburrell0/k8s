@@ -4,7 +4,7 @@ metadata:
   name: frontend
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+    external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
     nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
 spec:
