@@ -4,6 +4,8 @@ metadata:
   name: guestbook-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt # Generate a letsencrypt cert when cert-manager becomes available
+    external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
 spec:
   rules:
   - host: guestbook.k8s.burrell.tech
