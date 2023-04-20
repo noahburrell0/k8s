@@ -4,11 +4,12 @@ metadata:
   name: frontend
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/exclude: 'true'
+    external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
     nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
 spec:
   rules:
-  - host: guestbook.k8s.burrell.tech
+  - host: guestbook.akuity.burrell.tech
     http:
       paths:
       - path: /
@@ -20,5 +21,5 @@ spec:
               name: http
   tls:
   - hosts:
-    - guestbook.k8s.burrell.tech
-    secretName: guestbook.k8s.burrell.tech
+    - guestbook.akuity.burrell.tech
+    secretName: guestbook.akuity.burrell.tech
