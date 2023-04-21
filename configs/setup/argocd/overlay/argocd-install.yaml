@@ -97,30 +97,30 @@ data:
       description: Application is synced and healthy. Triggered once per commit.
       send: [app-deployed]
       oncePer: app.status.operationState.syncResult.revision
-  # trigger.on-health-degraded: |
-  #   - when: app.status.health.status == 'Degraded'
-  #     description: Application has degraded
-  #     send: [app-health-degraded]
-  # trigger.on-sync-failed: |
-  #   - when: app.status.operationState.phase in ['Error', 'Failed']
-  #     description: Application syncing has failed
-  #     send: [app-sync-failed]
-  # trigger.on-sync-running: |
-  #   - when: app.status.operationState.phase in ['Running']
-  #     description: Application is being synced
-  #     send: [app-sync-running]
-  # trigger.on-sync-status-unknown: |
-  #   - when: app.status.sync.status == 'Unknown'
-  #     description: Application status is 'Unknown'
-  #     send: [app-sync-status-unknown]
-  # trigger.on-sync-status-outofsync: |
-  #   - when: app.status.sync.status == 'OutOfSync'
-  #     description: Application status is 'OutOfSync'
-  #     send: [app-sync-status-outofsync]
-  # trigger.on-sync-succeeded: |
-  #   - when: app.status.operationState.phase in ['Succeeded']
-  #     description: Application syncing has succeeded
-  #     send: [app-sync-succeeded]
+  trigger.on-health-degraded: |
+    - when: app.status.health.status == 'Degraded'
+      description: Application has degraded
+      send: [app-health-degraded]
+  trigger.on-sync-failed: |
+    - when: app.status.operationState.phase in ['Error', 'Failed']
+      description: Application syncing has failed
+      send: [app-sync-failed]
+  trigger.on-sync-running: |
+    - when: app.status.operationState.phase in ['Running']
+      description: Application is being synced
+      send: [app-sync-running]
+  trigger.on-sync-status-unknown: |
+    - when: app.status.sync.status == 'Unknown'
+      description: Application status is 'Unknown'
+      send: [app-sync-status-unknown]
+  trigger.on-sync-status-outofsync: |
+    - when: app.status.sync.status == 'OutOfSync'
+      description: Application status is 'OutOfSync'
+      send: [app-sync-status-outofsync]
+  trigger.on-sync-succeeded: |
+    - when: app.status.operationState.phase in ['Succeeded']
+      description: Application syncing has succeeded
+      send: [app-sync-succeeded]
 
   # Notification Templates
   template.app-deployed: |
@@ -129,20 +129,16 @@ data:
       generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
       labels:
         alertname: 'app-deployed-{{.app.metadata.name}}'
-        fault_priority: "P5"
-        event_bucket: "deploy"
-        event_status: "succeed"
+        severity: "info"
       annotations:
         application: '{{.app.metadata.name}}'
 
   # template.app-health-degraded: |
-  #   message: |
-  #       {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} has degraded.
-  #       Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+  #   message: Application {{.app.metadata.name}} has degraded.
   #   alertmanager:
   #     labels:
   #       alertname: app-health-degraded
-  #       fault_priority: "P5"
+  #       fault_priority: "P2"
   #       event_bucket: "deploy"
 
   # template.app-sync-failed: |
