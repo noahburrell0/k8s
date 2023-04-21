@@ -133,8 +133,6 @@ data:
         recipient: "{{.recipient}}"
       annotations:
         application: '<a href="{{.context.argocdUrl}}/applications/{{.app.metadata.name}}">{{.app.metadata.name}}</a>'
-        author: "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}"
-        message: "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}"
 
   # template.app-health-degraded: |
   #   message: |
