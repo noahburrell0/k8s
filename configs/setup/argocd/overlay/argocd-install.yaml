@@ -130,7 +130,6 @@ data:
         fault_priority: "P5"
         event_bucket: "deploy"
         event_status: "succeed"
-        recipient: "{{.recipient}}"
       annotations:
         application: '<a href="{{.context.argocdUrl}}/applications/{{.app.metadata.name}}">{{.app.metadata.name}}</a>'
 
