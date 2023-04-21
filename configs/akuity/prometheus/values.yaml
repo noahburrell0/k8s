@@ -57,6 +57,7 @@ alertmanager:
       - alertmanager.akuity.burrell.tech
 
 grafana:
+  defaultDashboardsTimezone: America/Toronto
   ingress:
     enabled: true
     hosts:
