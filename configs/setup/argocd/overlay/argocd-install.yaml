@@ -124,8 +124,7 @@ data:
 
   # Notification Templates
   template.app-deployed: |
-    message: |
-        {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
+    message: Application {{.app.metadata.name}} has been healthy.
     alertmanager:
       labels:
         fault_priority: "P5"
