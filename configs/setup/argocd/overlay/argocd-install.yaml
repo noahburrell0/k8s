@@ -130,8 +130,8 @@ data:
         fault_priority: "P5"
         event_bucket: "deploy"
         event_status: "succeed"
-      annotations:
-        application: '<a href="{{.context.argocdUrl}}/applications/{{.app.metadata.name}}">{{.app.metadata.name}}</a>'
+  #    annotations:
+  #      application: '<a href="{{.context.argocdUrl}}/applications/{{.app.metadata.name}}">{{.app.metadata.name}}</a>'
 
   # template.app-health-degraded: |
   #   message: |
