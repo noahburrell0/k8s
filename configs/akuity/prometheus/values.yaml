@@ -16,7 +16,7 @@ grafana:
   ingress:
     enabled: true
     hosts:
-      - alertmanager.akuity.burrell.tech
+      - grafana.akuity.burrell.tech
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
