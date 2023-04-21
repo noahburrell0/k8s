@@ -84,7 +84,7 @@ prometheus:
       hosts:
       - prometheus.akuity.burrell.tech
 
-   additionalServiceMonitors:
+  additionalServiceMonitors:
   - name: argocd-metrics
     selector:
       matchLabels:
