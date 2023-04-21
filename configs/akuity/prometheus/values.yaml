@@ -132,8 +132,3 @@ prometheus:
       - argocd
     endpoints:
     - port: metrics
-
-kubeEtcd:
-  service:
-    selector:
-      component: etcd
