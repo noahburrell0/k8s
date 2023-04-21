@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: main-site
+  name: kube-prometheus-stack
   namespace: argocd
 spec:
   project: akuity
