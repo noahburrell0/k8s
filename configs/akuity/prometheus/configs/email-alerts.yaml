@@ -9,9 +9,9 @@ spec:
     - to: 'noah@burrell.tech'
       from: 'alerts@burrell.tech'
       smarthost: smtp.smtp:25
-route:
-  group_by: ['alertname']
-  group_wait: 10s
-  group_interval: 10s
-  repeat_interval: 2m
-  receiver: 'email'
+  route:
+    group_by: ['alertname']
+    group_wait: 10s
+    group_interval: 10s
+    repeat_interval: 2m
+    receiver: 'email'
