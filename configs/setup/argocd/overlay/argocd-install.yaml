@@ -75,6 +75,7 @@ metadata:
 data:
   # Basic Setup
   service.alertmanager: |
+    scheme: https
     targets:
     - alertmanager.akuity.burrell.tech:443
   context: |
