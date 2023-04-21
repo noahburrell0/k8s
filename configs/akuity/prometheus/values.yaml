@@ -1,4 +1,17 @@
 alertmanager:
+  config:
+    receivers:
+    - name: "null"
+    - name: "email"
+      emailConfigs:
+      - to: "noah+alerting@burrell.tech"
+        from: "noah@burrell.tech"
+        smarthost: "smtp.gmail.com:587"
+        authUsername: "noah@burrell.tech"
+        authPassword:
+          name: gmail-secret
+          key: password
+        authIdentity: "noah@burrell.tech"
   ingress:
     enabled: true
     hosts:
@@ -11,10 +24,6 @@ alertmanager:
     - secretName: alertmanager.akuity.burrell.tech
       hosts:
       - alertmanager.akuity.burrell.tech
-  alertmanagerSpec:
-    alertmanagerConfigSelector:
-      matchLabels:
-        alertmanagerconfig: enabled
 
 grafana:
   ingress:
