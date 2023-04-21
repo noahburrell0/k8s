@@ -5,7 +5,7 @@ metadata:
 spec:
   receivers:
   - name: 'email'
-    email_configs:
+    emailConfigs:
     - to: 'noah@burrell.tech'
       from: 'alerts@burrell.tech'
       smarthost: smtp.smtp:25
