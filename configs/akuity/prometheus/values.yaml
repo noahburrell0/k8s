@@ -38,13 +38,8 @@ alertmanager:
     - name: "email"
       email_configs:
       - to: "noah+alerting@burrell.tech"
-        from: "noah@burrell.tech"
-        smarthost: "smtp.gmail.com:587"
-        auth_username: "noah@burrell.tech"
-        auth_password:
-          name: gmail-secret
-          key: password
-        auth_identity: "noah@burrell.tech"
+        from: "no-reply@burrell.tech"
+        smarthost: "smtp.smtp:25"
     templates:
     - '/etc/alertmanager/config/*.tmpl'
 
