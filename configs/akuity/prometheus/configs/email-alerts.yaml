@@ -24,8 +24,7 @@ kind: AlertmanagerConfig
 metadata:
   name: email-alerts
   labels:
-    alertmanagerConfig: email
-    alertconfig: email-config
+    alertmanagerconfig: enabled
 spec:
   receivers:
   - name: 'email'

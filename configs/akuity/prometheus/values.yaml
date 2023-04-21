@@ -11,6 +11,10 @@ alertmanager:
     - secretName: alertmanager.akuity.burrell.tech
       hosts:
       - alertmanager.akuity.burrell.tech
+  alertmanagerSpec:
+    alertmanagerConfigSelector:
+      matchLabels:
+        alertmanagerconfig: enabled
 
 grafana:
   ingress:
