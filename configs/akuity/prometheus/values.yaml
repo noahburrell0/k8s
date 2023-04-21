@@ -1,9 +1,9 @@
-defaultRules:
-  rules:
-    etcd: false
-    kubeControllerManager: false
-    kubeProxy: false
-    kubeSchedulerAlerting: false
+# defaultRules:
+#   rules:
+#     etcd: false
+#     kubeControllerManager: false
+#     kubeProxy: false
+#     kubeSchedulerAlerting: false
 
 alertmanager:
   config:
