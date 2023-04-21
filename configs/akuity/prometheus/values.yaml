@@ -40,6 +40,7 @@ alertmanager:
       - to: "noah+alerting@burrell.tech"
         from: "no-reply@burrell.tech"
         smarthost: "smtp.smtp:25"
+        require_tls: "false"
     templates:
     - '/etc/alertmanager/config/*.tmpl'
   ingress:
