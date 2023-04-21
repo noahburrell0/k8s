@@ -128,7 +128,7 @@ data:
     alertmanager:
       generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
       labels:
-        alertname: 'app-deployed-{{ (call .strings.ReplaceAll (call .app.metadata.name) "/" "-" ) }}'
+        alertname: 'app-deployed-{{.app.metadata.name}}'
         fault_priority: "P5"
         event_bucket: "deploy"
         event_status: "succeed"
