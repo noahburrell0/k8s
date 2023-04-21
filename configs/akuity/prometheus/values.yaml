@@ -71,10 +71,6 @@ grafana:
       - grafana.akuity.burrell.tech
 
 prometheus:
-  prometheusSpec:
-    serviceMonitorSelectorNilUsesHelmValues: true
-    serviceMonitorSelector: {}
-    serviceMonitorNamespaceSelector: {}
   ingress:
     enabled: true
     hosts:
@@ -87,3 +83,11 @@ prometheus:
     - secretName: prometheus.akuity.burrell.tech
       hosts:
       - prometheus.akuity.burrell.tech
+
+   additionalServiceMonitors:
+  - name: argocd-metrics
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: argocd-metrics
+    endpoints:
+    - port: metrics
