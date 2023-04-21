@@ -76,7 +76,7 @@ data:
   # Basic Setup
   service.alertmanager: |
     targets:
-    - https://alertmanager.akuity.burrell.tech/
+    - alertmanager.akuity.burrell.tech:443
   context: |
     argocdUrl: https://argocd.k8s.burrell.tech
   subscriptions: |
