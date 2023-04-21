@@ -78,7 +78,7 @@ grafana:
       hosts:
       - grafana.akuity.burrell.tech
 
-7prometheus:
+prometheus:
   ingress:
     enabled: true
     hosts:
