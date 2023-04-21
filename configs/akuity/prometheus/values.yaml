@@ -71,6 +71,10 @@ grafana:
       - grafana.akuity.burrell.tech
 
 prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: true
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
   ingress:
     enabled: true
     hosts:
