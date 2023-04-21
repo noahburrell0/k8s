@@ -12,9 +12,6 @@ spec:
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/external/main-site
-  - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
-    path: configs/external/main-site/testing
   destination:
     name: in-cluster
     namespace: main-site
