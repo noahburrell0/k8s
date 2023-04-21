@@ -128,10 +128,14 @@ data:
         {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
     alertmanager:
       labels:
-        alertname: app-deployed
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
+        event_status: "succeed"
+        recipient: "{{.recipient}}"
+      annotations:
+        application: '<a href="{{.context.argocdUrl}}/applications/{{.app.metadata.name}}">{{.app.metadata.name}}</a>'
+        author: "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}"
+        message: "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}"
 
   template.app-health-degraded: |
     message: |
@@ -140,7 +144,6 @@ data:
     alertmanager:
       labels:
         alertname: app-health-degraded
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -151,7 +154,6 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-failed
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -162,7 +164,6 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-running
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -178,7 +179,6 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-status-unknown
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -194,7 +194,6 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-status-outofsync
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -205,6 +204,5 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-succeeded
-        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
