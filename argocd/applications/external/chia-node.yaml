@@ -13,6 +13,6 @@ spec:
     targetRevision: main
     path: configs/external/chia-node
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: chia-node
 

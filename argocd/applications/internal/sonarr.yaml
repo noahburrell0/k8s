@@ -13,6 +13,6 @@ spec:
     targetRevision: main
     path: configs/internal/sonarr
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: sonarr
 

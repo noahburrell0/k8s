@@ -16,6 +16,6 @@
 #     targetRevision: main
 #     path: manifests/dependencies
 #   destination:
-#     server: https://kubernetes.default.svc
+#     name: in-cluster
 #     namespace: deploymysite-operator
 

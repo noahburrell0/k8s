@@ -14,5 +14,5 @@ spec:
     targetRevision: main
     path: configs/setup/nginx-ingress
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: ingress-nginx

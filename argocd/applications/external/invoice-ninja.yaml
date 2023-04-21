@@ -16,7 +16,7 @@ spec:
     targetRevision: main
     path: configs/external/invoiceninja/configs
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: invoice-ninja
   ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
   - kind: Secret

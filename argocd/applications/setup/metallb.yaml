@@ -17,7 +17,7 @@ spec:
     targetRevision: main
     path: configs/setup/metallb/configs
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: metallb-system
   ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
     - kind: CustomResourceDefinition

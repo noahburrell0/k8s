@@ -14,5 +14,5 @@ spec:
     targetRevision: main
     path: configs/setup/argocd
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: argocd

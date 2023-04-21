@@ -13,5 +13,5 @@ spec:
     directory:
       recurse: true
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd  
+    name: in-cluster
+    namespace: argocd

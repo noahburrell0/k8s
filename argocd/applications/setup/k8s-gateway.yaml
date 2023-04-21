@@ -14,6 +14,6 @@ spec:
     targetRevision: main
     path: configs/setup/k8s-gateway
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: k8s-gateway
 

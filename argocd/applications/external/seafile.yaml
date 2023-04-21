@@ -16,6 +16,6 @@ spec:
     targetRevision: main
     path: configs/external/seafile/secrets
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: seafile
 

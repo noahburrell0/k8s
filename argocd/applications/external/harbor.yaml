@@ -16,7 +16,7 @@ spec:
     targetRevision: main
     path: configs/external/harbor/configs
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: harbor
   ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
   - kind: Deployment

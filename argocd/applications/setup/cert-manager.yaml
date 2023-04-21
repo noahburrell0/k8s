@@ -17,6 +17,6 @@ spec:
     targetRevision: main
     path: configs/setup/cert-manager/configs
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: cert-manager
 

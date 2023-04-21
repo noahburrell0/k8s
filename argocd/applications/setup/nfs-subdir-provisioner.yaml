@@ -14,6 +14,6 @@ spec:
     targetRevision: main
     path: configs/setup/nfs-subdir-provisioner
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: nfs-subdir-provisioner-system
 

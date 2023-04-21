@@ -16,6 +16,6 @@ spec:
     targetRevision: main
     path: configs/external/ghost/configs
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: ghost
 
