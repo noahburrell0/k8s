@@ -40,11 +40,11 @@ alertmanager:
       - to: "noah+alerting@burrell.tech"
         from: "noah@burrell.tech"
         smarthost: "smtp.gmail.com:587"
-        authUsername: "noah@burrell.tech"
-        authPassword:
+        auth_username: "noah@burrell.tech"
+        auth_password:
           name: gmail-secret
           key: password
-        authIdentity: "noah@burrell.tech"
+        auth_identity: "noah@burrell.tech"
     templates:
     - '/etc/alertmanager/config/*.tmpl'
 
