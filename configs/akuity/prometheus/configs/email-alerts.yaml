@@ -23,6 +23,8 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: email-alerts
+  labels:
+    alertmanagerConfig: "example"
 spec:
   receivers:
   - name: 'email'
@@ -36,7 +38,7 @@ spec:
         key: password
       authIdentity: "noah@burrell.tech"
   route:
-    groupBy: ['alertname']
+    groupBy: ['job']
     groupWait: 10s
     groupInterval: 10s
     repeatInterval: 2m
