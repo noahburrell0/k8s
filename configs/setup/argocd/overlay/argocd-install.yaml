@@ -129,6 +129,7 @@ data:
     alertmanager:
       labels:
         alertname: app-deployed
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -139,6 +140,7 @@ data:
     alertmanager:
       labels:
         alertname: app-health-degraded
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -149,6 +151,7 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-failed
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -159,6 +162,7 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-running
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -174,6 +178,7 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-status-unknown
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -189,6 +194,7 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-status-outofsync
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
 
@@ -199,5 +205,6 @@ data:
     alertmanager:
       labels:
         alertname: app-sync-succeeded
+        application: {{.app.metadata.name}}
         fault_priority: "P5"
         event_bucket: "deploy"
