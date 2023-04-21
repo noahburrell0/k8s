@@ -42,20 +42,6 @@ alertmanager:
         smarthost: "smtp.smtp:25"
     templates:
     - '/etc/alertmanager/config/*.tmpl'
-
-  config:
-    receivers:
-    - name: "null"
-    - name: "email"
-      emailConfigs:
-      - to: "noah+alerting@burrell.tech"
-        from: "noah@burrell.tech"
-        smarthost: "smtp.gmail.com:587"
-        authUsername: "noah@burrell.tech"
-        authPassword:
-          name: gmail-secret
-          key: password
-        authIdentity: "noah@burrell.tech"
   ingress:
     enabled: true
     hosts:
