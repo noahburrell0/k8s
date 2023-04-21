@@ -8,7 +8,7 @@ spec:
     emailConfigs:
     - to: 'noah@burrell.tech'
       from: 'alerts@burrell.tech'
-      smarthost: smtp-internal.smtp:25
+      smarthost: smtp.smtp:25
   route:
     groupBy: ['alertname']
     groupWait: 10s

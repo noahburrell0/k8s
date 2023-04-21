@@ -14,18 +14,3 @@ spec:
     app.kubernetes.io/instance: smtp
     app.kubernetes.io/name: smtp
   type: LoadBalancer
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: smtp-internal
-spec:
-  ports:
-    - name: smtp
-      port: 25
-      protocol: TCP
-      targetPort: smtp
-  selector:
-    app.kubernetes.io/instance: smtp
-    app.kubernetes.io/name: smtp
-  type: ClusterIP
