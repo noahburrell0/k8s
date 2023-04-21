@@ -75,9 +75,8 @@ metadata:
 data:
   # Basic Setup
   service.alertmanager: |
-    scheme: https
     targets:
-    - alertmanager.akuity.burrell.tech:443
+    - prom-stack-kube-prometheus-alertmanager.kube-prometheus-stack:9093
   context: |
     argocdUrl: https://argocd.k8s.burrell.tech
   subscriptions: |
