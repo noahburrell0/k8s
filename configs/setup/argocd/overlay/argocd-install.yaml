@@ -127,7 +127,7 @@ data:
     message: Application {{.app.metadata.name}} has been healthy.
     alertmanager:
       labels:
-        fault_priority: "P5"
+        fault_priority: "P1"
         event_bucket: "deploy"
         event_status: "succeed"
   #    annotations:
