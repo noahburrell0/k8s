@@ -17,3 +17,29 @@ spec:
       creationTimestamp: null
       name: gmail-secret
 
+---
+
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: email-alerts
+  labels:
+    alertmanagerconfig: enabled
+spec:
+  receivers:
+  - name: 'email'
+    emailConfigs:
+    - to: "noah+alerting@burrell.tech"
+      from: "noah@burrell.tech"
+      smarthost: "smtp.gmail.com:587"
+      authUsername: "noah@burrell.tech"
+      authPassword:
+        name: gmail-secret
+        key: password
+      authIdentity: "noah@burrell.tech"
+  route:
+    groupBy: ['job']
+    groupWait: 10s
+    groupInterval: 10s
+    repeatInterval: 2m
+    receiver: 'email'
