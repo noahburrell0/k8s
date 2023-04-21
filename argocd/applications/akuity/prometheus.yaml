@@ -19,5 +19,5 @@ spec:
     targetRevision: main
     ref: values
   destination:
-    server: https://kubernetes.default.svc
-    namespace: main-site
+    name: in-cluster
+    namespace: kube-prometheus-stack
