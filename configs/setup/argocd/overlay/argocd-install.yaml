@@ -126,6 +126,7 @@ data:
   template.app-deployed: |
     message: Application {{.app.metadata.name}} has been healthy.
     alertmanager:
+      generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
       labels:
         alertname: app-deployed
         fault_priority: "P5"
