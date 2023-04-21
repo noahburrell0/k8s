@@ -9,6 +9,7 @@ spec:
     automated: {}
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
   sources:
   - chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
