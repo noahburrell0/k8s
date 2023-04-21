@@ -132,7 +132,7 @@ data:
         event_bucket: "deploy"
         event_status: "succeed"
       annotations:
-        application: '<a href="{{.context.argocdUrl}}/applications/{{.app.metadata.name}}">{{.app.metadata.name}}</a>'
+        application: '{{.app.metadata.name}}'
 
   # template.app-health-degraded: |
   #   message: |
