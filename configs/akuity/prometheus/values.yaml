@@ -78,7 +78,7 @@ grafana:
       hosts:
       - grafana.akuity.burrell.tech
 
-prometheus:
+7prometheus:
   ingress:
     enabled: true
     hosts:
@@ -132,3 +132,8 @@ prometheus:
       - argocd
     endpoints:
     - port: metrics
+
+kubeEtcd:
+  service:
+    selector:
+      component: etcd
