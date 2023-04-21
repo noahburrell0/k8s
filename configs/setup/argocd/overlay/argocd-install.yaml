@@ -97,30 +97,22 @@ data:
       description: Application is synced and healthy. Triggered once per commit.
       send: [app-deployed]
       oncePer: app.status.operationState.syncResult.revision
-  # trigger.on-health-degraded: |
-  #   - when: app.status.health.status == 'Degraded'
-  #     description: Application has degraded
-  #     send: [app-health-degraded]
-  # trigger.on-sync-failed: |
-  #   - when: app.status.operationState.phase in ['Error', 'Failed']
-  #     description: Application syncing has failed
-  #     send: [app-sync-failed]
-  # trigger.on-sync-running: |
-  #   - when: app.status.operationState.phase in ['Running']
-  #     description: Application is being synced
-  #     send: [app-sync-running]
-  # trigger.on-sync-status-unknown: |
-  #   - when: app.status.sync.status == 'Unknown'
-  #     description: Application status is 'Unknown'
-  #     send: [app-sync-status-unknown]
-  # trigger.on-sync-status-outofsync: |
-  #   - when: app.status.sync.status == 'OutOfSync'
-  #     description: Application status is 'OutOfSync'
-  #     send: [app-sync-status-outofsync]
-  # trigger.on-sync-succeeded: |
-  #   - when: app.status.operationState.phase in ['Succeeded']
-  #     description: Application syncing has succeeded
-  #     send: [app-sync-succeeded]
+  trigger.on-health-degraded: |
+    - when: app.status.health.status == 'Degraded'
+      description: Application has degraded
+      send: [app-health-degraded]
+  trigger.on-sync-failed: |
+    - when: app.status.operationState.phase in ['Error', 'Failed']
+      description: Application syncing has failed
+      send: [app-sync-failed]
+  trigger.on-sync-status-unknown: |
+    - when: app.status.sync.status == 'Unknown'
+      description: Application status is 'Unknown'
+      send: [app-sync-status-unknown]
+  trigger.on-sync-status-outofsync: |
+    - when: app.status.sync.status == 'OutOfSync'
+      description: Application status is 'OutOfSync'
+      send: [app-sync-status-outofsync]
 
   # Notification Templates
   template.app-deployed: |
@@ -133,70 +125,42 @@ data:
       annotations:
         application: '{{.app.metadata.name}}'
 
-  # template.app-health-degraded: |
-  #   message: Application {{.app.metadata.name}} has degraded.
-  #   alertmanager:
-  #     labels:
-  #       alertname: app-health-degraded
-  #       fault_priority: "P2"
-  #       event_bucket: "deploy"
+  template.app-health-degraded: |
+    message: Application {{.app.metadata.name}} has degraded.
+    alertmanager:
+      generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
+      labels:
+        alertname: 'app-health-degraded-{{.app.metadata.name}}'
+        severity: "error"
+      annotations:
+        application: '{{.app.metadata.name}}'
 
-  # template.app-sync-failed: |
-  #   message: |
-  #       {{if eq .serviceType "slack"}}:exclamation:{{end}}  The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
-  #       Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
-  #   alertmanager:
-  #     labels:
-  #       alertname: app-sync-failed
-  #       fault_priority: "P5"
-  #       event_bucket: "deploy"
+  template.app-sync-failed: |
+    message: Application {{.app.metadata.name}} has failed to sync.
+    alertmanager:
+      generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
+      labels:
+        alertname: 'app-sync-failed-{{.app.metadata.name}}'
+        severity: "warning"
+      annotations:
+        application: '{{.app.metadata.name}}'
 
-  # template.app-sync-running: |
-  #   message: |
-  #       The sync operation of application {{.app.metadata.name}} has started at {{.app.status.operationState.startedAt}}.
-  #       Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
-  #   alertmanager:
-  #     labels:
-  #       alertname: app-sync-running
-  #       fault_priority: "P5"
-  #       event_bucket: "deploy"
+  template.app-sync-status-unknown: |
+    message: Application {{.app.metadata.name}} sync status is unknown.
+    alertmanager:
+      generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
+      labels:
+        alertname: 'app-sync-status-unknown-{{.app.metadata.name}}'
+        severity: "warning"
+      annotations:
+        application: '{{.app.metadata.name}}'
 
-  # template.app-sync-status-unknown: |
-  #   message: |
-  #       {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} sync is 'Unknown'.
-  #       Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
-  #       {{if ne .serviceType "slack"}}
-  #       {{range $c := .app.status.conditions}}
-  #           * {{$c.message}}
-  #       {{end}}
-  #       {{end}}
-  #   alertmanager:
-  #     labels:
-  #       alertname: app-sync-status-unknown
-  #       fault_priority: "P5"
-  #       event_bucket: "deploy"
-
-  # template.app-sync-status-outofsync: |
-  #   message: |
-  #       {{if eq .serviceType "slack"}}:warning:{{end}} Application {{.app.metadata.name}} sync is 'OutOfSync'.
-  #       Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
-  #       {{if ne .serviceType "slack"}}
-  #       {{range $c := .app.status.conditions}}
-  #           * {{$c.message}}
-  #       {{end}}
-  #       {{end}}
-  #   alertmanager:
-  #     labels:
-  #       alertname: app-sync-status-outofsync
-  #       fault_priority: "P5"
-  #       event_bucket: "deploy"
-
-  # template.app-sync-succeeded: |
-  #   message: |
-  #       {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} has been successfully synced at {{.app.status.operationState.finishedAt}}.
-  #       Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true
-  #   alertmanager:
-  #     labels:
-  #       alertname: app-sync-succeeded
-  #       fault_priority: "P5"
-  #       event_bucket: "deploy"
+  template.app-sync-status-outofsync: |
+    message: Application {{.app.metadata.name}} sync status is outofsync.
+    alertmanager:
+      generatorURL: '{{.context.argocdUrl}}/applications/{{.app.metadata.name}}'
+      labels:
+        alertname: 'app-sync-status-outofsync-{{.app.metadata.name}}'
+        severity: "info"
+      annotations:
+        application: '{{.app.metadata.name}}'
