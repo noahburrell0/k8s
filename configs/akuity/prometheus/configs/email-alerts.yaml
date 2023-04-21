@@ -7,7 +7,7 @@ spec:
   - name: 'email'
     emailConfigs:
     - to: 'noah@burrell.tech'
-      from: 'alerts@burrell.tech'
+      from: 'no-reply@burrell.tech'
       smarthost: smtp.smtp:25
   route:
     groupBy: ['alertname']
