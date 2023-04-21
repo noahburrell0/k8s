@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: main-site
+  namespace: argocd
+spec:
+  project: akuity
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 45.17.0
+    helm:
+      valueFiles:
+      - $values/configs/akuity/prometheus/values.yaml
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: main-site

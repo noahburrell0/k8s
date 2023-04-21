@@ -1,0 +1,41 @@
+alertmanager:
+  ingress:
+    enabled: true
+    hosts:
+      - alertmanager.akuity.burrell.tech
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
+    tls:
+    - secretName: alertmanager.akuity.burrell.tech
+      hosts:
+      - alertmanager.akuity.burrell.tech
+
+grafana:
+  ingress:
+    enabled: true
+    hosts:
+      - alertmanager.akuity.burrell.tech
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
+    tls:
+    - secretName: grafana.akuity.burrell.tech
+      hosts:
+      - grafana.akuity.burrell.tech
+
+prometheus:
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.akuity.burrell.tech
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/target: 'unproxied.burrell.tech'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
+    tls:
+    - secretName: prometheus.akuity.burrell.tech
+      hosts:
+      - prometheus.akuity.burrell.tech
