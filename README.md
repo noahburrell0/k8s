@@ -66,7 +66,7 @@ I have also setup a couple of basic Prometheus rules (sourced from [here](https:
 
 ### Alert delivery
 
-All alerts that go though Alertmanager are configured to be delivered by email (to noah+alerting@burrell.tech) through my [SMTP relay](configs/internal/smtp).
+Alertmanager is configured to deliver the alerts by email (to noah+alerting@burrell.tech) through my [SMTP relay](configs/internal/smtp). For alerts for qualify for email delivery, the alert must be labeled with `namespace: kube-prometheus-stack`
 
 ![](https://i.imgur.com/kA1SXzM.png)
 
