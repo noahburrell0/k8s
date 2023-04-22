@@ -1,0 +1,8 @@
+nfs:
+  server: 192.168.129.254
+  path: /Media/Kubernetes
+storageClass:
+  provisionerName: nfs-rwx
+  name: nfs-rwx
+  reclaimPolicy: Retain
+  accessModes: ReadWriteMany
