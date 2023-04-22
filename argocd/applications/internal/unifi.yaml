@@ -9,10 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: unifi
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 4.10.1
+    helm:
+      valueFiles:
+      - $values/configs/internal/unifi/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/internal/unifi
+    ref: values
   destination:
     name: in-cluster
     namespace: unifi
-
