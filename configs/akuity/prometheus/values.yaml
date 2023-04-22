@@ -1,7 +1,7 @@
 alertmanager:
   alertmanagerSpec:
     alertmanagerConfigSelector:
-      matchLabels:
+      matchExpressions:
       - key: alertmanagerConfig
         operator: In
         values:
