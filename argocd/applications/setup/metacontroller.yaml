@@ -9,9 +9,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
-    path: configs/setup/metacontroller
+  - chart: metacontroller-helm
+    repoURL: oci://ghcr.io/metacontroller
+    targetRevision: v4.5.2
   destination:
     name: in-cluster
     namespace: metacontroller
