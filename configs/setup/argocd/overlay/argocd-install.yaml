@@ -121,6 +121,7 @@ data:
       labels:
         alertname: 'app-deployed-{{.app.metadata.name}}'
         severity: "info"
+        namespace: "kube-prometheus-stack"
       annotations:
         application: '{{.app.metadata.name}}'
 
@@ -130,6 +131,7 @@ data:
       labels:
         alertname: 'app-health-degraded-{{.app.metadata.name}}'
         severity: "error"
+        namespace: "kube-prometheus-stack"
       annotations:
         application: '{{.app.metadata.name}}'
 
@@ -139,6 +141,7 @@ data:
       labels:
         alertname: 'app-sync-failed-{{.app.metadata.name}}'
         severity: "warning"
+        namespace: "kube-prometheus-stack"
       annotations:
         application: '{{.app.metadata.name}}'
 
@@ -148,6 +151,7 @@ data:
       labels:
         alertname: 'app-sync-status-unknown-{{.app.metadata.name}}'
         severity: "warning"
+        namespace: "kube-prometheus-stack"
       annotations:
         application: '{{.app.metadata.name}}'
 
@@ -157,5 +161,6 @@ data:
       labels:
         alertname: 'app-sync-status-outofsync-{{.app.metadata.name}}'
         severity: "info"
+        namespace: "kube-prometheus-stack"
       annotations:
         application: '{{.app.metadata.name}}'
