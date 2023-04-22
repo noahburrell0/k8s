@@ -1,6 +1,6 @@
 metrics:
   enabled: true
 serviceMonitor:
-  enabled: false
+  enabled: true
 args:
   - --kubelet-insecure-tls
