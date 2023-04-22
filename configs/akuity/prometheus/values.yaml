@@ -6,50 +6,6 @@ alertmanager:
         operator: In
         values:
         - prom-stack
-  # config:
-  #   global:
-  #     resolve_timeout: 5m
-  #   inhibit_rules:
-  #     - source_matchers:
-  #         - 'severity = critical'
-  #       target_matchers:
-  #         - 'severity =~ warning|info'
-  #       equal:
-  #         - 'namespace'
-  #         - 'alertname'
-  #     - source_matchers:
-  #         - 'severity = warning'
-  #       target_matchers:
-  #         - 'severity = info'
-  #       equal:
-  #         - 'namespace'
-  #         - 'alertname'
-  #     - source_matchers:
-  #         - 'alertname = InfoInhibitor'
-  #       target_matchers:
-  #         - 'severity = info'
-  #       equal:
-  #         - 'namespace'
-  #   route:
-  #     group_by: ['alertname']
-  #     group_wait: 10s
-  #     group_interval: 10s
-  #     repeat_interval: 30m
-  #     receiver: 'email'
-  #     routes:
-  #     - receiver: 'null'
-  #       matchers:
-  #         - alertname =~ "InfoInhibitor|Watchdog"
-  #   receivers:
-  #   - name: 'null'
-  #   - name: "email"
-  #     email_configs:
-  #     - to: "noah+alerting@burrell.tech"
-  #       from: "no-reply@burrell.tech"
-  #       smarthost: "smtp.smtp:25"
-  #       require_tls: false
-  #   templates:
-  #   - '/etc/alertmanager/config/*.tmpl'
   ingress:
     enabled: true
     hosts:
@@ -62,6 +18,7 @@ alertmanager:
     - secretName: alertmanager.akuity.burrell.tech
       hosts:
       - alertmanager.akuity.burrell.tech
+
 
 grafana:
   defaultDashboardsTimezone: America/Toronto
@@ -78,6 +35,7 @@ grafana:
       hosts:
       - grafana.akuity.burrell.tech
 
+
 prometheus:
   ingress:
     enabled: true
@@ -91,7 +49,6 @@ prometheus:
     - secretName: prometheus.akuity.burrell.tech
       hosts:
       - prometheus.akuity.burrell.tech
-
   additionalServiceMonitors:
   - name: argocd-metrics
     selector:
@@ -102,7 +59,6 @@ prometheus:
       - argocd
     endpoints:
     - port: metrics
-
   - name: argocd-server-metrics
     selector:
       matchLabels:
@@ -112,7 +68,6 @@ prometheus:
       - argocd
     endpoints:
     - port: metrics
-
   - name: argocd-repo-server-metrics
     selector:
       matchLabels:
@@ -122,7 +77,6 @@ prometheus:
       - argocd
     endpoints:
     - port: metrics
-
   - name: argocd-applicationset-controller-metrics
     selector:
       matchLabels:
