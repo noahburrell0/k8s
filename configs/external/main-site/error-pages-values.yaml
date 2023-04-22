@@ -1,0 +1,6 @@
+env:
+  TZ: America/Toronto
+  SHOW_DETAILS: "false"
+  TEMPLATE_NAME: connection
+image:
+  tag: 2.19.0
