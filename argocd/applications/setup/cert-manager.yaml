@@ -6,13 +6,18 @@ metadata:
 spec:
   project: setup
   syncPolicy:
-    automated: {}
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: cert-manager
+    repoURL: https://charts.jetstack.io
+    targetRevision: 1.8.0
+    helm:
+      valueFiles:
+      - $values/configs/setup/cert-manager/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/setup/cert-manager
+    ref: values
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/setup/cert-manager/configs
