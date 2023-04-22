@@ -1,11 +1,8 @@
 alertmanager:
   alertmanagerSpec:
     alertmanagerConfigSelector:
-      matchExpressions:
-      - key: alertconfig
-        operator: In
-        values:
-          - prom-stack
+      matchLabels:
+        alertconfig: prom-stack
   # config:
   #   global:
   #     resolve_timeout: 5m
