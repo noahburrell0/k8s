@@ -9,12 +9,12 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: metallb
+    repoURL: https://metallb.github.io/metallb
+    targetRevision: 0.13.7
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/setup/metallb
-  - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
-    path: configs/setup/metallb/configs
   destination:
     name: in-cluster
     namespace: metallb-system
