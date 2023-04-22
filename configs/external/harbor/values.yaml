@@ -1,57 +1,55 @@
-harbor:
+externalURL: https://registry.burrell.tech
 
-  externalURL: https://registry.burrell.tech
+expose:
+  type: ingress
+  ingress:
+    hosts:
+      core: registry.burrell.tech
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+  tls:
+    certSource: secret
+    secret:
+      secretName: registry.burrell.tech-tls
 
-  expose:
-    type: ingress
-    ingress:
-      hosts:
-        core: registry.burrell.tech
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/target: 'burrell.tech'
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
-    tls:
-      certSource: secret
-      secret:
-        secretName: registry.burrell.tech-tls
+trivy:
+  enabled: false
+notary:
+  enabled: false
 
-  trivy:
-    enabled: false
-  notary:
-    enabled: false
-
-  persistence:
-    persistentVolumeClaim:
-      registry:
+persistence:
+  persistentVolumeClaim:
+    registry:
+      storageClass: "nfs-rwo"
+      accessMode: ReadWriteOnce
+      size: 1Ti
+    chartmuseum:
+      storageClass: "nfs-rwo"
+      accessMode: ReadWriteOnce
+      size: 10Gi
+    jobservice:
+      jobLog:
         storageClass: "nfs-rwo"
         accessMode: ReadWriteOnce
-        size: 1Ti
-      chartmuseum:
-        storageClass: "nfs-rwo"
-        accessMode: ReadWriteOnce
-        size: 10Gi
-      jobservice:
-        jobLog:
-          storageClass: "nfs-rwo"
-          accessMode: ReadWriteOnce
-          size: 5Gi
-      database:
-        storageClass: "nfs-rwo"
-        accessMode: ReadWriteOnce
-        size: 10Gi
-      redis:
-        storageClass: "nfs-rwo"
-        accessMode: ReadWriteOnce
-        size: 10Gi
+        size: 5Gi
+    database:
+      storageClass: "nfs-rwo"
+      accessMode: ReadWriteOnce
+      size: 10Gi
+    redis:
+      storageClass: "nfs-rwo"
+      accessMode: ReadWriteOnce
+      size: 10Gi
 
-  updateStrategy:
-    type: Recreate
+updateStrategy:
+  type: Recreate
 
-  existingSecretSecretKey: harbor-sealed-secrets
-  existingSecretAdminPasswordKey: harbor-sealed-secrets
+existingSecretSecretKey: harbor-sealed-secrets
+existingSecretAdminPasswordKey: harbor-sealed-secrets
 
-  registry:
-    credentials:
-      username: root
-      existingSecret: harbor-sealed-secrets
+registry:
+  credentials:
+    username: root
+    existingSecret: harbor-sealed-secrets
