@@ -60,7 +60,9 @@ The alerts that can be triggered are based on the following application conditio
 - On sync status unknown
 - On sync status outofsync
 
-In addition to the alerts fired by Argo CD, the standard set of rules/alerts Prometheus ships with are also enabled. I have not configured any additional Prometheus rules to cover Argo CD specifically.
+In addition to the alerts fired by Argo CD, the standard set of rules/alerts Prometheus ships with are also enabled.
+
+I have also setup a couple of basic Prometheus rules (sourced from [here](https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml#L819)) to demonstrate Prometheus handeling the alerting. These rules can be found in this file [configs/akuity/prometheus/configs/argocd-prometheus-rules.yaml](configs/akuity/prometheus/configs/argocd-prometheus-rules.yaml)
 
 ### Alert delivery
 
