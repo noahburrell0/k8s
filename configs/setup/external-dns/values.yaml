@@ -1,22 +1,21 @@
-external-dns:
-  sources:
-    - ingress
-  provider: cloudflare
-  txtPrefix: external_dns_
-  extraArgs:
-    - --domain-filter=burrell.tech
-    - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
+sources:
+  - ingress
+provider: cloudflare
+txtPrefix: external_dns_
+extraArgs:
+  - --domain-filter=burrell.tech
+  - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
 
-  env:
-    - name: CF_API_KEY
-      valueFrom:
-        secretKeyRef:
-          name: cloudflare-auth
-          key: CF_API_KEY
-          optional: false
-    - name: CF_API_EMAIL
-      valueFrom:
-        secretKeyRef:
-          name: cloudflare-auth
-          key: CF_API_EMAIL
-          optional: false
+env:
+- name: CF_API_KEY
+  valueFrom:
+    secretKeyRef:
+      name: cloudflare-auth
+      key: CF_API_KEY
+      optional: false
+- name: CF_API_EMAIL
+  valueFrom:
+    secretKeyRef:
+      name: cloudflare-auth
+      key: CF_API_EMAIL
+      optional: false
