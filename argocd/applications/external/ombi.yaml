@@ -9,9 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: ombi
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 11.4.0
+    helm:
+      valueFiles:
+      - $values/configs/external/ombi/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/external/ombi
+    ref: values
   destination:
     name: in-cluster
     namespace: ombi
