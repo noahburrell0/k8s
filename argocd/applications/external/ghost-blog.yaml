@@ -9,9 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: ghost
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 19.1.58
+    helm:
+      valueFiles:
+      - $values/configs/external/ghost/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/external/ghost
+    ref: values
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/external/ghost/configs
