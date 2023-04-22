@@ -10,7 +10,7 @@ spec:
       - CreateNamespace=true
   sources:
   - chart: metacontroller-helm
-    repoURL: oci://ghcr.io/metacontroller
+    repoURL: ghcr.io/metacontroller
     targetRevision: v4.5.2
   destination:
     name: in-cluster
