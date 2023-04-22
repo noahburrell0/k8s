@@ -9,10 +9,11 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - alias: metacontroller
-    chart: metacontroller-helm
+  - chart: metacontroller-helm
     repoURL: ghcr.io/metacontroller
     targetRevision: v4.5.2
+    helm:
+      releaseName: metacontroller
   destination:
     name: in-cluster
     namespace: metacontroller
