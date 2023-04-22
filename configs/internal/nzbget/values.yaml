@@ -1,37 +1,35 @@
-nzbget:
+image:
+  pullPolicy: IfNotPresent
 
-  image:
-    pullPolicy: IfNotPresent
-    
-  ingress:
-    main:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: letsencrypt
-        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-        nginx.ingress.kubernetes.io/ssl-redirect: "true"
-        nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-        external-dns.alpha.kubernetes.io/exclude: 'true'
+ingress:
+  main:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+      external-dns.alpha.kubernetes.io/exclude: 'true'
+    hosts:
+      - host: nzbget.home.burrell.tech
+        paths:
+        - path: /
+          pathType: Prefix
+    tls:
+    - secretName: nzbget.home.burrell.tech
       hosts:
-        - host: nzbget.home.burrell.tech
-          paths:
-          - path: /
-            pathType: Prefix
-      tls:
-      - secretName: nzbget.home.burrell.tech
-        hosts:
-        - nzbget.home.burrell.tech
+      - nzbget.home.burrell.tech
 
-  persistence:
-    config:
-      enabled: true
-      storageClass: nfs-rwx
-      size: 5Ti
-      mountPath: /config
+persistence:
+  config:
+    enabled: true
+    storageClass: nfs-rwx
+    size: 5Ti
+    mountPath: /config
 
-  podSecurityContext:
-    runAsUser: 0
-    runAsGroup: 0
-    fsGroup: 0
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+  fsGroup: 0

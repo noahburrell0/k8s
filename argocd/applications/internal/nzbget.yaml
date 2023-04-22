@@ -9,9 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: nzbget
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 12.3.2
+    helm:
+      valueFiles:
+      - $values/configs/internal/nzbget/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/internal/nzbget
+    ref: values
   destination:
     name: in-cluster
     namespace: nzbget
