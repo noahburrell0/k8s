@@ -9,9 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: sonarr
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 16.2.3
+    helm:
+      valueFiles:
+      - $values/configs/internal/sonarr/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/internal/sonarr
+    ref: values
   destination:
     name: in-cluster
     namespace: sonarr
