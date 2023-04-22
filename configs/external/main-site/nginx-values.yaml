@@ -1,0 +1,60 @@
+replicaCount: 1
+
+service:
+  type: ClusterIP
+
+cloneStaticSiteFromGit:
+  enabled: "true"
+  repository: https://github.com/noahburrell0/burrell-tech.git
+  branch: main
+  interval: 5
+
+ingress:
+  enabled: true
+  hostname: burrell.tech
+  tls: true
+  tlsSecret: burrell.tech
+
+  extraHosts:
+  - name: www.burrell.tech
+    path: /
+  extraTls:
+    - hosts:
+      - www.burrell.tech
+      secretName: www.burrell.tech-tls
+
+  pathType: Prefix
+  path: /
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/default-backend: main-site-error-pages
+    nginx.ingress.kubernetes.io/custom-http-errors: "401,403,404,500,501,502,503"
+    external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+
+serverBlock: |-
+  server {
+    listen 0.0.0.0:8080;
+    location / {
+      try_files $uri $uri/ @rm-ext;
+    }
+
+    location ~ .html$ {
+      try_files $uri =404;
+    }
+
+    location @rm-ext {
+    rewrite ^(.*)$ $1.html last;
+    }
+  }
+
+error-pages:
+env:
+  TZ: America/Toronto
+  SHOW_DETAILS: "false"
+  TEMPLATE_NAME: connection
+image:
+  tag: 2.19.0

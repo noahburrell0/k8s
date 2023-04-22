@@ -9,9 +9,21 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: nginx
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 12.0.1
+    helm:
+      valueFiles:
+      - $values/configs/external/main-site/nginx-values.yaml
+  - chart: error-pages
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 1.1.2
+    helm:
+      valueFiles:
+      - $values/configs/external/main-site/error-pages-values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/external/main-site
+    ref: values
   destination:
     name: in-cluster
     namespace: main-site
