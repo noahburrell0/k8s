@@ -18,6 +18,7 @@ spec:
       for: 15m
       labels:
         severity: critical
+        namespace: kube-prometheus-stack
       annotations:
         summary: "[Argo CD] No reported applications"
         description: >
@@ -30,6 +31,7 @@ spec:
       for: 12h
       labels:
         severity: warning
+        namespace: kube-prometheus-stack
       annotations:
         summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
         description: >
@@ -42,6 +44,7 @@ spec:
       for: 10s
       labels:
         severity: warning
+        namespace: kube-prometheus-stack
       annotations:
         summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
         description: >
