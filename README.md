@@ -66,7 +66,7 @@ In addition to the alerts fired by Argo CD, the standard set of rules/alerts Pro
 
 All alerts that go though Alertmanager are configured to be delivered by email (to noah+alerting@burrell.tech) though my [SMTP relay](configs/internal/smtp).
 
-
+![](https://i.imgur.com/LqL7kBj.png)
 
 
 
