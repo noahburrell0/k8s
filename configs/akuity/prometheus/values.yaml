@@ -1,48 +1,55 @@
 alertmanager:
-  config:
-    global:
-      resolve_timeout: 5m
-    inhibit_rules:
-      - source_matchers:
-          - 'severity = critical'
-        target_matchers:
-          - 'severity =~ warning|info'
-        equal:
-          - 'namespace'
-          - 'alertname'
-      - source_matchers:
-          - 'severity = warning'
-        target_matchers:
-          - 'severity = info'
-        equal:
-          - 'namespace'
-          - 'alertname'
-      - source_matchers:
-          - 'alertname = InfoInhibitor'
-        target_matchers:
-          - 'severity = info'
-        equal:
-          - 'namespace'
-    route:
-      group_by: ['alertname']
-      group_wait: 10s
-      group_interval: 10s
-      repeat_interval: 30m
-      receiver: 'email'
-      routes:
-      - receiver: 'null'
-        matchers:
-          - alertname =~ "InfoInhibitor|Watchdog"
-    receivers:
-    - name: 'null'
-    - name: "email"
-      email_configs:
-      - to: "noah+alerting@burrell.tech"
-        from: "no-reply@burrell.tech"
-        smarthost: "smtp.smtp:25"
-        require_tls: false
-    templates:
-    - '/etc/alertmanager/config/*.tmpl'
+  alertmanagerSpec:
+    alertmanagerConfigSelector:
+      matchExpressions:
+      - key: alertconfig
+        operator: In
+        values:
+          - prom-stack
+  # config:
+  #   global:
+  #     resolve_timeout: 5m
+  #   inhibit_rules:
+  #     - source_matchers:
+  #         - 'severity = critical'
+  #       target_matchers:
+  #         - 'severity =~ warning|info'
+  #       equal:
+  #         - 'namespace'
+  #         - 'alertname'
+  #     - source_matchers:
+  #         - 'severity = warning'
+  #       target_matchers:
+  #         - 'severity = info'
+  #       equal:
+  #         - 'namespace'
+  #         - 'alertname'
+  #     - source_matchers:
+  #         - 'alertname = InfoInhibitor'
+  #       target_matchers:
+  #         - 'severity = info'
+  #       equal:
+  #         - 'namespace'
+  #   route:
+  #     group_by: ['alertname']
+  #     group_wait: 10s
+  #     group_interval: 10s
+  #     repeat_interval: 30m
+  #     receiver: 'email'
+  #     routes:
+  #     - receiver: 'null'
+  #       matchers:
+  #         - alertname =~ "InfoInhibitor|Watchdog"
+  #   receivers:
+  #   - name: 'null'
+  #   - name: "email"
+  #     email_configs:
+  #     - to: "noah+alerting@burrell.tech"
+  #       from: "no-reply@burrell.tech"
+  #       smarthost: "smtp.smtp:25"
+  #       require_tls: false
+  #   templates:
+  #   - '/etc/alertmanager/config/*.tmpl'
   ingress:
     enabled: true
     hosts:
