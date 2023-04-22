@@ -5,7 +5,7 @@ alertmanager:
       - key: alertmanagerConfig
         operator: In
         values:
-          - prom-stack
+        - prom-stack
   # config:
   #   global:
   #     resolve_timeout: 5m
