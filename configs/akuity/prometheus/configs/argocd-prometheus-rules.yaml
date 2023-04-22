@@ -10,6 +10,7 @@ metadata:
 spec:
   groups:
   - name: argocd
+    interval: 10s
     rules:
     - alert: ArgoAppMissing
       expr: |
