@@ -9,9 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: adguard-home
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 5.5.2
+    helm:
+      valueFiles:
+      - $values/configs/internal/adguard/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/internal/adguard
+    ref: values
   destination:
     name: in-cluster
     namespace: adguard
