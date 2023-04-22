@@ -9,9 +9,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
+  - chart: metrics-server
+    repoURL: https://kubernetes-sigs.github.io/metrics-server/
+    targetRevision: 3.8.2
+    helm:
+      valueFiles:
+      - $values/configs/setup/metrics-server/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/setup/metrics-server
+    ref: values
   destination:
     name: in-cluster
     namespace: metrics-server
