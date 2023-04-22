@@ -21,4 +21,8 @@ spec:
   destination:
     name: in-cluster
     namespace: k8s-gateway
-
+  ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
+  - kind: Deployment
+    group: apps
+    jsonPointers:
+    - /spec/template/metadata/annotations/checksum~1config
