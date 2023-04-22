@@ -6,7 +6,6 @@ metadata:
 spec:
   project: internal
   syncPolicy:
-    automated: {}
     syncOptions:
       - CreateNamespace=true
   sources:
