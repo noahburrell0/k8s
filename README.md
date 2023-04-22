@@ -22,7 +22,7 @@ I've also deployed a guestbook application, it is externally accessible here: ht
 
 ### Application and project definitions
 
-You can find the application and project definitions for Argo CD in [argocd](argocd), the guestbook and prometheus applications are located in [argocd/akuity](argocd/akuity).
+You can find the application and project definitions for Argo CD in [argocd](argocd), the guestbook and prometheus applications are located in [argocd/applications/akuity](argocd/applications/akuity).
 
 The app-of-apps is here: [argocd/app-of-apps.yaml](argocd/app-of-apps.yaml)
 
