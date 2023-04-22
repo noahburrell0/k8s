@@ -11,7 +11,6 @@ spec:
     groupInterval: 10s
     repeatInterval: 30m
     receiver: 'email'
-    matchers: []
   receivers:
   - name: 'email'
     emailConfigs:
