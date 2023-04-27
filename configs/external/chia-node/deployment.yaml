@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: chia-node
     app.kubernetes.io/name: chia-node
-    app.kubernetes.io/version: 1.6.0
+    app.kubernetes.io/version: 1.7.1
   name: chia-node
   namespace: chia-node
 spec:
@@ -32,7 +32,7 @@ spec:
             - containerPort: 8447
               name: farmer
               protocol: TCP
-          image: 'ghcr.io/chia-network/chia:1.6.0'
+          image: 'ghcr.io/chia-network/chia:1.7.1'
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
