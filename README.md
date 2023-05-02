@@ -32,10 +32,6 @@ All manifests, Helm values, etc., are located in [configs](configs). You can che
 
 ## Self-Managing Argo CD
 
-Part of the requirements outlined "a self-managed Argo CD" instance. I wasn't sure if this meant self-hosted (ie. not using the Akuity or Codefresh type of hosted offerings), or if it meant that Argo CD should be self-managing.
-
-Regardless, I already have a self-managing Argo CD instance. Any changes I make to Argo CD's configurations will automatically be applied by Argo CD once committed without the need to manually issue a `kubectl` command.
-
 The application definition is here: [argocd/applications/setup/argocd.yaml](argocd/applications/setup/argocd.yaml)
 
 And Argo CD's configurations are here: [configs/setup/argocd](configs/setup/argocd)
