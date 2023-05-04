@@ -54,6 +54,7 @@ spec:
       containers:
       - name: plex-worker
         image: lscr.io/linuxserver/plex:latest
+        imagePullPolicy: Always
         startupProbe:
           httpGet:
             path: /health
