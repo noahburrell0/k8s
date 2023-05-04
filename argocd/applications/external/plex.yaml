@@ -16,8 +16,11 @@ spec:
       valueFiles:
       - $values/configs/external/plex/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
+    targetRevision: clusterplex
     ref: values
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: clusterplex
+    path: configs/external/plex/clusterplex
   destination:
     name: in-cluster
     namespace: plex
