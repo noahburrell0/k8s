@@ -41,6 +41,12 @@ service:
     enabled: true
     type: ClusterIP
     ports:
+      pms:
+        enabled: true
+        port: 32400
+        nodePort: 32400
+        targetPort: 32400
+        protocol: TCP
       relay:
         enabled: true
         port: 32499
