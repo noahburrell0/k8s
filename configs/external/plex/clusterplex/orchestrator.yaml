@@ -56,7 +56,7 @@ spec:
         envFrom:
         - configMapRef:
             name: clusterplex-orchestrator-config
-        resources:            # adapt requests and limits to your needs
+        resources:
           requests:
             cpu: 200m
             memory: 32Mi

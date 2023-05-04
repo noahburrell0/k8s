@@ -37,6 +37,10 @@ service:
         nodePort: 32400
         targetPort: 32400
         protocol: TCP
+  relay:
+    enabled: true
+    type: ClusterIP
+    ports:
       relay:
         enabled: true
         port: 32499
