@@ -94,7 +94,7 @@ spec:
             memory: 200Mi
           limits:
             cpu: 6000m
-            memory: 800Mi
+            memory: 2048Mi
       securityContext:
         runAsGroup: 0
         runAsUser: 0
