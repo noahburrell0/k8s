@@ -9,7 +9,7 @@ data:
   TZ: America/Toronto
   PGID: '0'
   PUID: '0'
-  VERSION: docker
+  VERSION: latest
   DOCKER_MODS: 'ghcr.io/pabloromeo/clusterplex_worker_dockermod:latest'
   ORCHESTRATOR_URL: 'http://clusterplex-orchestrator:3500'
   LISTENING_PORT: '3501'
