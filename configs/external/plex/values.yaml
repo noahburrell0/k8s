@@ -24,6 +24,7 @@ service:
     primary: false
     enabled: false
   lb-bgp:
+    nameOverride: ""
     enabled: true
     type: LoadBalancer
     annotations:
