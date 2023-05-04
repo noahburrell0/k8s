@@ -38,6 +38,7 @@ service:
         targetPort: 32400
         protocol: TCP
   relay:
+    nameOverride: plex-relay
     enabled: true
     type: ClusterIP
     ports:
