@@ -109,7 +109,7 @@ spec:
           server: 192.168.129.254
       - name: transcode
         nfs:
-          path: /Media/PmsTranscodeDir
+          path: /mnt/Boot_NVMe/PmsTranscode
           server: 192.168.129.254
       - name: codecs
         emptyDir: {}
