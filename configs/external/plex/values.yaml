@@ -10,6 +10,14 @@ env:
   PUID: "0"
   PGID: "0"
   VERSION: latest
+  DOCKER_MODS: ghcr.io/pabloromeo/clusterplex_dockermod:latest
+  ORCHESTRATOR_URL: http://clusterplex-orchestrator:3500
+  PMS_SERVICE: plex
+  PMS_PORT: "32400"
+  TRANSCODER_VERBOSE: "1"
+  TRANSCODE_OPERATING_MODE: both
+  LOCAL_RELAY_ENABLED: "1"
+  LOCAL_RELAY_PORT: "32499"
 
 service:
   main:
@@ -28,6 +36,12 @@ service:
         port: 32400
         nodePort: 32400
         targetPort: 32400
+        protocol: TCP
+      relay:
+        enabled: true
+        port: 32499
+        nodePort: 32499
+        targetPort: 32499
         protocol: TCP
 
 ingress:
@@ -64,8 +78,9 @@ persistence:
         readOnly: false
   transcode:
     enabled: true
-    type: emptyDir
-    size: 16Gi
+    type: nfs
+    server: 192.168.129.254
+    path: /Media/PmsTranscodeDir
     mountPath: /transcode
   media-tv:
     enabled: true

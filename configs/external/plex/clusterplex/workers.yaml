@@ -1,0 +1,114 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: clusterplex-worker-config
+  labels:
+    app.kubernetes.io/name: clusterplex-worker-config
+    app.kubernetes.io/part-of: clusterplex
+data:
+  TZ: America/Toronto
+  PGID: '0'
+  PUID: '0'
+  VERSION: docker
+  DOCKER_MODS: 'ghcr.io/pabloromeo/clusterplex_worker_dockermod:latest'
+  ORCHESTRATOR_URL: 'http://clusterplex-orchestrator:3500'
+  LISTENING_PORT: '3501'
+  STAT_CPU_INTERVAL: '10000'
+  EAE_SUPPORT: '1'
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: clusterplex-worker
+  labels:
+    app.kubernetes.io/name: clusterplex-worker
+    app.kubernetes.io/part-of: clusterplex
+spec:
+  serviceName: clusterplex-worker-service
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: clusterplex-worker
+      app.kubernetes.io/part-of: clusterplex
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: clusterplex-worker
+        app.kubernetes.io/part-of: clusterplex
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  name: clusterplex-worker
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  name: clusterplex-pms
+              topologyKey: kubernetes.io/hostname
+            weight: 50
+      containers:
+      - name: plex-worker
+        image: lscr.io/linuxserver/plex:latest
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 3501
+          failureThreshold: 40
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3501
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3501
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        ports:
+          - name: worker
+            containerPort: 3501
+        envFrom:
+        - configMapRef:
+            name: clusterplex-worker-config
+        volumeMounts:
+        - name: television
+          mountPath: /mnt/Media/Television
+        - name: movies
+          mountPath: /mnt/Media/Movies
+        - name: codecs
+          mountPath: /codecs
+        - name: transcode
+          mountPath: /transcode
+        resources:              # adapt requests and limits to your needs
+          requests:
+            cpu: 500m
+            memory: 200Mi
+          limits:
+            cpu: 3000m
+            memory: 800Mi
+      securityContext:
+        runAsGroup: 0
+        runAsUser: 0
+      volumes:
+      - name: movies
+        nfs:
+          path: /Media/Movies
+          server: 192.168.129.254
+      - name: television
+        nfs:
+          path: /Media/Television
+          server: 192.168.129.254
+      - name: transcode
+        nfs:
+          path: /Media/PmsTranscodeDir
+          server: 192.168.129.254
+      - name: codecs
+        emptyDir: {}
