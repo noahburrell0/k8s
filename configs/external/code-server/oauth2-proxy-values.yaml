@@ -10,6 +10,7 @@ ingress:
   hosts:
   - code.burrell.tech
   path: /oauth2/
+  pathType: Prefix
   tls:
   - secretName: code.burrell.tech
     hosts:
