@@ -33,3 +33,9 @@ extraEnv:
   value: https://burrell.us.auth0.com/
 - name: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
   value: "true"
+- name: OAUTH2_PROXY_OIDC_JWKS_URL
+  value: "https://burrell.us.auth0.com/.well-known/jwks.json"
+- name: OAUTH2_PROXY_REDEEM_URL
+  value: https://burrell.us.auth0.com/oauth/token
+- name: OAUTH2_PROXY_SKIP_OIDC_DISCOVERY
+  value: "true"
