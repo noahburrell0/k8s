@@ -15,8 +15,8 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     external-dns.alpha.kubernetes.io/target: 'burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
-    # nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-    # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 persistence:
   storageClass: nfs-rwo
   size: 50Gi
