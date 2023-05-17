@@ -9,7 +9,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - repoURL: https://github.com/noahburrell0/k8s.git
+  - repoURL: https://github.com/coder/code-server.git
     targetRevision: v4.12.0
     path: code-server/ci/helm-chart
     helm:
