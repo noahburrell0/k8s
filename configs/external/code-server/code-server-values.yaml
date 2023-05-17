@@ -13,8 +13,8 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/target: 'burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
-    nginx.ingress.kubernetes.io/auth-url: "https://code.burrell.tech/oauth2/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "https://code.burrell.tech/oauth2/start?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     ingress.kubernetes.io/force-ssl-redirect: "true"
     ingress.kubernetes.io/proxy-body-size: "1024m"
     nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
