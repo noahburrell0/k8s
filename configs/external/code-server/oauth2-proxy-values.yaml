@@ -20,8 +20,8 @@ config:
   cookieName: burrellCodeServer
 
 extraEnv:
-  OAUTH2_PROXY_PROVIDER: oidc
-  OAUTH2_PROXY_PROVIDER_DISPLAY_NAME: Auth0
-  OAUTH2_PROXY_REDIRECT_URL: https://code.burrell.tech/oauth2/callback
-  OAUTH2_PROXY_OIDC_ISSUER_URL: https://burrell.us.auth0.com/authorize
-  OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
+- OAUTH2_PROXY_PROVIDER: oidc
+- OAUTH2_PROXY_PROVIDER_DISPLAY_NAME: Auth0
+- OAUTH2_PROXY_REDIRECT_URL: https://code.burrell.tech/oauth2/callback
+- OAUTH2_PROXY_OIDC_ISSUER_URL: https://burrell.us.auth0.com/authorize
+- OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
