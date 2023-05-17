@@ -41,3 +41,5 @@ extraEnv:
   value: https://burrell.us.auth0.com/oauth/token
 - name: OAUTH2_PROXY_SKIP_OIDC_DISCOVERY
   value: "true"
+
+# https://burrell.us.auth0.com/v2/logout?client_id=GBegpb6agBLAcQ6D5bkXuJCcrDgXCEBP&returnTo=https://code.burrell.tech/oauth2/sign_out
