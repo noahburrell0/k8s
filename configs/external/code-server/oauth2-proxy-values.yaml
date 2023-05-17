@@ -34,7 +34,7 @@ extraEnv:
 - name: OAUTH2_PROXY_OIDC_ISSUER_URL
   value: https://burrell.us.auth0.com/
 - name: OAUTH2_PROXY_LOGIN_URL
-  value: https://burrell.us.auth0.com/authorize
+  value: https://burrell.us.auth0.com/authorize?audience=https://code.burrell.tech/
 - name: OAUTH2_PROXY_OIDC_JWKS_URL
   value: "https://burrell.us.auth0.com/.well-known/jwks.json"
 - name: OAUTH2_PROXY_REDEEM_URL
