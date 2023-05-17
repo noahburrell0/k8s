@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://github.com/coder/code-server.git
     targetRevision: v4.12.0
-    path: code-server/ci/helm-chart
+    path: ci/helm-chart
     helm:
       valueFiles:
       - $values/configs/external/code-server/code-server-values.yaml
