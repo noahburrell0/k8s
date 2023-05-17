@@ -23,6 +23,8 @@ config:
   cookieName: burrellCodeServer
 
 extraEnv:
+- name: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
+  value: "true"
 - name: OAUTH2_PROXY_PROVIDER
   value: oidc
 - name: OAUTH2_PROXY_PROVIDER_DISPLAY_NAME
@@ -31,8 +33,8 @@ extraEnv:
   value: https://code.burrell.tech/oauth2/callback
 - name: OAUTH2_PROXY_OIDC_ISSUER_URL
   value: https://burrell.us.auth0.com/
-- name: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
-  value: "true"
+- name: OAUTH2_PROXY_LOGIN_URL
+  value: https://burrell.us.auth0.com/authorize
 - name: OAUTH2_PROXY_OIDC_JWKS_URL
   value: "https://burrell.us.auth0.com/.well-known/jwks.json"
 - name: OAUTH2_PROXY_REDEEM_URL
