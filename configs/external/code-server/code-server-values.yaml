@@ -20,3 +20,6 @@ ingress:
 persistence:
   storageClass: nfs-rwo
   size: 50Gi
+extraArgs:
+- "--auth"
+- "none"
