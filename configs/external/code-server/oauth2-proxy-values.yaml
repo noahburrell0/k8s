@@ -9,7 +9,7 @@ ingress:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
   hosts:
   - code.burrell.tech
-  path: /oauth2/
+  path: /oauth2
   pathType: Prefix
   tls:
   - secretName: code.burrell.tech
