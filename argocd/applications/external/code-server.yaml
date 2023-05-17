@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: code-server
+  namespace: argocd
+spec:
+  project: external
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: v4.12.0
+    path: code-server/ci/helm-chart
+    helm:
+      valueFiles:
+      - $values/configs/external/code-server/code-server-values.yaml
+  - chart: oauth2-proxy
+    repoURL: https://oauth2-proxy.github.io/manifests
+    targetRevision: 6.12.0
+    helm:
+      valueFiles:
+      - $values/configs/external/code-server/oauth2-proxy-values.yaml
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/external/code-server/configs
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    ref: values
+  destination:
+    name: in-cluster
+    namespace: code-server

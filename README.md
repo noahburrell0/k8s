@@ -1,76 +1,4 @@
-# Hello Akuity 👋
-
-## What is this repository?
-
-This repository is where I keep the configurations for my personal homelab. I've added in a guestbook application and Prometheus/Alertmanager/Grafana for this technical challenge.
-
-## Grafana
-
-I've made Grafana externally accessible for this technical challenge, you can view it here: https://grafana.akuity.burrell.tech/
-
-The Argo CD dashboard can be directly accessed at this URL: https://grafana.akuity.burrell.tech/d/LCAgc9rWz/argocd?orgId=1
-
-**Username:** `admin`
-
-**Password:** `prom-operator`
-
-## Guestbook
-
-I've also deployed a guestbook application, it is externally accessible here: https://guestbook.akuity.burrell.tech/
-
-## Where is everything?
-
-### Application and project definitions
-
-You can find the application and project definitions for Argo CD in [argocd](argocd), the guestbook and prometheus applications are located in [argocd/applications/akuity](argocd/applications/akuity).
-
-The app-of-apps is here: [argocd/app-of-apps.yaml](argocd/app-of-apps.yaml)
-
-### Configurations
-
-All manifests, Helm values, etc., are located in [configs](configs). You can check the [configs/akuity](configs/akuity) directory for the guestbook and Prometheus/Alertmanager/Grafana configurations.
-
-## Self-Managing Argo CD
-
-The application definition is here: [argocd/applications/setup/argocd.yaml](argocd/applications/setup/argocd.yaml)
-
-And Argo CD's configurations are here: [configs/setup/argocd](configs/setup/argocd)
-
-
-## Alerting
-
-### Prometheus/Alertmanager/Grafana
-
-The monitoring stack is installed using the prometheus-community `kube-prometheus-stack` Helm chart. The values I used are here [configs/akuity/prometheus/values.yaml](configs/akuity/prometheus/values.yaml).
-
-In addition to the values file, the additional configurations I used to enable email alerting and the Argo CD Grafana dashboard are available here [configs/akuity/prometheus/configs](configs/akuity/prometheus/configs)
-
-### Argo CD notifications
-
-Alerts are fired by Argo CD notifications to Alertmanager. The configurations for Argo CD notifications can be found at [configs/setup/argocd/overlay/argocd-install.yaml#L70](configs/setup/argocd/overlay/argocd-install.yaml#L70)
-
-The alerts that can be triggered are based on the following application conditions:
-- On deployment (application is synced and healthy)
-- On degraded
-- On sync failure
-- On sync status unknown
-- On sync status outofsync
-
-In addition to the alerts fired by Argo CD, the standard set of rules/alerts Prometheus ships with are also enabled.
-
-I have also setup a couple of basic Prometheus rules (sourced from [here](https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml#L819)) to demonstrate Prometheus handeling the alerting for Argo CD. These rules can be found in this file [configs/akuity/prometheus/configs/argocd-prometheus-rules.yaml](configs/akuity/prometheus/configs/argocd-prometheus-rules.yaml)
-
-### Alert delivery
-
-Alertmanager is configured to deliver the alerts by email (to noah+alerting@burrell.tech) through my [SMTP relay](configs/internal/smtp). For alerts to qualify for email delivery, the alert must be labeled with `namespace: kube-prometheus-stack`
-
-![](https://i.imgur.com/kA1SXzM.png)
-
-
-
-
-
-<!-- # Self-Managing Kubernetes Homelab w/ ArgoCD
+# Self-Managing Kubernetes Homelab w/ ArgoCD
 
 This repository serves as the immutable source of configurations for my personal homelab and is deployed using ArgoCD. The configurations contained in the repository self-manage ArgoCD as well as the applications. With various operators like external-dns, cert-manager, and metallb, this homelab pretty much manages itself. Once set up, there is zero intervention required to keep things running.
 
@@ -139,11 +67,3 @@ The above commands will deploy ArgoCD and the `app-of-apps` application which wi
 ## Secrets
 
 All secrets are encrypted and stored in this repository using [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) by Bitnami. Only I hold the decryption keys for the secrets in this repository. If you are using this repository as the basis for you own homelab or Kubernetes cluster, be aware that none of the sealed secrets here will unseal for you. You will need seal your own secrets and replace mine. As a result, if you try to deploy the applications contained in this repository using my configurations, the application will most likely be broken.
-
----
-
-# Hire Me!
-
-Need help getting started with Kubernetes (or DevOps, or GitOps), or have a project you need an extra set of hands with? I'm available for freelance and consulting work! I'm a CKA certified Kubernetes (and Linux) administrator and DevOps engineer during the day in the financial services industry, and I also do a lot of the same sort of stuff in my spare time for fun.
-
-Email me directly at [noah@burrell.tech](mailto:noah@burrell.tech), or visit my website at [burrell.tech](https://burrell.tech). -->
