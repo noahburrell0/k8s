@@ -11,4 +11,4 @@ ingress:
     external-dns.alpha.kubernetes.io/exclude: "true"
   host: vcluster.k8s.burrell.tech
 storage:
-  className: nfs-rwo
+  persistence: false
