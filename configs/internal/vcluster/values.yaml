@@ -1,5 +1,8 @@
 vcluster:
   image: rancher/k3s:v1.23.5-k3s1
+syncer:
+  extraArgs:
+  - --tls-san=my-vcluster.k8s.burrell.tech
 ingress:
   enabled: true
   annotations:
