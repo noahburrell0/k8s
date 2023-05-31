@@ -77,20 +77,7 @@ data:
     argocdUrl: https://argocd.k8s.burrell.tech
   service.slack.slack: |
     token: $SLACK-TOKEN
-    username: ""
-    icon: ""
-  template.app-created: |
-    email:
-      subject: Application {{.app.metadata.name}} has been created.
-    message: Application {{.app.metadata.name}} has been created.
-    teams:
-      title: Application {{.app.metadata.name}} has been created.
-  template.app-deleted: |
-    email:
-      subject: Application {{.app.metadata.name}} has been deleted.
-    message: Application {{.app.metadata.name}} has been deleted.
-    teams:
-      title: Application {{.app.metadata.name}} has been deleted.
+    username: "@argocd_notifications"
   template.app-deployed: >
     email:
       subject: New version of an application {{.app.metadata.name}} is up and running.
@@ -549,14 +536,15 @@ data:
       themeColor: '#000080'
       title: Application {{.app.metadata.name}} has been successfully synced
   trigger.on-deployed: |
-    - description: Application is synced and healthy. Triggered once per commit.
-      oncePer: app.status.operationState.syncResult.revision
-      send:
-        - app-deployed
-      when: app.status.operationState.phase in ['Succeeded'] and
-        app.status.health.status == 'Healthy'
+    description: Application is synced and healthy. Triggered once per commit.
+    oncePer: app.status.sync.revision
+    send:
+      - app-deployed
+    when: app.status.operationState.phase in ['Succeeded'] and
+      app.status.health.status == 'Healthy'
   trigger.on-sync-succeeded: |
-    - description: Application syncing has succeeded
-      send:
-        - app-sync-succeeded
-      when: app.status.operationState.phase in ['Succeeded']
+    description: Application syncing has succeeded
+    oncePer: ""
+    send:
+      - app-sync-succeeded
+    when: app.status.operationState.phase in ['Succeeded']
