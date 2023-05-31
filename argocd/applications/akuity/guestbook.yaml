@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: guestbook
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack: argo-notifications-testing
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: argo-notifications-testing
 spec:
   project: akuity
   syncPolicy:
