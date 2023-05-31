@@ -541,8 +541,8 @@ data:
       send:
         - app-deployed
       when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
-    trigger.on-sync-succeeded: |
-    -  description: Application syncing has succeeded
+  trigger.on-sync-succeeded: |
+    - description: Application syncing has succeeded
       oncePer: ""
       send:
         - app-sync-succeeded
