@@ -12,8 +12,8 @@ spec:
     automated: {}
     syncOptions:
       - CreateNamespace=true
-  sources:
-  - repoURL: https://github.com/noahburrell0/k8s.git
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/akuity/guestbook
   destination:
