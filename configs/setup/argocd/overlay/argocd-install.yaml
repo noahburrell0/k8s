@@ -540,7 +540,8 @@ data:
       oncePer: app.status.operationState.syncResult.revision
       send:
         - app-deployed
-      when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+      when: app.status.operationState.phase in ['Succeeded'] and
+        app.status.health.status == 'Healthy'
   trigger.on-sync-succeeded: |
     - description: Application syncing has succeeded
       oncePer: ""
