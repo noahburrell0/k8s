@@ -112,6 +112,11 @@ data:
             "title": "Repository",
             "value": "{{.app.spec.source.repoURL}}",
             "short": true
+          },
+          {
+            "title": "Revision",
+            "value": "{{.app.status.sync.revision}}",
+            "short": true
           }
           {{range $index, $c := .app.status.conditions}}
           {{if not $index}},{{end}}
@@ -158,15 +163,7 @@ data:
             "os":"default",
             "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}"
           }]
-        },
-        {
-          "@type":"OpenUri",
-          "name":"Open Repository",
-          "targets":[{
-            "os":"default",
-            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
-          }]
-        }]
+        }
       themeColor: '#000080'
       title: New version of an application {{.app.metadata.name}} is up and running.
   template.app-health-degraded: >
