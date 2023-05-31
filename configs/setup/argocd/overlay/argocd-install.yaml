@@ -150,7 +150,15 @@ data:
             "os":"default",
             "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}"
           }]
-        }
+        },
+        {
+          "@type":"OpenUri",
+          "name":"Open Repository",
+          "targets":[{
+            "os":"default",
+            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+          }]
+        }]
       themeColor: '#000080'
       title: New version of an application {{.app.metadata.name}} is up and running.
   template.app-health-degraded: >
@@ -532,7 +540,15 @@ data:
             "os":"default",
             "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
           }]
-        }
+        },
+        {
+          "@type":"OpenUri",
+          "name":"Open Repository",
+          "targets":[{
+            "os":"default",
+            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+          }]
+        }]
       themeColor: '#000080'
       title: Application {{.app.metadata.name}} has been successfully synced
   trigger.on-deployed: |
