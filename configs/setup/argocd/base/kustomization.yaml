@@ -6,3 +6,13 @@ resources:
   - argocd-namespace.yaml
 
 namespace: argocd
+
+patches:
+  # Disable the default argocd-notifications-secret so a sealed secret can be used
+  - target:
+      kind: Secret
+      name: argocd-notifications-secret
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: argocd-notifications-secret-disabled
