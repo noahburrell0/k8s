@@ -536,15 +536,15 @@ data:
       themeColor: '#000080'
       title: Application {{.app.metadata.name}} has been successfully synced
   trigger.on-deployed: |
-    - description: Application is synced and healthy. Triggered once per commit.
-      oncePer: app.status.operationState.syncResult.revision
-      send:
-        - app-deployed
-      when: app.status.operationState.phase in ['Succeeded'] and
-        app.status.health.status == 'Healthy'
+    description: Application is synced and healthy. Triggered once per commit.
+    oncePer: app.status.operationState.syncResult.revision
+    send:
+      - app-deployed
+    when: app.status.operationState.phase in ['Succeeded'] and
+      app.status.health.status == 'Healthy'
   trigger.on-sync-succeeded: |
-    - description: Application syncing has succeeded
-      oncePer: ""
-      send:
-        - app-sync-succeeded
-      when: app.status.operationState.phase in ['Succeeded']
+    description: Application syncing has succeeded
+    oncePer: ""
+    send:
+      - app-sync-succeeded
+    when: app.status.operationState.phase in ['Succeeded']
