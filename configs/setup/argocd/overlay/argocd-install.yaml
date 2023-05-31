@@ -519,6 +519,9 @@ data:
           {{end}}
           ]
         }]
+      deliveryPolicy: Post
+      groupingKey: ""
+      notifyBroadcast: false
     teams:
       facts: |
         [{
