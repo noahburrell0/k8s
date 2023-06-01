@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: testing
 data:
-  test: testaaaaaaaaaaaaaaa
+  test: test
