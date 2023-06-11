@@ -8,7 +8,7 @@ spec:
   syncPolicy:
     automated: {}
   sources:
-  - repoURL: git@github.com/noahburrell0/k8s-private.git
+  - repoURL: git@github.com:noahburrell0/k8s-private.git
     path: apps
     targetRevision: main
   destination:
