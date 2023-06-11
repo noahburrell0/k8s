@@ -3,7 +3,7 @@ sources:
 provider: cloudflare
 txtPrefix: external_dns_
 extraArgs:
-  - --domain-filter=burrell.tech
+  - --domain-filter=burrell.tech,lemmy.media
   - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
 
 env:
