@@ -2,6 +2,6 @@ $patch: merge
 apiVersion: v1
 kind: Service
 metadata:
-  name: 
+  name: wireguard-wireguard
   annotations:
     test: test
