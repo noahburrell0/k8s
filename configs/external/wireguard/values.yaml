@@ -11,7 +11,6 @@ resources:
     memory: 1024Mi
 
 securityContext:
-  readOnlyRootFilesystem: false
   privileged: true
 
             # privileged: true
