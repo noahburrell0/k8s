@@ -12,3 +12,14 @@ resources:
 
 securityContext:
   readOnlyRootFilesystem: false
+  privileged: true
+
+            # privileged: true
+            # readOnlyRootFilesystem: false
+            # runAsNonRoot: false
+            # runAsUser: 0
+            # ---
+            # privileged: false
+            # readOnlyRootFilesystem: true
+            # runAsNonRoot: true
+            # runAsUser: 1000
