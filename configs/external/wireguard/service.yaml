@@ -2,5 +2,6 @@ $patch: merge
 apiVersion: v1
 kind: Service
 metadata:
+  name: 
   annotations:
     test: test
