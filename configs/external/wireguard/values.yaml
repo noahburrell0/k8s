@@ -1,0 +1,11 @@
+secretName: wireguard-sealed-secret
+
+wireguard:
+  clients:
+  - PublicKey: dRw2kgfUv/84I2hEH9tKqjUT3EMneqhpNGVfg1n30Qc=
+    AllowedIPs: 0.0.0.0/0
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi

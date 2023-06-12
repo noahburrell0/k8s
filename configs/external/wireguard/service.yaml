@@ -1,0 +1,6 @@
+$patch: merge
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    test: test
