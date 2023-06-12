@@ -4,6 +4,8 @@ wireguard:
   clients:
   - PublicKey: dRw2kgfUv/84I2hEH9tKqjUT3EMneqhpNGVfg1n30Qc=
     AllowedIPs: 0.0.0.0/0
+  - PublicKey: dRw2kgfUv/84I2hEH9tKqjUT3EMneqhpNGVfg1n30Qc=
+    AllowedIPs: 0.0.0.0/0
 
 resources:
   limits:
