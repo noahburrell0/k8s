@@ -1,8 +1,8 @@
 secretName: wireguard-sealed-secret
 
 wireguard:
-  serverAddress: 10.34.0.1/24
-  serverCidr: 10.34.0.0/24
+  serverAddress: 172.20.0.1/24
+  serverCidr: 172.20.0.0/24
   clients:
   - PublicKey: dRw2kgfUv/84I2hEH9tKqjUT3EMneqhpNGVfg1n30Qc=
     AllowedIPs: 0.0.0.0/0
