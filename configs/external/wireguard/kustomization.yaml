@@ -7,10 +7,10 @@ helmCharts:
     version: 0.10.0
     releaseName: wireguard
     # namespace: kd-dev
-patches:
-  - path: service.yaml
-    target:
-      kind: Service
+# patches:
+#   - path: service.yaml
+#     target:
+#       kind: Service
 
 resources:
 - wireguard-sealed-secret.yaml
