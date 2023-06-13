@@ -1,12 +1,12 @@
 sources:
   - ingress
 provider: cloudflare
-txtPrefix: k8s_
+registry: noop
+# txtPrefix: k8s_
 extraArgs:
   - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
   - --cloudflare-proxied
   - --cloudflare-dns-records-per-page=5000
-  - --registry=noop
 
 env:
 - name: CF_API_TOKEN
