@@ -1,10 +1,11 @@
 sources:
   - ingress
 provider: cloudflare
-txtPrefix: external_dns_
+txtPrefix: k8s_
 extraArgs:
-  - --domain-filter=burrell.tech,lemmy.media
   - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
+  - --cloudflare-proxied
+  - --cloudflare-dns-records-per-page=5000
 
 env:
 - name: CF_API_TOKEN
