@@ -23,7 +23,7 @@ spec:
       - $values/configs/internal/coder/postgres/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: $values/configs/internal/coder/configs
+    path: configs/internal/coder/configs
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     ref: values
