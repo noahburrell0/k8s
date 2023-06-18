@@ -21,7 +21,8 @@ spec:
     helm:
       valueFiles:
       - $values/configs/internal/coder/postgres/values.yaml
-  - path: $values/configs/internal/coder/configs
+  - repoURL: $values
+    path: $values/configs/internal/coder/configs
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     ref: values
