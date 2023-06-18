@@ -5,7 +5,7 @@ auth:
     adminPasswordKey: postgres-password
 primary:
   persistence:
-      storageClass: "nfs-rwo"
+    storageClass: "nfs-rwo"
     accessModes:
       - ReadWriteOnce
     size: 25Gi
