@@ -1,0 +1,21 @@
+service:
+  type: ClusterIP
+ingress:
+  enable: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,172.16.0.0/16"
+    external-dns.alpha.kubernetes.io/exclude: 'true'
+  host: coder.burrell.tech
+  tls:
+    enable: true
+    secretName: coder.burrell.tech
+env:
+- name: "CODER_ACCESS_URL"
+  value: "https://coder.burrell.tech"
+- name: CODER_PG_CONNECTION_URL
+  valueFrom:
+    secretKeyRef:
+      name: postgres-secret
+      key: coder-psql

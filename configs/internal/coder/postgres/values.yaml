@@ -1,0 +1,11 @@
+auth:
+  database: coder
+  existingSecret: "postgres-secret"
+  secretKeys:
+    adminPasswordKey: postgres-password
+primary:
+  persistence:
+      storageClass: "nfs-rwo"
+    accessModes:
+      - ReadWriteOnce
+    size: 25Gi

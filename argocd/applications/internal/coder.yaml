@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coder
+  namespace: argocd
+spec:
+  project: internal
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - chart: coder
+    repoURL: https://helm.coder.com/v2
+    targetRevision: 0.24.1
+    helm:
+      valueFiles:
+      - $values/configs/internal/coder/values.yaml
+  - repoURL: registry-1.docker.io/bitnamicharts
+    chart: postgresql
+    targetRevision: 12.5.6
+    helm:
+      valueFiles:
+      - $values/configs/internal/coder/postgres/values.yaml
+
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    ref: values
+  destination:
+    name: in-cluster
+    namespace: coder
+
