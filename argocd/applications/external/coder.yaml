@@ -4,7 +4,7 @@ metadata:
   name: coder
   namespace: argocd
 spec:
-  project: internal
+  project: external
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
@@ -14,16 +14,16 @@ spec:
     targetRevision: 0.24.1
     helm:
       valueFiles:
-      - $values/configs/internal/coder/values.yaml
+      - $values/configs/external/coder/values.yaml
   - repoURL: registry-1.docker.io/bitnamicharts
     chart: postgresql
     targetRevision: 12.5.6
     helm:
       valueFiles:
-      - $values/configs/internal/coder/postgres/values.yaml
+      - $values/configs/external/coder/postgres/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: configs/internal/coder/configs
+    path: configs/external/coder/configs
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     ref: values
