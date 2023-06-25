@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: setup
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - chart: longhorn
+    repoURL: https://charts.longhorn.io
+    targetRevision: 1.4.2
+    helm:
+      valueFiles:
+      - $values/configs/setup/longhorn/values.yaml
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    ref: values
+  destination:
+    name: in-cluster
+    namespace: longhorn-system
+
