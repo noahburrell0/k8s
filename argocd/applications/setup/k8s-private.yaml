@@ -4,7 +4,7 @@ metadata:
   name: k8s-private
   namespace: argocd
 spec:
-  project: setup
+  project: private
   syncPolicy:
     automated: {}
   sources:

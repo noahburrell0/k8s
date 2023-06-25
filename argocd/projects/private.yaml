@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: private
+  namespace: argocd
+spec:
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+    namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  orphanedResources:
+    warn: false
+  roles:
+  - name: private-argo-test
+    policies:
+      # List applications in this project
+      - p, proj:external:external-argo-test, applications, get, external/*, allow
+
+      # Allow syncing applications in this project
+      - p, proj:external:external-argo-test, applications, sync, external/*, allow
+
+      # Allow deleting resources in applications in this project
+      - p, proj:external:external-argo-test, applications, delete, external/*, allow
+
+      # Allow restarting deployment resources in applications in this project
+      - p, proj:external:external-argo-test, applications, action/apps/Deployment/restart, external/*, allow
+
+      # Allow access to web terminal in applications in this project
+      - p, proj:external:external-argo-test, exec, create, external/*, allow
+    groups:
+      - ArgoCD-Test
