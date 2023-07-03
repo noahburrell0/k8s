@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: chia-node
     app.kubernetes.io/name: chia-node
-    app.kubernetes.io/version: 1.6.0
+    app.kubernetes.io/version: 1.8.2
   name: chia-node
   namespace: chia-node
 spec:
@@ -33,7 +33,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: chia-node
     app.kubernetes.io/name: chia-node
-    app.kubernetes.io/version: 1.6.0
+    app.kubernetes.io/version: 1.8.2
   name: chia-farmer
   namespace: chia-node
 spec:

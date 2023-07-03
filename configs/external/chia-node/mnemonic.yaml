@@ -1,17 +1,22 @@
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
 metadata:
-  annotations:
-    sealedsecrets.bitnami.com/cluster-wide: "true"
-  creationTimestamp: null
   name: mnemonic
 spec:
-  encryptedData:
-    mnemonic: AgBysHyk2AjoWA1d4aD0cby+wR7Zu7QE+/HhMwXW9kgn7DzT+mZ+IV24XYiSLZy/jVXF9XyfHEX6fc2Ah38YN/kR77zfPOtBCqFoDg4UVB7w2j6C4yNtYWbS5bZHaTSHjXVrEr80DFouJLoP2sg8hsgRPWugzp5mopWYEaCoZItK2DsRVMU2QBuaQXPUXe3jV3cKKPwwqT8JTDme1HGSNxxsU0N0mRQs9Yq1boLjqCLZyT+K4nXGxZ8AD5qJQW6KevU/vZreOjp13C5NFiPd2aeXe/x5i7uI19Z79uE2aR/GMZOKfVcdfO4i4Yj2+04pY/GlB7n234HghItv7Z6rnGfoK4e6aWkIJtqrLIVdItcZ1tP7Lo3ONi7o0xg9m9VkiYOz0bzombajbI1yBKzhraCQ/r0ICy48O4MfCiAGsA7LPMnLvQ8yI2McYTvDjt+XB4HkPyjxearOBYHsLThAzE8qonQBNsFPcGSgY44NNthkDBAFcqegRcNGJbrA5rmPeHcWCRevkQdu5lk++RXQtQFtMrr2OKSAk8Zkb3XKQpEPZIXvKAkbIQoRjMczKvkssk5R5ebIVCrDgZXSSKegKdQAAquDk/fiW4RWj2NjJUjAYNK9k+pAFwm3jlNFWtsU5Va+riAdE9mF3O4b81k/jxN8hVHG8VrwDezErEkmZAL+tNc7NRMCMFRvfIDoUseuJsR1dr730ykshmI4evD7Sy7Y/o2jf4v99526/r70UkmzvpX0Rg1cGJEryzDoWeN4dT682j3TqCITlXB3zUpe5US0IZB+NP2ntQxJ78CEXhVJYKVvQGqGSJWLatdjxzb8UwXle+qbln/SnF/bV7i/APYaSKsTzAoyF3IKe33mwIuRm3ToQIvVJflstJeThM5ouEuOj6K1Ob2oG62xUQ==
-  template:
-    data: null
-    metadata:
-      annotations:
-        sealedsecrets.bitnami.com/cluster-wide: "true"
-      creationTimestamp: null
-      name: mnemonic
+  target:
+    name: mnemonic
+    deletionPolicy: Delete
+    template:
+      type: Opaque
+      data:
+        mnemonic: |-
+          {{ .password }}
+  data:
+    - secretKey: password
+      sourceRef:
+        storeRef:
+          name: bitwarden-login
+          kind: ClusterSecretStore
+      remoteRef:
+        key: 570d2afa-7e6b-4de6-aace-b034014adee6
+        property: password
