@@ -24,6 +24,11 @@ spec:
           image: ghcr.io/noahburrell0/bitwarden@sha256:de220ba7ee93d4b619a88c673974eca4a8600c7b0e326e271203e1dbac663588
           imagePullPolicy: IfNotPresent
           env:
+            - name: BW_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bitwarden-cli
+                  key: BW_PASSWORD
             - name: BW_CLIENTID
               valueFrom:
                 secretKeyRef:
