@@ -39,5 +39,4 @@ patches:
       - op: replace
         path: /spec/strategy
         value:
-          strategy:
-            type: Recreate
+          type: Recreate
