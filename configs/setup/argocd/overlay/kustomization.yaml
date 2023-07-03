@@ -40,4 +40,4 @@ patches:
         path: /spec/strategy
         value:
           strategy:
-            type: Replace
+            type: Recreate
