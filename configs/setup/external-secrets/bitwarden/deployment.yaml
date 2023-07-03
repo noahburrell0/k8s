@@ -24,16 +24,16 @@ spec:
           image: ghcr.io/noahburrell0/bitwarden@sha256:cf77851e458a29a3b5c4c2017b1b71d885904675b3a7e3582fdc498c2dffb4ac
           imagePullPolicy: IfNotPresent
           env:
-            - name: BW_USER
+            - name: BW_CLIENTID
               valueFrom:
                 secretKeyRef:
                   name: bitwarden-cli
-                  key: BW_USERNAME
-            - name: BW_PASSWORD
+                  key: BW_CLIENTID
+            - name: BW_CLIENTSECRET
               valueFrom:
                 secretKeyRef:
                   name: bitwarden-cli
-                  key: BW_PASSWORD
+                  key: BW_CLIENTSECRET
           ports:
             - name: http
               containerPort: 8087
