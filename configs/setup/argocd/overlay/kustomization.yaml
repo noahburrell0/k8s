@@ -32,3 +32,12 @@ patches:
           - pods/exec
           verbs:
           - create
+  - target:
+      kind: Deployment
+      name: argocd-redis-ha-haproxy
+    patch: |-
+      - op: replace
+        path: /spec/strategy
+        value:
+          strategy:
+            type: Replace
