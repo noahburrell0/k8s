@@ -27,6 +27,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-issuer-account-key
     # Add a single challenge solver, DNS01 using cloudflare
+    solvers:
     - dns01:
         cloudflare:
           apiTokenSecretRef:
