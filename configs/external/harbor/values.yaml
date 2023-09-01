@@ -23,30 +23,15 @@ persistence:
   persistentVolumeClaim:
     registry:
       existingClaim: registry
-      # storageClass: "nfs-rwo"
-      # accessMode: ReadWriteOnce
-      # size: 1Ti
     chartmuseum:
       existingClaim: chartmuseum
-      # storageClass: "nfs-rwo"
-      # accessMode: ReadWriteOnce
-      # size: 10Gi
     jobservice:
       jobLog:
         existingClaim: jobservice
-        # storageClass: "nfs-rwo"
-        # accessMode: ReadWriteOnce
-        # size: 5Gi
     database:
       existingClaim: database
-      # storageClass: "nfs-rwo"
-      # accessMode: ReadWriteOnce
-      # size: 10Gi
     redis:
       existingClaim: redis
-      # storageClass: "nfs-rwo"
-      # accessMode: ReadWriteOnce
-      # size: 10Gi
 
 updateStrategy:
   type: Recreate
