@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio
+  name: minio-1
   namespace: argocd
 spec:
   project: external
@@ -23,5 +23,5 @@ spec:
     path: configs/external/minio/configs
   destination:
     name: in-cluster
-    namespace: minio
+    namespace: minio-1
 

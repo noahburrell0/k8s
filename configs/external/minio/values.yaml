@@ -1,9 +1,9 @@
 existingSecret: minio-credentials
 replicas: 3
 persistence:
-  storageClass: nfs-rwo
+  storageClass: longhorn
   accessMode: ReadWriteOnce
-  size: 500Gi
+  size: 10Gi
 ingress:
   enabled: true
   annotations:
