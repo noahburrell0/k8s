@@ -52,21 +52,21 @@ spec:
                 - --post-data=''
             initialDelaySeconds: 20
             failureThreshold: 3
-            timeoutSeconds: 1
+            timeoutSeconds: 3
             periodSeconds: 120
           readinessProbe:
             tcpSocket:
               port: 8087
-            initialDelaySeconds: 20
+            initialDelaySeconds: 40
             failureThreshold: 3
-            timeoutSeconds: 1
+            timeoutSeconds: 3
             periodSeconds: 10
           startupProbe:
             tcpSocket:
               port: 8087
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             failureThreshold: 30
-            timeoutSeconds: 1
+            timeoutSeconds: 3
             periodSeconds: 5
 ---
 apiVersion: v1
