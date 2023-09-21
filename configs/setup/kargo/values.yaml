@@ -1,5 +1,5 @@
 api:
-  host: kargo.burrell.tech
+  host: kargo.k8s.burrell.tech
   ingress:
     enabled: true
     annotations:
