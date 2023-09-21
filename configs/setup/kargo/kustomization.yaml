@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 helmCharts:
   - name: kargo
-    repo: ghcr.io/akuity/kargo-charts
+    repo: ghcr.io/akuity/kargo-charts/kargo
     valuesFile: values.yaml
     version: 0.1.0
     releaseName: kargo
