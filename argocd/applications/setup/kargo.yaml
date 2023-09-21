@@ -8,16 +8,10 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-  sources:
-  - chart: kargo
-    repoURL: ghcr.io/akuity/kargo-charts
-    targetRevision: 0.1.0
-    helm:
-      valueFiles:
-      - $values/configs/setup/kargo/values.yaml
-  - repoURL: https://github.com/noahburrell0/k8s.git
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
+    path: configs/setup/kargo
   destination:
     name: in-cluster
     namespace: kargo
