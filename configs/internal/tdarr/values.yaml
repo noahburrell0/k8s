@@ -7,7 +7,7 @@ env:
 image:
   tag: 2.13.01
   repository: haveagitgat/tdarr
-
+  
 service:
   server:
     enabled: true
@@ -48,7 +48,7 @@ node:
   enabled: true
   id: k8s-node
   image:
-    tag: 2.00.18.2
+    tag: 2.13.01
   resources:
     limits:
       cpu: 4
