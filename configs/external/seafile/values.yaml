@@ -58,12 +58,13 @@ ingress:
       - seafile.burrell.tech
 
 persistence:
+  nameOverride: longhorn
   shared:
     enabled: true
     type: pvc
-    storageClass: nfs-rwx
+    storageClass: longhorn
     accessMode: ReadWriteMany
-    size: 8Ti
+    size: 1Ti
 
 mariadb:
   enabled: true
