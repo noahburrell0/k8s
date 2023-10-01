@@ -86,6 +86,6 @@ probes:
       failureThreshold: 2000
 
 initContainers:
-  - name: skip-chown
+  skip-chown:
     image: busybox:1.28
     command: ['sh', '-c', "touch /firstRun"]
