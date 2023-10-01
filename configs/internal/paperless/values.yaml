@@ -33,27 +33,24 @@ persistence:
   consume:
     enabled: true
     type: nfs
-    server: storage.burrell.tech
-    path: /Media/Storage/paperless-ng/consume
+    server: "192.168.1.10"
+    path: /Media/Storage/Paperless-Consumer
     mountPath: /usr/src/paperless/consume
   data:
     enabled: true
-    type: custom
-    volumeSpec:
-      iscsi:
-        targetPortal: 192.168.129.254:3260
-        iqn: iqn.2022-07.tech.frontenac.k8s.paperless.iscsi:Media.k8s-paperless
-        lun: 1
-        fsType: ext4
-        readOnly: false
+    nameOverride: longhorn-data
+    storageClass: longhorn
+    size: 25Gi
   media:
     enabled: true
-    storageClass: nfs-rwx
+    nameOverride: longhorn-media
+    storageClass: longhorn
     size: 25Gi
     mountPath: /usr/src/paperless/media
   export:
     enabled: true
-    storageClass: nfs-rwx
+    nameOverride: longhorn-export
+    storageClass: longhorn
     size: 25Gi
     mountPath: /usr/src/paperless/export
 
@@ -61,7 +58,7 @@ redis:
   enabled: true
 
   global:
-    storageClass: nfs-rwx
+    storageClass: longhorn
 
   image:
     pullPolicy: IfNotPresent
@@ -72,4 +69,4 @@ redis:
 
   persistence:
     enabled: true
-    storageClass: nfs-rwx
+    storageClass: longhorn
