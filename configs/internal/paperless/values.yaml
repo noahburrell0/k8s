@@ -34,7 +34,7 @@ persistence:
     enabled: true
     type: nfs
     server: "192.168.1.10"
-    path: /Media/Storage/Paperless-Consumer
+    path: /Media/Paperless-Consumer
     mountPath: /usr/src/paperless/consume
   data:
     enabled: true
