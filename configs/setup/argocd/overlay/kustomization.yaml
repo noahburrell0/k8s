@@ -40,12 +40,15 @@ patches:
         path: /spec/strategy
         value:
           type: Recreate
+  - target:
+      kind: StatefulSet
+      name: argocd-redis-ha-server
+    patch: |-
       - op: replace
         path: /spec/template/spec/affinity
         value: {}
   - target:
-      kind: StatefulSet
-      name: argocd-redis-ha-server
+      kind: Deployment
     patch: |-
       - op: replace
         path: /spec/template/spec/affinity
