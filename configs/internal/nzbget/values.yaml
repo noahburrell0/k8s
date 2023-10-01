@@ -25,8 +25,9 @@ ingress:
 persistence:
   config:
     enabled: true
-    storageClass: nfs-rwx
-    size: 5Ti
+    type: nfs
+    server: "192.168.1.10"
+    path: /Media/nzbget
     mountPath: /config
 
 podSecurityContext:
