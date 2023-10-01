@@ -40,3 +40,6 @@ patches:
         path: /spec/strategy
         value:
           type: Recreate
+      - op: replace
+        path: /spec/template/spec/affinity
+        value: {}
