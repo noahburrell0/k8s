@@ -4,6 +4,10 @@ env:
   PGUID: 0
   THREADS_WORKER_INIT_TIMEOUT: 200000
 
+image:
+  tag: 2.13.01
+  repository: haveagitgat/tdarr
+  
 service:
   server:
     enabled: true
@@ -44,7 +48,7 @@ node:
   enabled: true
   id: k8s-node
   image:
-    tag: 2.00.18.2
+    tag: 2.13.01
   resources:
     limits:
       cpu: 4
@@ -80,3 +84,8 @@ probes:
   startup:
     spec:
       failureThreshold: 2000
+
+initContainers:
+  skip-chown:
+    image: busybox:1.28
+    command: ['sh', '-c', "touch /firstRun"]
