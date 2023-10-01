@@ -58,9 +58,9 @@ ingress:
       - seafile.burrell.tech
 
 persistence:
-  nameOverride: longhorn
   shared:
     enabled: true
+    nameOverride: longhorn
     type: pvc
     storageClass: longhorn
     accessMode: ReadWriteMany
