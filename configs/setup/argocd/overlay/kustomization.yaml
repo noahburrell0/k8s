@@ -43,3 +43,10 @@ patches:
       - op: replace
         path: /spec/template/spec/affinity
         value: {}
+  - target:
+      kind: StatefulSet
+      name: argocd-redis-ha
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/affinity
+        value: {}
