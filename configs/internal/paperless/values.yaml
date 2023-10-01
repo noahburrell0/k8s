@@ -40,7 +40,7 @@ persistence:
     enabled: true
     nameOverride: longhorn-data
     storageClass: longhorn
-    size: 25Gi
+    size: 100Gi
   media:
     enabled: true
     nameOverride: longhorn-media
