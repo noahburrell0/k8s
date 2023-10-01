@@ -76,5 +76,5 @@ mariadb:
   primary:
     persistence:
       enabled: true
-      storageClass: nfs-rwx
+      storageClass: longhorn
       size: 25Gi
