@@ -7,7 +7,7 @@ env:
 image:
   tag: 2.13.01
   repository: haveagitgat/tdarr
-  
+
 service:
   server:
     enabled: true
@@ -60,14 +60,14 @@ node:
 persistence:
   config:
     enabled: true
-    storageClass: nfs-rwx
+    nameOverride: longhorn-config
+    storageClass: longhorn
     size: 10Gi
-    accessMode: ReadWriteMany
   data:
     enabled: true
-    storageClass: nfs-rwx
+    nameOverride: longhorn-data
+    storageClass: longhorn
     size: 30Gi
-    accessMode: ReadWriteMany
   media:
     enabled: true
     type: nfs
