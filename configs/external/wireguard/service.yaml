@@ -4,5 +4,5 @@ kind: Service
 metadata:
   name: wireguard-wireguard
   annotations:
+    loadBalancerIP: 172.19.0.2
     metallb.universe.tf/address-pool: bgp-pool
-    tnsr.burrell.tech/tnsrACL: k8s-acl
