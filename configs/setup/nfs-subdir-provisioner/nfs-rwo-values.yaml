@@ -1,8 +1,0 @@
-nfs:
-  server: 192.168.129.254
-  path: /Media/Kubernetes
-storageClass:
-  provisionerName: nfs-rwo
-  name: nfs-rwo
-  reclaimPolicy: Retain
-  accessModes: ReadWriteOnce
