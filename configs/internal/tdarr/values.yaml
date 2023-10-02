@@ -63,11 +63,13 @@ persistence:
     nameOverride: longhorn-config
     storageClass: longhorn
     size: 10Gi
+    accessMode: ReadWriteOnce
   data:
     enabled: true
     nameOverride: longhorn-data
     storageClass: longhorn
     size: 30Gi
+    accessMode: ReadWriteOnce
   media:
     enabled: true
     type: nfs
