@@ -73,7 +73,7 @@ persistence:
   media:
     enabled: true
     type: nfs
-    server: 192.168.129.254
+    server: 192.168.1.10
     path: /Media
     mountPath: /media
 
