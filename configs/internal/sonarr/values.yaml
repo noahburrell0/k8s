@@ -42,14 +42,8 @@ persistence:
     mountPath: /nzbget
   config:
     enabled: true
-    type: custom
-    volumeSpec:
-      iscsi:
-        targetPortal: 192.168.129.254:3260
-        iqn: iqn.2022-07.tech.frontenac.k8s.sonarr.iscsi:Media.k8s-sonarr
-        lun: 1
-        fsType: ext4
-        readOnly: false
+    storageClass: longhorn
+    size: 50Gi
 
 podSecurityContext:
   runAsUser: 0
