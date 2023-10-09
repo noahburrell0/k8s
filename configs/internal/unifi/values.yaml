@@ -68,8 +68,9 @@ persistence:
 
   data:
     enabled: true
+    nameOverride: longhorn-data
     accessMode: ReadWriteOnce
-    storageClass: nfs-rwo
+    storageClass: longhorn
     size: 10Gi
     mountPath: /unifi
 
@@ -84,5 +85,5 @@ mongodb:
     enabled: false
   persistence:
     enabled: true
-    storageClass: nfs-rwo
+    storageClass: longhorn
     size: 10Gi

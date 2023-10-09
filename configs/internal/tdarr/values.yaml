@@ -4,6 +4,10 @@ env:
   PGUID: 0
   THREADS_WORKER_INIT_TIMEOUT: 200000
 
+image:
+  tag: 2.13.01
+  repository: haveagitgat/tdarr
+
 service:
   server:
     enabled: true
@@ -44,7 +48,7 @@ node:
   enabled: true
   id: k8s-node
   image:
-    tag: 2.00.18.2
+    tag: 2.13.01
   resources:
     limits:
       cpu: 4
@@ -56,18 +60,20 @@ node:
 persistence:
   config:
     enabled: true
-    storageClass: nfs-rwx
+    nameOverride: longhorn-config
+    storageClass: longhorn
     size: 10Gi
-    accessMode: ReadWriteMany
+    accessMode: ReadWriteOnce
   data:
     enabled: true
-    storageClass: nfs-rwx
+    nameOverride: longhorn-data
+    storageClass: longhorn
     size: 30Gi
-    accessMode: ReadWriteMany
+    accessMode: ReadWriteOnce
   media:
     enabled: true
     type: nfs
-    server: 192.168.129.254
+    server: 192.168.1.10
     path: /Media
     mountPath: /media
 
@@ -80,3 +86,8 @@ probes:
   startup:
     spec:
       failureThreshold: 2000
+
+initContainers:
+  skip-chown:
+    image: busybox:1.28
+    command: ['sh', '-c', "touch /firstRun"]
