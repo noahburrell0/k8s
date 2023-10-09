@@ -1,8 +1,0 @@
-$patch: merge
-apiVersion: v1
-kind: Service
-metadata:
-  name: wireguard-wireguard
-  annotations:
-    metallb.universe.tf/address-pool: bgp-pool
-    tnsr.burrell.tech/tnsrACL: k8s-acl
