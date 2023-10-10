@@ -1,7 +1,0 @@
-$patch: merge
-apiVersion: v1
-kind: Service
-metadata:
-  name: wireguard-wireguard
-spec:
-  loadBalancerIP: 172.19.0.2
