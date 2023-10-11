@@ -14,6 +14,7 @@ service:
       metallb.universe.tf/allow-shared-ip: "unifi"
       coredns.io/hostname: controller.unifi.home.burrell.tech
     externalTrafficPolicy: Local
+    loadBalancerIP: 172.19.0.7
     ports:
       controller-lb:
         enabled: true
@@ -29,6 +30,7 @@ service:
       metallb.universe.tf/allow-shared-ip: "unifi"
       coredns.io/hostname: controller.unifi.home.burrell.tech
     externalTrafficPolicy: Local
+    loadBalancerIP: 172.19.0.7
     ports:
       syslog-lb:
         enabled: true
