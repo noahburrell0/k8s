@@ -4,12 +4,14 @@ metadata:
   name: smtp
   annotations:
     metallb.universe.tf/address-pool: bgp-pool
+    coredns.io/hostname: smtp.k8s.burrell.tech
 spec:
   ports:
     - name: smtp
       port: 25
       protocol: TCP
       targetPort: smtp
+  loadBalancerIP: 172.19.0.8
   selector:
     app.kubernetes.io/instance: smtp
     app.kubernetes.io/name: smtp
