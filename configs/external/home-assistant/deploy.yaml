@@ -71,7 +71,7 @@ spec:
     targetPort: homekit-udp
   - name: homekit-tcp
     port: 21063
-    protocol: tcp
+    protocol: TCP
     targetPort: homekit-tcp
 ---
 apiVersion: v1
