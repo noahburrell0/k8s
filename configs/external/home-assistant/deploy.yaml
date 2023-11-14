@@ -21,6 +21,7 @@ spec:
         app.kubernetes.io/name: home-assistant
     spec:
       automountServiceAccountToken: true
+      hostNetwork: true
       containers:
         - image: 'ghcr.io/home-assistant/home-assistant:2023.11.2'
           imagePullPolicy: IfNotPresent
