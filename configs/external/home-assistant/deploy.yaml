@@ -63,12 +63,8 @@ spec:
   ports:
   - name: http
     port: 8123
-    protocol: tcp
+    protocol: TCP
     targetPort: http
-  - name: homekit-udp
-    port: 5353
-    protocol: UDP
-    targetPort: homekit-udp
   - name: homekit-tcp
     port: 21063
     protocol: TCP
