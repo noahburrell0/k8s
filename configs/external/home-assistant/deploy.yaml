@@ -29,6 +29,12 @@ spec:
             - containerPort: 8123
               name: http
               protocol: TCP
+            - containerPort: 5353
+              name: homekit-udp
+              protocol: UDP
+            - containerPort: 21063
+              name: homekit-tcp
+              protocol: TCP
           envFrom:
             - configMapRef:
                 name: home-assistant-cm
@@ -44,14 +50,48 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: home-assistant
+  name: home-assistant-lb-tcp
+  annotations:
+    metallb.universe.tf/address-pool: bgp-pool
+    metallb.universe.tf/allow-shared-ip: hass
 spec:
   selector:
     app.kubernetes.io/instance: home-assistant
     app.kubernetes.io/name: home-assistant
+  loadBalancerIP: 172.19.0.3
+  type: LoadBalancer
   ports:
   - name: http
     port: 8123
+    protocol: tcp
+    targetPort: http
+  - name: homekit-udp
+    port: 5353
+    protocol: UDP
+    targetPort: homekit-udp
+  - name: homekit-tcp
+    port: 21063
+    protocol: tcp
+    targetPort: homekit-tcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-assistant-lb-udp
+  annotations:
+    metallb.universe.tf/address-pool: bgp-pool
+    metallb.universe.tf/allow-shared-ip: hass
+spec:
+  selector:
+    app.kubernetes.io/instance: home-assistant
+    app.kubernetes.io/name: home-assistant
+  loadBalancerIP: 172.19.0.3
+  type: LoadBalancer
+  ports:
+  - name: homekit-udp
+    port: 5353
+    protocol: UDP
+    targetPort: homekit-udp
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -72,7 +112,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: home-assistant
+            name: home-assistant-lb-tcp
             port:
               name: http
   tls:
