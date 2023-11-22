@@ -59,6 +59,9 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
       volumes:
       - name: config
         persistentVolumeClaim:
