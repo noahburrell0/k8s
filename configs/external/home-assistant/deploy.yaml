@@ -164,10 +164,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: hass.home.burrell.tech
+  - host: code.hass.home.burrell.tech
     http:
       paths:
-      - path: /codeserver/
+      - path: /
         pathType: Prefix
         backend:
           service:
@@ -176,8 +176,8 @@ spec:
               name: codeserver
   tls:
   - hosts:
-    - hass.home.burrell.tech
-    secretName: hass.home.burrell.tech-tls
+    - code.hass.home.burrell.tech
+    secretName: code.hass.home.burrell.tech-tls
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
