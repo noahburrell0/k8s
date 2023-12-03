@@ -8,7 +8,7 @@ cloneStaticSiteFromGit:
   repository: https://github.com/noahburrell0/burrell-tech.git
   branch: main
   interval: 5
-  gitSync:
+  gitClone:
     command: 
     - /bin/bash
     - '-ec'
