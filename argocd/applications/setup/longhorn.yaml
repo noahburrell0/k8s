@@ -18,6 +18,9 @@ spec:
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     ref: values
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/setup/longhorn/configs
   destination:
     name: in-cluster
     namespace: longhorn-system
