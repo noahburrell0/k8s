@@ -60,10 +60,10 @@ ingress:
 persistence:
   shared:
     enabled: true
-    nameOverride: longhorn
+    nameOverride: longhorn-rwo
     type: pvc
     storageClass: longhorn
-    accessMode: ReadWriteMany
+    accessMode: ReadWriteOnce
     size: 1Ti
 
 mariadb:
