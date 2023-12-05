@@ -68,5 +68,4 @@ redis:
     enabled: false
 
   persistence:
-    enabled: true
-    storageClass: longhorn
+    enabled: false
