@@ -57,9 +57,6 @@ persistence:
 redis:
   enabled: true
 
-  global:
-    storageClass: longhorn
-
   image:
     pullPolicy: IfNotPresent
 
@@ -67,5 +64,6 @@ redis:
   auth:
     enabled: false
 
-  persistence:
-    enabled: false
+  master:
+    persistence:
+      enabled: false
