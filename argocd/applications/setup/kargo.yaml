@@ -29,3 +29,6 @@ spec:
     name: kargo-api
     jsonPointers:
     - /data/ADMIN_ACCOUNT_PASSWORD_HASH
+  destination:
+    name: in-cluster
+    namespace: kargo
