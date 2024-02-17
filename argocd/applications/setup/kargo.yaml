@@ -18,6 +18,14 @@ spec:
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     ref: values
-  destination:
-    name: in-cluster
-    namespace: kargo
+  ignoreDifferences: # Ignore dynamic parameters that cause incorrect OutOfSync status
+  - kind: Deployment
+    group: apps
+    name: kargo-api
+    jsonPointers:
+    - /spec/template/metadata/annotations/configmap~1checksum
+    - /spec/template/metadata/annotations/secret~1checksum
+  - kind: Secret
+    name: kargo-api
+    jsonPointers:
+    - /data/ADMIN_ACCOUNT_PASSWORD_HASH
