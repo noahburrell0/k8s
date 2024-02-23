@@ -1,0 +1,46 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: ghcr.io/onedr0p/bazarr
+  tag: 1.4.2
+
+env:
+  TZ: America/Toronto
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,172.16.0.0/12"
+      nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+      external-dns.alpha.kubernetes.io/exclude: 'true'
+
+    hosts:
+      - host: bazarr.home.burrell.tech
+        paths:
+        - path: /
+          pathType: Prefix
+    tls:
+    - secretName: bazarr.home.burrell.tech
+      hosts:
+      - bazarr.home.burrell.tech
+
+persistence:
+  media:
+    enabled: true
+    type: nfs
+    server: "192.168.1.10"
+    path: /Media
+    mountPath: /media
+  config:
+    enabled: true
+    storageClass: longhorn
+    size: 50Gi
+
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+  fsGroup: 0

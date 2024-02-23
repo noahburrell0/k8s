@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bazarr
+  namespace: argocd
+spec:
+  project: internal
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+  - chart: bazarr
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 10.6.2
+    helm:
+      valueFiles:
+      - $values/configs/internal/radarr/values.yaml
+  - repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    ref: values
+  destination:
+    name: in-cluster
+    namespace: bazarr
+
