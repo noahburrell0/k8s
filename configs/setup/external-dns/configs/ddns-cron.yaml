@@ -6,7 +6,9 @@ rules:
 - apiGroups: ["networking.k8s.io"]
   resources: ["ingresses"]
   verbs: ["*"]
-
+- apiGroups: ["batch"]
+  resources: ["cronjobs"]
+  verbs: ['*']
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
@@ -50,6 +52,7 @@ spec:
             - /bin/sh
             - -c
             - |
+              export CRONJOB_UID=$(kubectl get cronjob ddns -o=jsonpath='{.metadata.uid}')
               cat << EOF > /tmp/ingress.yml && kubectl apply -f /tmp/ingress.yml
               apiVersion: networking.k8s.io/v1
               kind: Ingress
@@ -59,6 +62,13 @@ spec:
                   external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_PROXIED'
                   external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
                   external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+                ownerReferences:
+                  - apiVersion: batch/v1
+                    blockOwnerDeletion: false
+                    controller: true
+                    kind: CronJob
+                    name: ddns
+                    uid: $CRONJOB_UID
               spec:
                 rules:
                 - host: '$IP_HOSTNAME_PROXIED'
@@ -71,6 +81,13 @@ spec:
                   external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_UNPROXIED'
                   external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
                   external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
+                ownerReferences:
+                  - apiVersion: batch/v1
+                    blockOwnerDeletion: false
+                    controller: true
+                    kind: CronJob
+                    name: ddns
+                    uid: $CRONJOB_UID
               spec:
                 rules:
                 - host: '$IP_HOSTNAME_UNPROXIED'
@@ -81,4 +98,3 @@ spec:
             - name: IP_HOSTNAME_UNPROXIED
               value: unproxied.burrell.tech
           restartPolicy: OnFailure
-        
