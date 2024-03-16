@@ -36,10 +36,10 @@ persistence:
 updateStrategy:
   type: Recreate
 
-existingSecretSecretKey: harbor-sealed-secrets
-existingSecretAdminPasswordKey: harbor-sealed-secrets
+existingSecretSecretKey: harbor-secrets
+existingSecretAdminPasswordKey: harbor-secrets
 
 registry:
   credentials:
     username: root
-    existingSecret: harbor-sealed-secrets
+    existingSecret: harbor-secrets
