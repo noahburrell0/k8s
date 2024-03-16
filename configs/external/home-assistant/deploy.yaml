@@ -10,6 +10,8 @@ metadata:
   name: home-assistant
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/instance: home-assistant
@@ -23,7 +25,7 @@ spec:
       automountServiceAccountToken: true
       hostNetwork: true
       containers:
-        - image: 'ghcr.io/home-assistant/home-assistant:2023.11.2'
+        - image: 'ghcr.io/home-assistant/home-assistant:2024.2.5'
           imagePullPolicy: IfNotPresent
           name: home-assistant
           ports:
