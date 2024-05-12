@@ -140,7 +140,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: hass.home.burrell.tech
+  - host: hass.burrell.tech
     http:
       paths:
       - path: /
@@ -152,8 +152,8 @@ spec:
               name: http
   tls:
   - hosts:
-    - hass.home.burrell.tech
-    secretName: hass.home.burrell.tech-tls
+    - hass.burrell.tech
+    secretName: hass.burrell.tech-tls
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -169,7 +169,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: code.hass.home.burrell.tech
+  - host: code.hass.burrell.tech
     http:
       paths:
       - path: /
@@ -181,8 +181,8 @@ spec:
               name: codeserver
   tls:
   - hosts:
-    - code.hass.home.burrell.tech
-    secretName: code.hass.home.burrell.tech-tls
+    - code.hass.burrell.tech
+    secretName: code.hass.burrell.tech-tls
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
