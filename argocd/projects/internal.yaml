@@ -12,7 +12,7 @@ spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
-    namespaceResourceWhitelist:
+  namespaceResourceWhitelist:
   - group: '*'
     kind: '*'
   orphanedResources:
