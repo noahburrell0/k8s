@@ -5,10 +5,10 @@ resources:
 - workflows.yaml
 - workflows-sa.yaml
 
-images:
-- name: quay.io/argoproj/argocli
-  newName: quay.io/akuity/argocli
-  newTag: v3.4.6-akdev.ac25245
-- name: quay.io/argoproj/workflow-controller
-  newName: quay.io/akuity/argocli
-  newTag: v3.4.6-akdev.ac25245
+# images:
+# - name: quay.io/argoproj/argocli
+#   newName: quay.io/akuity/argocli
+#   newTag: v3.4.6-akdev.ac25245
+# - name: quay.io/argoproj/workflow-controller
+#   newName: quay.io/akuity/argocli
+#   newTag: v3.4.6-akdev.ac25245
