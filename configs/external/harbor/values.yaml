@@ -9,7 +9,7 @@ expose:
       # cert-manager.io/cluster-issuer: letsencrypt
       cert-manager.io/cluster-issuer: selfsigned
       external-dns.alpha.kubernetes.io/target: 'burrell.tech'
-      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
   tls:
     certSource: secret
     secret:
