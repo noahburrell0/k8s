@@ -14,6 +14,7 @@ metadata:
   name: argocd-cm
 data:
   kustomize.buildOptions: --enable-helm
+  application.resourceTrackingMethod: annotation+label
   timeout.reconciliation: 60s
   exec.enabled: "true"
   exec.shells: "bash,sh,powershell,cmd,dash,ash,ksh"
