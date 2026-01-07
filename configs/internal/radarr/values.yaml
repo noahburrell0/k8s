@@ -42,7 +42,7 @@ persistence:
   config:
     enabled: true
     storageClass: longhorn
-    size: 50Gi
+    size: 100Gi
 
 podSecurityContext:
   runAsUser: 0
