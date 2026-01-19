@@ -37,6 +37,11 @@ spec:
                 secretKeyRef:
                   name: shinobi-secrets
                   key: DB_PASS
+            - name: DB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: shinobi-secrets
+                  key: DB_PASS
             - name: DB_HOST
               value: "localhost"
           livenessProbe:
