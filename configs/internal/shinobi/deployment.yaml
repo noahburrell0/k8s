@@ -43,7 +43,7 @@ spec:
                   name: shinobi-secrets
                   key: DB_PASS
             - name: DB_HOST
-              value: "localhost"
+              value: "127.0.0.1"
             - name: DB_TYPE
               value: "mysql2"
           livenessProbe:
