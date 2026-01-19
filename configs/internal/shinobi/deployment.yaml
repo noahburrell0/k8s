@@ -74,8 +74,8 @@ spec:
               subPath: super.json
             - name: shinobi-media
               mountPath: /recordings
-            # - name: shinobi-mysql
-            #   mountPath: /var/lib/mysql
+            - name: shinobi-mysql
+              mountPath: /var/lib/mysql
 
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
@@ -89,9 +89,13 @@ spec:
           nfs:
             path: /Media/surveillance
             server: 192.168.1.10
+        # Testing
         - name: shinobi-mysql
-          persistentVolumeClaim:
-            claimName: shinobi-mysql
+          emptyDir:
+            sizeLimit: 500Mi
+        # - name: shinobi-mysql
+        #   persistentVolumeClaim:
+        #     claimName: shinobi-mysql
         - name: shinobi-config
           secret:  
             secretName: shinobi-secrets
