@@ -51,9 +51,11 @@ spec:
             - name: shinobi-config 
               readOnly: true
               mountPath: "/home/Shinobi/config.json"
-            - name: shinobi-super 
+              subPath: config.json
+            - name: shinobi-config
               readOnly: true
               mountPath: "/home/Shinobi/super.json"
+              subPath: super.json
             - name: shinobi-media
               mountPath: /recordings
             # - name: shinobi-mysql
@@ -77,8 +79,8 @@ spec:
         - name: shinobi-config
           secret:  
             secretName: shinobi-secrets
-            key: config.json
-        - name: shinobi-super
-          secret:  
-            secretName: shinobi-secrets
-            key: super.json
+            items:
+              - key: config.json
+                path: config.json
+              - key: super.json
+                path: super.json
