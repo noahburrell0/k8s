@@ -27,7 +27,7 @@ spec:
                 secretKeyRef:
                   name: shinobi-secrets
                   key: DB_USER
-            - name: DB_PASS
+            - name: DB_PASSWORD
               valueFrom: 
                 secretKeyRef:
                   name: shinobi-secrets
