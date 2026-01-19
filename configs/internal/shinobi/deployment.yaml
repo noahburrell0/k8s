@@ -44,6 +44,8 @@ spec:
                   key: DB_PASS
             - name: DB_HOST
               value: "localhost"
+            - name: DB_TYPE
+              value: "mysql2"
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 0
