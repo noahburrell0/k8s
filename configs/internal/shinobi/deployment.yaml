@@ -21,6 +21,17 @@ spec:
       containers:
         - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:f497fdc0811dc09c9765e754d9fe6a5fb1e18122d91c885b9efd93645cc84000 # dev tag, release date January 13, 2026
           imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_USER
+              valueFrom: 
+                secretKeyRef:
+                  name: shinobi-secrets
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom: 
+                secretKeyRef:
+                  name: shinobi-secrets
+                  key: DB_PASS
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 0
