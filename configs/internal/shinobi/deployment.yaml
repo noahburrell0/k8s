@@ -49,15 +49,13 @@ spec:
             timeoutSeconds: 1
           volumeMounts:
             - name: shinobi-configs 
-              mountPath: "/home/Shinobi/config.json"
-              subPath: config.json
-            - name: shinobi-configs  
-              mountPath: "/home/Shinobi/super.json"
-              subPath: super.json  
-            - mountPath: /recordings
-              name: shinobi-media
-            # - mountPath: /var/lib/mysql
-            #   name: shinobi-mysql
+              readOnly: true
+              mountPath: "/home/Shinobi"
+            - name: shinobi-media
+              mountPath: /recordings
+            # - name: shinobi-mysql
+            #   mountPath: /var/lib/mysql
+
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       securityContext:
