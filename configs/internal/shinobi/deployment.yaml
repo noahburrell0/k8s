@@ -79,10 +79,10 @@ spec:
 
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
-      securityContext:
-        fsGroup: 0
-        runAsGroup: 0
-        runAsUser: 0
+      # securityContext:
+      #   fsGroup: 0
+      #   runAsGroup: 0
+      #   runAsUser: 0
       serviceAccountName: default
       volumes:
         - name: shinobi-media
