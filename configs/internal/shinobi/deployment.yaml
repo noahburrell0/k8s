@@ -37,6 +37,8 @@ spec:
                 secretKeyRef:
                   name: shinobi-secrets
                   key: DB_PASS
+            - name: DB_HOST
+              value: "127.0.0.1"
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 0
