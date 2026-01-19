@@ -19,7 +19,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-        - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:f497fdc0811dc09c9765e754d9fe6a5fb1e18122d91c885b9efd93645cc84000 # dev tag, release date January 13, 2026
+        - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:f7a907d0cc74a44457caa08ae86d1a5209ba1dee804b66cdef4954187516f2b0 # dev tag, release date January 13, 2026
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_USER
