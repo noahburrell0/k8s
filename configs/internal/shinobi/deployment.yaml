@@ -67,11 +67,11 @@ spec:
             timeoutSeconds: 1
           volumeMounts:
             - name: shinobi-config 
-              readOnly: true
+              readOnly: false
               mountPath: "/home/Shinobi/conf.json"
               subPath: conf.json
             - name: shinobi-config
-              readOnly: true
+              readOnly: false
               mountPath: "/home/Shinobi/super.json"
               subPath: super.json
             - name: shinobi-media
