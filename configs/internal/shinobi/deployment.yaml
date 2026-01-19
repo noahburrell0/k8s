@@ -50,12 +50,10 @@ spec:
           volumeMounts:
             - name: shinobi-config 
               readOnly: true
-              mountPath: "/home/Shinobi"
-              subPath: config.json
+              mountPath: "/home/Shinobi/config.json"
             - name: shinobi-super 
               readOnly: true
-              mountPath: "/home/Shinobi"
-              subPath: super.json
+              mountPath: "/home/Shinobi/super.json"
             - name: shinobi-media
               mountPath: /recordings
             # - name: shinobi-mysql
