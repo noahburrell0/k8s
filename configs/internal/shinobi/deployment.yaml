@@ -48,9 +48,14 @@ spec:
               port: 8080
             timeoutSeconds: 1
           volumeMounts:
-            - name: shinobi-configs 
+            - name: shinobi-config 
               readOnly: true
               mountPath: "/home/Shinobi"
+              subPath: config.json
+            - name: shinobi-super 
+              readOnly: true
+              mountPath: "/home/Shinobi"
+              subPath: super.json
             - name: shinobi-media
               mountPath: /recordings
             # - name: shinobi-mysql
@@ -71,6 +76,11 @@ spec:
         - name: shinobi-mysql
           persistentVolumeClaim:
             claimName: shinobi-mysql
-        - name: shinobi-configs
+        - name: shinobi-config
           secret:  
             secretName: shinobi-secrets
+            key: config.json
+        - name: shinobi-super
+          secret:  
+            secretName: shinobi-secrets
+            key: super.json
