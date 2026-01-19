@@ -19,7 +19,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-        - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:aba3e0f91f541ca357ced219e43f4799248c204429b6f6c4a6eb435a7a9df861 # latest tag, release date October 28, 2025
+        - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:f497fdc0811dc09c9765e754d9fe6a5fb1e18122d91c885b9efd93645cc84000 # dev tag, release date January 13, 2026
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
