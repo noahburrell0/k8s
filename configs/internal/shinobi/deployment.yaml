@@ -48,10 +48,10 @@ spec:
               port: 8080
             timeoutSeconds: 1
           volumeMounts:
-            - mountPath: /home/Shinobi
-              name: shinobi-media
-            - mountPath: /config
-              name: shinobi-mysql
+            # - mountPath: /home/Shinobi
+            #   name: shinobi-media
+            # - mountPath: /var/lib/mysql
+            #   name: shinobi-mysql
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       securityContext:
