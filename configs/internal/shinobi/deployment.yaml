@@ -50,8 +50,8 @@ spec:
           volumeMounts:
             - name: shinobi-config 
               readOnly: true
-              mountPath: "/home/Shinobi/config.json"
-              subPath: config.json
+              mountPath: "/home/Shinobi/conf.json"
+              subPath: conf.json
             - name: shinobi-config
               readOnly: true
               mountPath: "/home/Shinobi/super.json"
@@ -80,7 +80,7 @@ spec:
           secret:  
             secretName: shinobi-secrets
             items:
-              - key: config.json
-                path: config.json
+              - key: conf.json
+                path: conf.json
               - key: super.json
                 path: super.json
