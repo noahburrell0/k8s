@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shinobi
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: shinobi
+      app.kubernetes.io/name: shinobi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: shinobi
+        app.kubernetes.io/name: shinobi
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:aba3e0f91f541ca357ced219e43f4799248c204429b6f6c4a6eb435a7a9df861 # latest tag, release date October 28, 2025
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+          name: shinobi
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 30
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /home/Shinobi
+              name: shinobi-media
+            - mountPath: /config
+              name: shinobi-mysql
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      securityContext:
+        fsGroup: 0
+        runAsGroup: 0
+        runAsUser: 0
+      serviceAccountName: default
+      volumes:
+        - name: shinobi-media
+          nfs:
+            path: /Media/surveillance
+            server: 192.168.1.10
+        - name: shinobi-mysql
+          persistentVolumeClaim:
+            claimName: shinobi-mysql
