@@ -41,7 +41,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "100m"
-          livenessProbe:
+          startupProbe:
             exec:
               command:
               - python3
@@ -55,19 +55,33 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 5
             failureThreshold: 3
-          readinessProbe:
-            exec:
-              command:
-              - python3
-              - -c
-              - |
-                import urllib.request
-                import ssl
-                ctx = ssl._create_unverified_context()
-                urllib.request.urlopen('https://localhost:443/?subscriptionId=probe', context=ctx)
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 3
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #     - python3
+          #     - -c
+          #     - |
+          #       import urllib.request
+          #       import ssl
+          #       ctx = ssl._create_unverified_context()
+          #       urllib.request.urlopen('https://localhost:443/?subscriptionId=probe', context=ctx)
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #     - python3
+          #     - -c
+          #     - |
+          #       import urllib.request
+          #       import ssl
+          #       ctx = ssl._create_unverified_context()
+          #       urllib.request.urlopen('https://localhost:443/?subscriptionId=probe', context=ctx)
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
+          #   timeoutSeconds: 3
           volumeMounts:
             - name: ssl-data
               mountPath: /etc/ssl/certs
