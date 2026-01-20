@@ -132,19 +132,19 @@ spec:
               name: http
               protocol: TCP
           readinessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 0
-            periodSeconds: 10
-            tcpSocket:
-              port: 8080
-            timeoutSeconds: 1
-          startupProbe:
             failureThreshold: 30
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 5
             tcpSocket:
               port: 8080
-            timeoutSeconds: 1
+            timeoutSeconds: 2
+          startupProbe:
+            failureThreshold: 30
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 2
           volumeMounts:
             - name: shinobi-config 
               readOnly: true
