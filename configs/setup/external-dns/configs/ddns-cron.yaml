@@ -94,7 +94,7 @@ spec:
               EOF
             env:
             - name: IP_HOSTNAME_PROXIED
-              value: burrell.tech
+              value: proxied.burrell.tech
             - name: IP_HOSTNAME_UNPROXIED
               value: unproxied.burrell.tech
           restartPolicy: OnFailure
