@@ -24,6 +24,23 @@ spec:
           - "licenses.shinobi.video"
       imagePullSecrets:
         - name: shinobi-pullsecret
+      containers:
+        - name: license-server
+          image: ghcr.io/noahburrell0/shinobi-license-server:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 443
+            name: https
+            protocol: TCP
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
           livenessProbe:
             exec:
               command:
@@ -54,7 +71,6 @@ spec:
           volumeMounts:
             - name: ssl-data
               mountPath: /etc/ssl/certs
-      containers:
         - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:f497fdc0811dc09c9765e754d9fe6a5fb1e18122d91c885b9efd93645cc84000 # dev tag, release date January 13, 2026
           imagePullPolicy: IfNotPresent
           command:
