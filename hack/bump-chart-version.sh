@@ -329,7 +329,7 @@ current_start_line=1
 line_num=0
 
 while IFS= read -r line || [ -n "$line" ]; do
-    ((line_num++))
+    ((line_num++)) || true
 
     # Check if line starts with ###
     if [[ "$line" =~ ^###[[:space:]]*.* ]]; then
@@ -348,7 +348,7 @@ while IFS= read -r line || [ -n "$line" ]; do
         fi
         current_section+="$line"
     fi
-done < "$CONFIG_FILE_ABS"
+done <<< "$FILE_CONTENT"
 
 # Add the last section
 if [ -n "$current_section" ]; then
