@@ -86,7 +86,7 @@ spec:
               for i in $(seq 1 $MAX_RETRIES); do
                 if curl -f -s -o /dev/null "$URL"; then
                   echo "URL is reachable!"
-                  exec /home/Shinobi/Docker/init.sh
+                  exec /home/Shinobi/Docker/init.sh pm2-docker /home/Shinobi/Docker/pm2.yml
                 fi
                 echo "Attempt $i/$MAX_RETRIES: URL not reachable yet, retrying in ${RETRY_DELAY}s..."
                 sleep $RETRY_DELAY
@@ -94,9 +94,6 @@ spec:
               
               echo "Failed to reach $URL after $MAX_RETRIES attempts"
               exit 1
-          args:
-            - pm2-docker
-            - /home/Shinobi/Docker/pm2.yml
           env:
             - name: DB_USER
               valueFrom: 
@@ -172,10 +169,6 @@ spec:
           nfs:
             path: /Media/surveillance
             server: 192.168.1.10
-        # Testing
-        # - name: shinobi-mysql
-        #   emptyDir:
-        #     sizeLimit: 500Mi
         - name: shinobi-mysql
           persistentVolumeClaim:
             claimName: shinobi-mysql
