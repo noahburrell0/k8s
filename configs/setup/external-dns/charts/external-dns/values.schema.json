@@ -6,6 +6,20 @@
       "description": "Affinity settings for `Pod` [scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/). If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.",
       "type": "object"
     },
+    "annotationFilter": {
+      "description": "Filter resources queried for endpoints by annotation selector.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "annotationPrefix": {
+      "description": "Annotation prefix for external-dns annotations (useful for split horizon DNS with multiple instances).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "automountServiceAccountToken": {
       "description": "Set this to `false` to [opt out of API credential automounting](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting) for the `Pod`.",
       "type": "boolean"
@@ -23,9 +37,8 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": [
-            "string"
-          ],
+          "default": "Recreate",
+          "type": "string",
           "enum": [
             "Recreate",
             "RollingUpdate"
@@ -98,6 +111,13 @@
         "null"
       ]
     },
+    "gatewayNamespace": {
+      "description": "_Gateway API_ gateway namespace to watch.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "global": {
       "type": "object",
       "properties": {
@@ -151,7 +171,7 @@
       "type": "string"
     },
     "labelFilter": {
-      "description": "Filter resources queried for endpoints by label selector",
+      "description": "Filter resources queried for endpoints by label selector.",
       "type": [
         "string",
         "null"
@@ -192,9 +212,7 @@
     "logFormat": {
       "description": "Log format.",
       "default": "text",
-      "type": [
-        "string"
-      ],
+      "type": "string",
       "enum": [
         "text",
         "json"
@@ -203,9 +221,7 @@
     "logLevel": {
       "description": "Log level.",
       "default": "info",
-      "type": [
-        "string"
-      ],
+      "type": "string",
       "enum": [
         "panic",
         "debug",
@@ -272,9 +288,7 @@
     "policy": {
       "description": "How DNS records are synchronized between sources and providers; available values are `create-only`, `sync`, \u0026 `upsert-only`.",
       "default": "upsert-only",
-      "type": [
-        "string"
-      ],
+      "type": "string",
       "enum": [
         "create-only",
         "sync",
@@ -367,6 +381,7 @@
                       ]
                     },
                     "port": {
+                      "default": "string",
                       "type": [
                         "integer",
                         "string"
@@ -420,6 +435,7 @@
                       ]
                     },
                     "port": {
+                      "default": "string",
                       "type": [
                         "integer",
                         "string"
@@ -486,10 +502,16 @@
               "type": "object",
               "properties": {
                 "bearerTokenFile": {
-                  "type": "null"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "interval": {
-                  "type": "null"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "metricRelabelings": {
                   "type": "array"
@@ -498,10 +520,16 @@
                   "type": "array"
                 },
                 "scheme": {
-                  "type": "null"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "scrapeTimeout": {
-                  "type": "null"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "tlsConfig": {
                   "type": "object"
