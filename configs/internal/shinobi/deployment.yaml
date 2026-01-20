@@ -24,7 +24,7 @@ spec:
           - "licenses.shinobi.video"
       imagePullSecrets:
         - name: shinobi-pullsecret
-      containers:
+      initContainers:
         - name: license-server
           image: ghcr.io/noahburrell0/shinobi-license-server:latest
           imagePullPolicy: Always
@@ -71,6 +71,7 @@ spec:
           volumeMounts:
             - name: ssl-data
               mountPath: /etc/ssl/certs
+      containers:
         - image: registry.gitlab.com/shinobi-systems/shinobi@sha256:f497fdc0811dc09c9765e754d9fe6a5fb1e18122d91c885b9efd93645cc84000 # dev tag, release date January 13, 2026
           imagePullPolicy: IfNotPresent
           env:
