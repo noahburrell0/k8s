@@ -9,18 +9,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - chart: cert-manager
-    repoURL: https://charts.jetstack.io
-    targetRevision: v1.18.2
-    helm:
-      valueFiles:
-      - $values/configs/setup/cert-manager/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
-  - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
-    path: configs/setup/cert-manager/configs
+    path: configs/setup/cert-manager
   destination:
     name: in-cluster
     namespace: cert-manager
