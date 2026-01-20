@@ -3,8 +3,8 @@ name: Bump Helm Charts
 on:
   workflow_dispatch:
     inputs:
-      config_path:
-        description: 'Path to repo.conf file (e.g., configs/setup/cert-manager/repo.conf)'
+      config_dir:
+        description: 'Path to directory containing repo.conf (e.g., configs/setup/cert-manager)'
         required: true
         type: string
       chart_version:
@@ -24,6 +24,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Verify config directory and file
+        run: |
+          if [ ! -d "${{ inputs.config_dir }}" ]; then
+            echo "Error: Directory '${{ inputs.config_dir }}' does not exist"
+            exit 1
+          fi
+
+          if [ ! -f "${{ inputs.config_dir }}/repo.conf" ]; then
+            echo "Error: File 'repo.conf' not found in directory '${{ inputs.config_dir }}'"
+            exit 1
+          fi
+
+          echo "✓ Verified: ${{ inputs.config_dir }}/repo.conf exists"
 
       - name: Install Helm
         uses: azure/setup-helm@v4
@@ -45,7 +59,8 @@ jobs:
       - name: Build bump command
         id: build_cmd
         run: |
-          CMD="./hack/bump-chart-version.sh ${{ inputs.config_path }}"
+          CONFIG_PATH="${{ inputs.config_dir }}/repo.conf"
+          CMD="./hack/bump-chart-version.sh $CONFIG_PATH"
 
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             CMD="$CMD --dry-run"
@@ -59,6 +74,7 @@ jobs:
           fi
 
           echo "command=$CMD" >> $GITHUB_OUTPUT
+          echo "config_path=$CONFIG_PATH" >> $GITHUB_OUTPUT
 
       - name: Run bump-chart-version.sh
         run: |
@@ -74,10 +90,10 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
             # Extract chart name from path for commit message
-            CHART_NAME=$(basename $(dirname ${{ inputs.config_path }}))
+            CHART_NAME=$(basename ${{ inputs.config_dir }})
 
             # Determine the new version from the updated config file
-            NEW_VERSION=$(grep "^VERS=" ${{ inputs.config_path }} | cut -d'=' -f2)
+            NEW_VERSION=$(grep "^VERS=" ${{ steps.build_cmd.outputs.config_path }} | cut -d'=' -f2)
 
             # Create branch name
             if [ -n "${{ inputs.chart_version }}" ]; then
@@ -90,10 +106,10 @@ jobs:
             git checkout -b "$BRANCH_NAME"
 
             # Add changes
-            git add ${{ inputs.config_path }}
+            git add ${{ steps.build_cmd.outputs.config_path }}
 
             # Add downloaded charts if they exist
-            CHARTS_DIR=$(dirname ${{ inputs.config_path }})/charts
+            CHARTS_DIR=${{ inputs.config_dir }}/charts
             if [ -d "$CHARTS_DIR" ]; then
               git add "$CHARTS_DIR"
             fi
