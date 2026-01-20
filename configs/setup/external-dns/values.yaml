@@ -6,6 +6,7 @@ registry: noop
 extraArgs:
   - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
   - --cloudflare-dns-records-per-page=5000
+  - --cloudflare-proxied
 
 env:
 - name: CF_API_TOKEN
