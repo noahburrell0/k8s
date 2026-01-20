@@ -1,0 +1,146 @@
+name: Bump Helm Charts
+
+on:
+  workflow_dispatch:
+    inputs:
+      config_path:
+        description: 'Path to repo.conf file (e.g., configs/setup/cert-manager/repo.conf)'
+        required: true
+        type: string
+      chart_version:
+        description: 'Specific version to update to (optional, defaults to latest stable)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Run in dry-run mode (show changes without applying)'
+        required: false
+        type: boolean
+        default: true
+      download:
+        description: 'Automatically download charts after version update'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  bump-chart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'latest'
+
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Install crane
+        run: |
+          VERSION=$(curl -s "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq -r '.tag_name')
+          curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_Linux_x86_64.tar.gz" | tar xz -C /tmp
+          sudo mv /tmp/crane /usr/local/bin/crane
+          crane version
+
+      - name: Build bump command
+        id: build_cmd
+        run: |
+          CMD="./hack/bump-chart-version.sh ${{ inputs.config_path }}"
+
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            CMD="$CMD --dry-run"
+          fi
+
+          if [ "${{ inputs.download }}" = "true" ]; then
+            CMD="$CMD --download"
+          fi
+
+          if [ -n "${{ inputs.chart_version }}" ]; then
+            CMD="$CMD --version ${{ inputs.chart_version }}"
+          fi
+
+          echo "command=$CMD" >> $GITHUB_OUTPUT
+
+      - name: Run bump-chart-version.sh
+        run: |
+          chmod +x ./hack/bump-chart-version.sh
+          chmod +x ./hack/download-helm-chart.sh
+          ${{ steps.build_cmd.outputs.command }}
+
+      - name: Create PR with changes
+        if: ${{ inputs.dry_run == false }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            # Extract chart name from path for commit message
+            CHART_NAME=$(basename $(dirname ${{ inputs.config_path }}))
+
+            # Determine the new version from the updated config file
+            NEW_VERSION=$(grep "^VERS=" ${{ inputs.config_path }} | cut -d'=' -f2)
+
+            # Create branch name
+            if [ -n "${{ inputs.chart_version }}" ]; then
+              BRANCH_NAME="bump-${CHART_NAME}-${{ inputs.chart_version }}"
+            else
+              BRANCH_NAME="bump-${CHART_NAME}-${NEW_VERSION}"
+            fi
+
+            # Create and switch to new branch
+            git checkout -b "$BRANCH_NAME"
+
+            # Add changes
+            git add ${{ inputs.config_path }}
+
+            # Add downloaded charts if they exist
+            if [ "${{ inputs.download }}" = "true" ]; then
+              CHARTS_DIR=$(dirname ${{ inputs.config_path }})/charts
+              if [ -d "$CHARTS_DIR" ]; then
+                git add "$CHARTS_DIR"
+              fi
+            fi
+
+            # Commit changes
+            if [ -n "${{ inputs.chart_version }}" ]; then
+              COMMIT_MSG="chore: bump ${CHART_NAME} to version ${{ inputs.chart_version }}"
+            else
+              COMMIT_MSG="chore: bump ${CHART_NAME} to version ${NEW_VERSION}"
+            fi
+
+            git commit -m "$COMMIT_MSG"
+
+            # Push branch
+            git push -u origin "$BRANCH_NAME"
+
+            # Create pull request
+            if [ -n "${{ inputs.chart_version }}" ]; then
+              PR_TITLE="Bump ${CHART_NAME} to version ${{ inputs.chart_version }}"
+              PR_BODY="This PR updates ${CHART_NAME} to version ${{ inputs.chart_version }}."
+            else
+              PR_TITLE="Bump ${CHART_NAME} to latest stable version"
+              PR_BODY="This PR updates ${CHART_NAME} to the latest stable version."
+            fi
+
+            gh pr create \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY" \
+              --base main
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Upload charts artifact
+        if: ${{ inputs.download == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: helm-charts
+          path: $(dirname ${{ inputs.config_path }})/charts/
+          if-no-files-found: ignore
