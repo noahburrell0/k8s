@@ -3,9 +3,11 @@ kind: Kustomization
 
 helmCharts:
 - name: cert-manager
+  releaseName: cert-manager
   namespace: cert-manager
   repo: cert-manager
   valuesFile: values.yaml
+
 
 resources:
 - configs/cloudflare-api-token-secret-private.yaml
