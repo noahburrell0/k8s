@@ -318,6 +318,9 @@ echo ""
 # Read the entire file content
 FILE_CONTENT=$(cat "$CONFIG_FILE_ABS")
 
+echo "DEBUG: File content read successfully" >&2
+echo "DEBUG: File has $(echo "$FILE_CONTENT" | wc -l) lines" >&2
+
 # Parse the config file and split into sections with line numbers
 declare -a chart_sections=()
 declare -a section_start_lines=()
@@ -360,6 +363,7 @@ if [ ${#chart_sections[@]} -eq 0 ]; then
 fi
 
 total_charts=${#chart_sections[@]}
+echo "DEBUG: Parsed $total_charts chart section(s)" >&2
 info "Found $total_charts chart(s) to check"
 echo ""
 
@@ -367,9 +371,12 @@ echo ""
 declare -a updates=()
 updated_content="$FILE_CONTENT"
 
+echo "DEBUG: Starting chart processing loop" >&2
+
 # Process each section
 chart_num=1
 for i in "${!chart_sections[@]}"; do
+    echo "DEBUG: Processing chart $chart_num" >&2
     chart_section="${chart_sections[$i]}"
 
     # Skip empty sections
@@ -487,6 +494,7 @@ section "Summary"
 
 if [ ${#updates[@]} -eq 0 ]; then
     info "No updates available"
+    exit 0
 else
     info "Found ${#updates[@]} update(s):"
     for update in "${updates[@]}"; do
@@ -499,7 +507,8 @@ else
         echo ""
         echo "--- Current"
         echo "+++ Proposed"
-        (diff -u "$CONFIG_FILE_ABS" <(echo "$updated_content") || true)
+        diff -u "$CONFIG_FILE_ABS" <(echo "$updated_content") || true
+        exit 0
     else
         info "Updating $CONFIG_FILE_ABS..."
         echo "$updated_content" > "$CONFIG_FILE_ABS"
