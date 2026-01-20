@@ -78,7 +78,7 @@ spec:
             - -c
             - |
               URL="https://licenses.shinobi.video/subscribe/check?subscriptionId=test12345"
-              MAX_RETRIES=60
+              MAX_RETRIES=20
               RETRY_DELAY=5
               
               echo "Waiting for $URL to become reachable..."
@@ -94,6 +94,9 @@ spec:
               
               echo "Failed to reach $URL after $MAX_RETRIES attempts"
               exit 1
+          args:
+            - pm2-docker
+            - /home/Shinobi/Docker/pm2.yml
           env:
             - name: DB_USER
               valueFrom: 
