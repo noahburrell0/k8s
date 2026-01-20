@@ -18,6 +18,10 @@ spec:
         app.kubernetes.io/name: shinobi
     spec:
       automountServiceAccountToken: true
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+          - "licenses.shinobi.video"
       imagePullSecrets:
         - name: shinobi-pullsecret
       containers:
