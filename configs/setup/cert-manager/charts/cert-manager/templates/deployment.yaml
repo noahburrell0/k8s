@@ -212,9 +212,7 @@ spec:
             failureThreshold: {{ .failureThreshold }}
           {{- end }}
           {{- end }}
-      {{- $nodeSelector := .Values.global.nodeSelector | default dict }}
-      {{- $nodeSelector = merge $nodeSelector (.Values.nodeSelector | default dict) }}
-      {{- with $nodeSelector }}
+      {{- with (coalesce .Values.nodeSelector .Values.global.nodeSelector) }}
       nodeSelector:
         {{- range $key, $value := . }}
         {{ $key }}: {{ $value | quote }}
