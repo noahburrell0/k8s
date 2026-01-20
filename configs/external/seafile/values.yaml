@@ -47,7 +47,7 @@ ingress:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
       nginx.ingress.kubernetes.io/permanent-redirect: "https://seafile.burrell.tech/sso/?next=/"
-      external-dns.alpha.kubernetes.io/target
+      external-dns.alpha.kubernetes.io/exclude: "true"
     hosts:
       - host: seafile.burrell.tech
         paths:
