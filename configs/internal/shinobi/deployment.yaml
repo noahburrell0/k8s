@@ -26,8 +26,8 @@ spec:
         - name: shinobi-pullsecret
       containers:
         - name: license-server
-          image: ghcr.io/noahburrell0/shinobi-license-server:latest
-          imagePullPolicy: Always
+          image: ghcr.io/noahburrell0/shinobi-license-server:0.0.1
+          imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 443
             name: https
