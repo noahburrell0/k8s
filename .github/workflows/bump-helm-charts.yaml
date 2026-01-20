@@ -12,15 +12,10 @@ on:
         required: false
         type: string
       dry_run:
-        description: 'Run in dry-run mode (show changes without applying)'
+        description: 'Run in dry-run mode (show changes without applying, when false charts will be downloaded and PR created)'
         required: false
         type: boolean
         default: true
-      download:
-        description: 'Automatically download charts after version update'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   bump-chart:
@@ -54,9 +49,8 @@ jobs:
 
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             CMD="$CMD --dry-run"
-          fi
-
-          if [ "${{ inputs.download }}" = "true" ]; then
+          else
+            # Enable download when not in dry-run mode
             CMD="$CMD --download"
           fi
 
@@ -99,11 +93,9 @@ jobs:
             git add ${{ inputs.config_path }}
 
             # Add downloaded charts if they exist
-            if [ "${{ inputs.download }}" = "true" ]; then
-              CHARTS_DIR=$(dirname ${{ inputs.config_path }})/charts
-              if [ -d "$CHARTS_DIR" ]; then
-                git add "$CHARTS_DIR"
-              fi
+            CHARTS_DIR=$(dirname ${{ inputs.config_path }})/charts
+            if [ -d "$CHARTS_DIR" ]; then
+              git add "$CHARTS_DIR"
             fi
 
             # Commit changes
@@ -136,11 +128,3 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ github.token }}
-
-      - name: Upload charts artifact
-        if: ${{ inputs.download == true }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: helm-charts
-          path: $(dirname ${{ inputs.config_path }})/charts/
-          if-no-files-found: ignore

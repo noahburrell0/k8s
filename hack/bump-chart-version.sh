@@ -499,7 +499,7 @@ else
         echo ""
         echo "--- Current"
         echo "+++ Proposed"
-        diff -u "$CONFIG_FILE_ABS" <(echo "$updated_content") || true
+        (diff -u "$CONFIG_FILE_ABS" <(echo "$updated_content") || true)
     else
         info "Updating $CONFIG_FILE_ABS..."
         echo "$updated_content" > "$CONFIG_FILE_ABS"
