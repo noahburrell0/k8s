@@ -8,7 +8,7 @@ expose:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       # cert-manager.io/cluster-issuer: selfsigned
-      external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+      external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
       external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
   tls:
     certSource: secret

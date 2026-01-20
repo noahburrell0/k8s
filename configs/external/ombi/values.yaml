@@ -14,7 +14,7 @@ ingress:
       cert-manager.io/cluster-issuer: letsencrypt
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+      external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
       external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
     hosts:
       - host: ombi.burrell.tech

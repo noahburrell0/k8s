@@ -41,7 +41,7 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/default-backend: main-site-error-pages
     nginx.ingress.kubernetes.io/custom-http-errors: "401,403,404,500,501,502,503"
-    external-dns.alpha.kubernetes.io/target: 'burrell.tech'
+    external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
 
 serverBlock: |-
