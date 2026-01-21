@@ -22,7 +22,7 @@ spec:
 apiVersion: metallb.io/v1beta2
 kind: BGPPeer
 metadata:
-  name: tnsr-peer
+  name: pfsense-peer
 spec:
   myASN: 64512
   peerASN: 64512
