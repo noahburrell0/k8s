@@ -3,7 +3,7 @@ kind: Kustomization
 
 helmCharts:
 - name: longhorn
-  namespace: longhorn
+  namespace: longhorn-system
   releaseName: longhorn
   repo: longhorn
   valuesFile: values.yaml
