@@ -14,5 +14,5 @@ spec:
     path: configs/setup/longhorn
   destination:
     name: in-cluster
-    namespace: longhorn-system.
+    namespace: longhorn-system
 
