@@ -1,0 +1,13 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: container image tag was updated to 1.6.2 from 1.6.1
+apiVersion: v2
+appVersion: 1.6.2
+description: A Helm chart for the k8s_gateway CoreDNS plugin
+maintainers:
+- name: samip5
+  url: https://github.com/samip5
+name: k8s-gateway
+type: application
+version: 3.4.1
