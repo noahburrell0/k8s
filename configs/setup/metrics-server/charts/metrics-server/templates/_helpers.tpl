@@ -40,6 +40,9 @@ helm.sh/chart: {{ include "metrics-server.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Values.commonLabels }}
+{{ toYaml .Values.commonLabels }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -66,6 +69,27 @@ The image to use
 */}}
 {{- define "metrics-server.image" -}}
 {{- printf "%s:%s" .Values.image.repository (default (printf "v%s" .Chart.AppVersion) .Values.image.tag) }}
+{{- end }}
+
+{{/*
+The image to use for the addon resizer
+*/}}
+{{- define "metrics-server.addonResizer.image" -}}
+{{- printf "%s:%s" .Values.addonResizer.image.repository .Values.addonResizer.image.tag }}
+{{- end }}
+
+{{/*
+ConfigMap name of addon resizer
+*/}}
+{{- define "metrics-server.addonResizer.configMap" -}}
+{{- printf "%s-%s" (include "metrics-server.fullname" .) "nanny-config" }}
+{{- end }}
+
+{{/*
+Role name of addon resizer
+*/}}
+{{- define "metrics-server.addonResizer.role" -}}
+{{ printf "system:%s-nanny" (include "metrics-server.fullname" .) }}
 {{- end }}
 
 {{/* Get PodDisruptionBudget API Version */}}
