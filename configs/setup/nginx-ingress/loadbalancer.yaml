@@ -4,7 +4,6 @@ metadata:
   name: nginx-metallb
   annotations:
     metallb.universe.tf/address-pool: bgp-pool
-    metallb.io/allow-shared-ip: "key-to-share-172.19.0.0"
     loadBalancerIP: 172.19.0.0
 spec:
   ipFamilies:
