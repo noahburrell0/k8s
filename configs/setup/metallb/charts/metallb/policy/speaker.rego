@@ -4,22 +4,15 @@ package main
 deny[msg] {
   input.kind == "DaemonSet"
   serviceAccountName := input.spec.template.spec.serviceAccountName
-  not serviceAccountName == "RELEASE-NAME-metallb-speaker"
+  not serviceAccountName == "release-name-metallb-speaker"
   msg = sprintf("speaker serviceAccountName '%s' does not match expected value", [serviceAccountName])
 }
 
 # validate METALLB_ML_SECRET_KEY (memberlist)
 deny[msg] {
 	input.kind == "DaemonSet"
-	not input.spec.template.spec.containers[0].env[5].name == "METALLB_ML_SECRET_KEY"
-	msg = "speaker env does not contain METALLB_ML_SECRET_KEY at env[5]"
-}
-
-deny[msg] {
-	input.kind == "DaemonSet"
-	not input.spec.template.spec.containers[0].env[5].valueFrom.secretKeyRef.name == "RELEASE-NAME-metallb-memberlist"
-	not input.spec.template.spec.containers[0].env[5].valueFrom.secretKeyRef.key == "secretkey"
-	msg = "speaker env METALLB_ML_SECRET_KEY secretKeyRef does not equal expected value"
+	not input.spec.template.spec.containers[0].env[5].name == "METALLB_ML_SECRET_KEY_PATH"
+	msg = "speaker env does not contain METALLB_ML_SECRET_KEY_PATH at env[5]"
 }
 
 # validate node selector includes builtin when custom ones are provided

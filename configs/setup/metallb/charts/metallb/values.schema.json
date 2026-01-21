@@ -299,7 +299,38 @@
       },
       "required": [ "podMonitor", "prometheusRule" ]
     },
-    "speaker": { 
+    "controller": {
+      "allOf": [
+        { "$ref": "#/definitions/component" },
+        { "description": "MetalLB Controller",
+          "type": "object",
+          "properties": {
+            "strategy": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [ "type" ]
+            },
+            "command" : {
+              "type": "string"
+            },
+            "webhookMode" : {
+              "type": "string"
+            },
+            "extraContainers": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "speaker": {
       "allOf": [
         { "$ref": "#/definitions/component" },
         { "description": "MetalLB Speaker",
@@ -316,8 +347,25 @@
                 },
                 "mlBindPort": {
                   "type": "integer"
+                },
+                "mlBindAddrOverride": {
+                  "type": "string"
+                },
+                "mlSecretKeyPath": {
+                  "type": "string"
                 }
               }
+            },
+            "excludeInterfaces": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "ignoreExcludeLB": {
+              "type": "boolean"
             },
             "updateStrategy": {
               "type": "object",
@@ -330,6 +378,9 @@
             },
             "runtimeClassName": {
               "type": "string"
+            },
+            "securityContext": {
+              "type": "object"
             },
             "secretName": {
               "type": "string"
@@ -362,6 +413,35 @@
               "properties": {
                 "resources": { "type": "object" }
               }
+            },
+            "initContainers": {
+              "type": "object",
+              "properties": {
+                "cpFrrFiles": {
+                  "type": "object",
+                  "properties": {
+                    "resources": { "type": "object" }
+                  }
+                },
+                "cpReloader": {
+                  "type": "object",
+                  "properties": {
+                    "resources": { "type": "object" }
+                  }
+                },
+                "cpMetrics": {
+                  "type": "object",
+                  "properties": {
+                    "resources": { "type": "object" }
+                  }
+                }
+              }
+            },
+            "extraContainers": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
             }
           },
           "required": [ "tolerateMaster" ]
@@ -383,31 +463,6 @@
         }
       }
     }
-  },
-  "controller": { 
-    "allOf": [
-      { "$ref": "#/definitions/component" },
-      { "description": "MetalLB Controller",
-        "type": "object",
-        "properties": {
-          "strategy": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string"
-              }
-            },
-            "required": [ "type" ]
-          },
-          "command" : {
-            "type": "string"
-          },
-          "webhookMode" : {
-            "type": "string"
-          }
-        }
-      }
-    ]
   },
   "required": [
     "controller",
