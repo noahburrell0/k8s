@@ -9,15 +9,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - chart: k8s-gateway
-    repoURL: https://ori-edge.github.io/k8s_gateway/
-    targetRevision: 1.1.15
-    helm:
-      valueFiles:
-      - $values/configs/setup/k8s-gateway/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
+    path: configs/setup/k8s-gateway
   destination:
     name: in-cluster
     namespace: k8s-gateway
