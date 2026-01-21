@@ -6,3 +6,4 @@ helmCharts:
   namespace: metrics-server
   releaseName: metrics-server
   repo: metrics-server
+  valuesFile: values.yaml
