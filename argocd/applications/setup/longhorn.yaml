@@ -9,19 +9,10 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - chart: longhorn
-    repoURL: https://charts.longhorn.io
-    targetRevision: 1.4.2
-    helm:
-      valueFiles:
-      - $values/configs/setup/longhorn/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
-  - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
-    path: configs/setup/longhorn/configs
+    path: configs/setup/longhorn
   destination:
     name: in-cluster
-    namespace: longhorn-system
+    namespace: longhorn-system.
 
