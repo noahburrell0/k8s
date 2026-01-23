@@ -27,7 +27,6 @@ patches:
         value: '--publish-service=ingress-nginx/nginx-metallb'
 
   # Convert deployment to daemonset
-
   - target:
       kind: Deployment
       name: ingress-nginx-controller
@@ -35,3 +34,12 @@ patches:
       - op: replace
         path: /kind
         value: 'DaemonSet'
+
+  # Allow Config Snippets
+  - target:
+      kind: ConfigMap
+      name: ingress-nginx-controller
+    patch: |-
+      - op: add
+        path: /data/allow-snippet-annotations
+        value: 'true'
