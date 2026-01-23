@@ -9,7 +9,6 @@ namespace: ingress-nginx
 
 configMapGenerator:
   - name: ingress-nginx-controller
-    behavior: replace
     literals:
       - allow-snippet-annotations=true
 
