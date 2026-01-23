@@ -42,4 +42,4 @@ patches:
     patch: |-
       - op: add
         path: /data/allow-snippet-annotations
-        value: 'true'
+        value: "true"
