@@ -7,6 +7,12 @@ resources:
 
 namespace: ingress-nginx
 
+configMapGenerator:
+  - name: ingress-nginx-controller
+    behavior: merge
+    literals:
+      - allow-snippet-annotations=true
+
 patches:
   # Make Nginx the default ingress class
   - target:
@@ -34,12 +40,3 @@ patches:
       - op: replace
         path: /kind
         value: 'DaemonSet'
-
-  # Allow Config Snippets
-  - target:
-      kind: ConfigMap
-      name: ingress-nginx-controller
-    patch: |-
-      - op: add
-        path: /data/allow-snippet-annotations
-        value: "true"
