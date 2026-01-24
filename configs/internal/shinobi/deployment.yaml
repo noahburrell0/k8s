@@ -166,8 +166,9 @@ spec:
       serviceAccountName: default
       volumes:
         - name: shinobi-media
-          persistentVolumeClaim:
-            claimName: shinobi-media
+          nfs:
+            path: /Media/surveillance
+            server: 192.168.1.10
         - name: shinobi-mysql
           persistentVolumeClaim:
             claimName: shinobi-mysql
