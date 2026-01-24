@@ -15,6 +15,7 @@ configMapGenerator:
     behavior: replace
     literals:
       - allow-snippet-annotations=true
+      - annotations-risk-level=Critical
 
 patches:
   # Make Nginx the default ingress class
