@@ -7,8 +7,12 @@ resources:
 
 namespace: ingress-nginx
 
+generatorOptions:
+  disableNameSuffixHash: true
 configMapGenerator:
   - name: ingress-nginx-controller
+    namespace: ingress-nginx
+    behavior: replace
     literals:
       - allow-snippet-annotations=true
 
