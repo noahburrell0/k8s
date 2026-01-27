@@ -18,6 +18,9 @@ spec:
   - chart: memcached
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 6.1.4
+    helm:
+      valueFiles:
+      - $values/configs/external/seafile/memcached-values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     ref: values

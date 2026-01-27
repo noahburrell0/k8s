@@ -68,6 +68,8 @@ persistence:
     size: 1Ti
 
 mariadb:
+  image:
+    repository: bitnamilegacy/mariadb
   enabled: true
   architecture: standalone
   auth:
