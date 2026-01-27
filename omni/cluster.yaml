@@ -1,0 +1,77 @@
+kind: Cluster
+systemExtensions:
+  - siderolabs/util-linux-tools
+  - siderolabs/iscsi-tools
+  - siderolabs/qemu-guest-agent
+  - siderolabs/nfsd
+name: homelab
+kubernetes:
+  version: v1.34.1
+talos:
+  version: v1.11.6
+patches:
+  - idOverride: 200-cluster-homelab-dns-resolver
+    annotations:
+      name: dns-resolver
+    inline:
+      machine:
+        network:
+          nameservers:
+            - 192.168.1.8
+  - idOverride: 201-cluster-homelab-max-pods
+    annotations:
+      name: max-pods
+    inline:
+      machine:
+        kubelet:
+          extraConfig:
+            maxPods: 500
+  - idOverride: 202-cluster-homelab-pod-subnet
+    annotations:
+      name: pod-subnet
+    inline:
+      cluster:
+        network:
+          podSubnets:
+            - 10.244.0.0/16
+  - idOverride: 203-cluster-homelab-longhorn-disk
+    annotations:
+      name: longhorn-disk
+    inline:
+      machine:
+        disks:
+          - device: /dev/sdb
+            partitions:
+              - mountpoint: /var/lib/longhorn
+  - idOverride: 204-cluster-homelab-pod-security-config
+    annotations:
+      name: pod-security-config
+    inline:
+      cluster:
+        apiServer:
+          admissionControl:
+            - configuration:
+                apiVersion: pod-security.admission.config.k8s.io/v1alpha1
+                defaults:
+                  audit: restricted
+                  audit-version: latest
+                  enforce: privileged
+                  enforce-version: latest
+                  warn: restricted
+                  warn-version: latest
+                kind: PodSecurityConfiguration
+              name: PodSecurity
+---
+kind: ControlPlane
+machineClass:
+  name: proxmox-control-plane
+  size: 1
+patches:
+  - idOverride: 400-homelab-control-planes-control-plane-scheduling
+    annotations:
+      name: control-plane-scheduling
+    inline:
+      cluster:
+        allowSchedulingOnControlPlanes: true
+---
+kind: Workers
