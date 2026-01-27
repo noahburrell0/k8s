@@ -60,7 +60,8 @@ redis:
   enabled: true
 
   image:
-    pullPolicy: IfNotPresent    
+    pullPolicy: IfNotPresent
+    repository: docker.io/bitnamilegacy
 
   architecture: standalone
   auth:
