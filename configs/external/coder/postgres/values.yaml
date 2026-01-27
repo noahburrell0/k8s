@@ -1,8 +1,0 @@
-auth:
-  database: coder
-  existingSecret: "postgres-secret"
-  secretKeys:
-    adminPasswordKey: postgres-password
-primary:
-  persistence:
-    existingClaim: coder-postgres-pvc
