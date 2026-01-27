@@ -21,8 +21,6 @@ spec:
         - envFrom:
             - secretRef:
                 name: smtp-secrets
-          env:
-            - 
           image: djjudas21/smtp-relay
           imagePullPolicy: IfNotPresent
           livenessProbe:
