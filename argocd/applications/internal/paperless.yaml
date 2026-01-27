@@ -9,15 +9,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - chart: paperless
-    repoURL: https://k8s-at-home.com/charts/
-    targetRevision: 8.8.3
-    helm:
-      valueFiles:
-      - $values/configs/internal/paperless/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
+    path: configs/internal/paperless
   destination:
     name: in-cluster
     namespace: paperless

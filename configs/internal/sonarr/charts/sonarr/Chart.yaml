@@ -1,0 +1,26 @@
+annotations:
+  artifacthub.io/changes: |-
+    - kind: changed
+      description: Upgraded `common` chart dependency to version 4.4.2
+apiVersion: v2
+appVersion: v3.0.8.1507
+dependencies:
+- name: common
+  repository: https://library-charts.k8s-at-home.com
+  version: 4.4.2
+description: Smart PVR for newsgroup and bittorrent users
+home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/sonarr
+icon: https://github.com/Sonarr/Sonarr/blob/phantom-develop/Logo/512.png?raw=true
+keywords:
+- sonarr
+- torrent
+- usenet
+kubeVersion: '>=1.16.0-0'
+maintainers:
+- email: jeff@billimek.com
+  name: billimek
+name: sonarr
+sources:
+- https://github.com/Sonarr/Sonarr
+- https://github.com/k8s-at-home/container-images
+version: 16.2.3

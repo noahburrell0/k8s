@@ -1,0 +1,25 @@
+annotations:
+  artifacthub.io/changes: |-
+    - kind: changed
+      description: Upgraded `common` chart dependency to version 4.4.2
+apiVersion: v2
+appVersion: v21.1
+dependencies:
+- name: common
+  repository: https://library-charts.k8s-at-home.com
+  version: 4.4.2
+description: NZBGet is a Usenet downloader client
+home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/nzbget
+icon: https://avatars1.githubusercontent.com/u/3368377?s=400&v=4
+keywords:
+- nzbget
+- usenet
+kubeVersion: '>=1.16.0-0'
+maintainers:
+- email: jeff@billimek.com
+  name: billimek
+name: nzbget
+sources:
+- https://nzbget.net/
+- https://github.com/k8s-at-home/container-images
+version: 12.3.2
