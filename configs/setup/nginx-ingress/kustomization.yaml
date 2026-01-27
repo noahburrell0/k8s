@@ -51,9 +51,10 @@ patches:
       name: ingress-nginx-controller
     patch: |-
       - op: remove
-        path: spec/minReadySeconds
+        path: /spec/minReadySeconds
       - op: remove
-        path: spec/strategy
+        path: /spec/strategy
+
   # Remove default svc
   - target:
       kind: Service
