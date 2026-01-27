@@ -57,10 +57,11 @@ persistence:
     mountPath: /usr/src/paperless/export
 
 redis:
-  enabled: true
+  enabled: false
 
   image:
     pullPolicy: IfNotPresent
+
 
   architecture: standalone
   auth:
