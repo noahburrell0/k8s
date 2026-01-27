@@ -36,15 +36,6 @@ patches:
         path: /spec/template/spec/containers/0/args/-
         value: '--publish-service=ingress-nginx/nginx-metallb'
 
-  # Convert deployment to daemonset
-  - target:
-      kind: Deployment
-      name: ingress-nginx-controller
-    patch: |-
-      - op: replace
-        path: /kind
-        value: 'DaemonSet'
-
   # Remove unapplicable fields from DaemonSet
   - target:
       kind: Deployment
@@ -54,6 +45,15 @@ patches:
         path: /spec/minReadySeconds
       - op: remove
         path: /spec/strategy
+
+  # Convert deployment to daemonset
+  - target:
+      kind: Deployment
+      name: ingress-nginx-controller
+    patch: |-
+      - op: replace
+        path: /kind
+        value: 'DaemonSet'
 
   # Remove default svc
   - target:
