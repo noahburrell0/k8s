@@ -8,7 +8,7 @@ helmCharts:
   repo: seafile
   valuesFile: values.yaml
 - name: memcached
-  releaseName: memcached
+  releaseName: seafile-memcached
   namespace: seafile
   repo: memcached
   valuesFile: memcached-values.yaml
