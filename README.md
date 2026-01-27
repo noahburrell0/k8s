@@ -1,70 +1,137 @@
-# Self-Managing Kubernetes Homelab w/ ArgoCD
+# GitOps Kubernetes Homelab
 
-This repository serves as the immutable source of configurations for my personal homelab and is deployed using ArgoCD. The configurations contained in the repository self-manage ArgoCD as well as the applications. With various operators like external-dns, cert-manager, and metallb, this homelab pretty much manages itself. Once set up, there is zero intervention required to keep things running.
+A fully GitOps-managed Kubernetes homelab running on Talos Linux and deployed with ArgoCD. This repository contains all cluster configurations and application deployments, enabling complete infrastructure-as-code management with automated reconciliation.
 
-Applications are divided into ArgoCD projects by their respective types.
+## Architecture
 
-- `setup` - Required base components used to operate the cluster and deployments.
-  - ArgoCD Application Definitions: `argocd/applications/setup`
-  - Configurations: `configs/setup/`
-- `external` - Externally facing applications.
-  - ArgoCD Application Definitions: `argocd/applications/external`
-  - Configurations: `configs/external/`
-- `internal` - Internal-only applications.
-  - ArgoCD Application Definitions: `argocd/applications/internal`
-  - Configurations: `configs/internal/`
+**Cluster Platform:** Talos Linux with Omni management
+**GitOps Engine:** ArgoCD (self-managing)
+**Storage:** Longhorn distributed block storage
+**Networking:** MetalLB load balancer, NGINX Ingress
+**DNS & Certificates:** External-DNS + cert-manager with Cloudflare integration
+
+Applications are organized into ArgoCD projects:
+
+- **`setup`** - Core infrastructure components
+  - Definitions: [argocd/applications/setup](argocd/applications/setup)
+  - Configs: [configs/setup/](configs/setup/)
+- **`external`** - Public-facing applications
+  - Definitions: [argocd/applications/external](argocd/applications/external)
+  - Configs: [configs/external/](configs/external/)
+- **`internal`** - Internal-only services
+  - Definitions: [argocd/applications/internal](argocd/applications/internal)
+  - Configs: [configs/internal/](configs/internal/)
+- **`private`** - Private applications (separate repository)
 
 ## Applications
 
-![App Status](https://api.burrell.tech/api/badge?name=app-of-apps&revision=true) [`app-of-apps`](argocd/app-of-apps.yaml)
+- ![App Status](https://api.burrell.tech/api/badge?name=app-of-apps&revision=true) [app-of-apps](argocd/app-of-apps.yaml) - Automated discovery of other Applications
 
-### Setup
+### Setup Infrastructure
 
-- ![App Status](https://api.burrell.tech/api/badge?name=argocd&revision=true) [`argocd`](https://argoproj.github.io/cd/) - The GitOps operator responsible for managing the cluster
-- ![App Status](https://api.burrell.tech/api/badge?name=cert-manager&revision=true) [`cert-manager`](https://cert-manager.io/) - Automatic SSL certificate generation, configured for Cloudflare
-- ![App Status](https://api.burrell.tech/api/badge?name=external-dns&revision=true) [`external-dns`](https://github.com/kubernetes-sigs/external-dns) - Automatically create DNS entries, configured for Lets Encrypt
-- ![App Status](https://api.burrell.tech/api/badge?name=k8s-gateway&revision=true) [`k8s-gateway`](https://github.com/ori-edge/k8s_gateway) - CoreDNS controller plugin
-- ![App Status](https://api.burrell.tech/api/badge?name=metacontroller&revision=true) [`metacontroller`](https://metacontroller.github.io/metacontroller/intro.html) - For rapid prototyping an deployment of custom controllers
-- ![App Status](https://api.burrell.tech/api/badge?name=metallb&revision=true) [`metallb`](https://metallb.universe.tf/) - A loadbalancer for non-cloud deployments
-- ![App Status](https://api.burrell.tech/api/badge?name=metrics-server&revision=true) [`metrics-server`](https://github.com/kubernetes-sigs/metrics-server) - Reports resource usage when running `kubectl top`
-- ![App Status](https://api.burrell.tech/api/badge?name=nfs-subdir-provisioner&revision=true) [`nfs-subdir-provisioner`](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) - Automatically provisions subdirectories against an NFS share
-- ![App Status](https://api.burrell.tech/api/badge?name=nginx-ingress&revision=true) [`nginx-ingress`](https://github.com/kubernetes/ingress-nginx) - The ingress controller for the cluster (Offical Kubernetes Ingress)
-- ![App Status](https://api.burrell.tech/api/badge?name=sealed-secrets&revision=true) [`sealed-secrets`](https://github.com/bitnami-labs/sealed-secrets) - A controller for encrypting and decrypting secrets
-- ![App Status](https://api.burrell.tech/api/badge?name=tnsr-controller&revision=true) [`tnsr-controller`](https://github.com/noahburrell0/tnsr-controller)- A homebrew controller that automatically adds firewall and NAT rules
+- ![App Status](https://api.burrell.tech/api/badge?name=argocd&revision=true) [argocd](https://argoproj.github.io/cd/) - GitOps continuous delivery
+- ![App Status](https://api.burrell.tech/api/badge?name=cert-manager&revision=true) [cert-manager](https://cert-manager.io/) - Automated certificate management with Let's Encrypt
+- ![App Status](https://api.burrell.tech/api/badge?name=external-dns&revision=true) [external-dns](https://github.com/kubernetes-sigs/external-dns) - Automated DNS record management via Cloudflare
+- ![App Status](https://api.burrell.tech/api/badge?name=external-secrets&revision=true) [external-secrets](https://external-secrets.io/) - External secret management integration
+- ![App Status](https://api.burrell.tech/api/badge?name=k8s-gateway&revision=true) [k8s-gateway](https://github.com/ori-edge/k8s_gateway) - DNS gateway for ingress resources
+- ![App Status](https://api.burrell.tech/api/badge?name=longhorn&revision=true) [longhorn](https://longhorn.io/) - Distributed block storage
+- ![App Status](https://api.burrell.tech/api/badge?name=metallb&revision=true) [metallb](https://metallb.universe.tf/) - Bare metal load balancer
+- ![App Status](https://api.burrell.tech/api/badge?name=metrics-server&revision=true) [metrics-server](https://github.com/kubernetes-sigs/metrics-server) - Resource metrics collection
+- ![App Status](https://api.burrell.tech/api/badge?name=nginx-ingress&revision=true) [nginx-ingress](https://github.com/kubernetes/ingress-nginx) - Ingress controller
+- ![App Status](https://api.burrell.tech/api/badge?name=sealed-secrets&revision=true) [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) - Encrypted secrets management
 
-### External
+### External Services
 
-- ![App Status](https://api.burrell.tech/api/badge?name=chia-node&revision=true) [`chia-node`](https://github.com/Chia-Network/chia-docker) - A Chia node for the Chia cryptocurrency
-- ![App Status](https://api.burrell.tech/api/badge?name=contact-api&revision=true) [`contact-api`](https://github.com/noahburrell0/contact-api) - A small API to submit form data from my website to an SMTP relay
-- ![App Status](https://api.burrell.tech/api/badge?name=ghost&revision=true) [`ghost`](https://ghost.org/) - Blogging software
-- ![App Status](https://api.burrell.tech/api/badge?name=main-site&revision=true) [`main-site`](https://github.com/noahburrell0/burrell-tech) - Combines the Bitnami Nginx and Error Pages charts to deploy my website
-- ![App Status](https://api.burrell.tech/api/badge?name=minio&revision=true) [`minio`](https://min.io/) - An S3 compliant object storage system
-- ![App Status](https://api.burrell.tech/api/badge?name=ombi&revision=true) [`ombi`](https://ombi.io/) - A multimedia request platform for Plex
-- ![App Status](https://api.burrell.tech/api/badge?name=paperless&revision=true) [`paperless`](https://docs.paperless-ngx.com/) - A document management system
-- ![App Status](https://api.burrell.tech/api/badge?name=plex&revision=true) [`plex`](https://www.plex.tv/) - A multimedia server
-- ![App Status](https://api.burrell.tech/api/badge?name=seafile&revision=true) [`seafile`](https://www.seafile.com/) - Self-hosted cloud storage system
+- ![App Status](https://api.burrell.tech/api/badge?name=contact-api&revision=true) [contact-api](https://github.com/noahburrell0/contact-api) - Website contact form API
+- ![App Status](https://api.burrell.tech/api/badge?name=harbor&revision=true) [harbor](https://goharbor.io/) - Container registry
+- ![App Status](https://api.burrell.tech/api/badge?name=home-assistant&revision=true) [home-assistant](https://www.home-assistant.io/) - Home automation platform
+- ![App Status](https://api.burrell.tech/api/badge?name=main-site&revision=true) [main-site](https://github.com/noahburrell0/burrell-tech) - Personal website
+- ![App Status](https://api.burrell.tech/api/badge?name=minio-1&revision=true) [minio](https://min.io/) - S3-compatible object storage
+- ![App Status](https://api.burrell.tech/api/badge?name=seafile&revision=true) [seafile](https://www.seafile.com/) - File sync and share platform
 
-### Internal
+### Internal Services
 
-- ![App Status](https://api.burrell.tech/api/badge?name=nzbget&revision=true) [`nzbget`](https://nzbget.net/) - A Usenet download platform
-- ![App Status](https://api.burrell.tech/api/badge?name=radarr&revision=true) [`radarr`](https://radarr.video/) - Automatically search, download, and manage movies
-- ![App Status](https://api.burrell.tech/api/badge?name=sonarr&revision=true) [`sonarr`](https://sonarr.tv/) - Automatically search, download, and manage television series
-- ![App Status](https://api.burrell.tech/api/badge?name=smtp&revision=true) [`smtp`](https://github.com/djjudas21/smtp-relay) - A local SMTP relay to centralize a point in the cluster from which to send emails
-- ![App Status](https://api.burrell.tech/api/badge?name=tdarr&revision=true) [`tdarr`](https://tdarr.io/) - An automatic multimedia transcoder
-- ![App Status](https://api.burrell.tech/api/badge?name=unifi&revision=true) [`unifi`](https://www.ui.com/download/unifi/) - The Uniquiti Unifi controller for managing Ubiquiti network devices
+- ![App Status](https://api.burrell.tech/api/badge?name=bazarr&revision=true) [bazarr](https://www.bazarr.media/) - Subtitle management for Radarr/Sonarr
+- ![App Status](https://api.burrell.tech/api/badge?name=nzbget&revision=true) [nzbget](https://nzbget.net/) - Usenet downloader
+- ![App Status](https://api.burrell.tech/api/badge?name=paperless&revision=true) [paperless](https://docs.paperless-ngx.com/) - Document management system
+- ![App Status](https://api.burrell.tech/api/badge?name=radarr&revision=true) [radarr](https://radarr.video/) - Movie collection manager
+- ![App Status](https://api.burrell.tech/api/badge?name=shinobi&revision=true) [shinobi](https://shinobi.video/) - Video surveillance platform
+- ![App Status](https://api.burrell.tech/api/badge?name=smtp&revision=true) [smtp](https://github.com/djjudas21/smtp-relay) - SMTP relay service
+- ![App Status](https://api.burrell.tech/api/badge?name=sonarr&revision=true) [sonarr](https://sonarr.tv/) - TV series collection manager
+- ![App Status](https://api.burrell.tech/api/badge?name=tdarr&revision=true) [tdarr](https://tdarr.io/) - Media transcoding automation
 
-## Bootstrapping
+## Cluster Provisioning
 
-ArgoCD needs to be manually bootstrapped before it can self-manage. The only pre-requisite is a Kubernetes cluster with a CNI installed. All other required components will be install after bootstrapping.
+The cluster runs on Talos Linux and is managed via Omni. Cluster configuration and machine provisioning is defined in [omni/cluster.yaml](omni/cluster.yaml).
 
-```
+**Key cluster/lab features:**
+- Talos Linux v1.11.6
+- Kubernetes v1.34.1
+- Omni/Proxmox automatic node provisioner
+- Longhorn distributed storage
+
+## Bootstrapping ArgoCD
+
+After cluster provisioning, bootstrap ArgoCD to enable GitOps management:
+
+```bash
 kubectl apply -k configs/setup/argocd/
 kubectl apply -f argocd/app-of-apps.yaml -n argocd
 ```
 
-The above commands will deploy ArgoCD and the `app-of-apps` application which will be used to discover and deploy all other applications out of this repository. From this point forward, ArgoCD will also self-manage. Any updates to `configs/setup/argocd/` will be automatically discovered and applied.
+This deploys ArgoCD and the app-of-apps pattern, which automatically discovers all applications in this repository. Before the ArgoCD UI becomes accessible, critical infrastructure applications must be synced using the ArgoCD CLI in core mode:
 
-## Secrets
+```bash
+# Switch to argocd namespace
+kubectl config set-context --current --namespace=argocd
 
-All secrets are encrypted and stored in this repository using [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) by Bitnami. Only I hold the decryption keys for the secrets in this repository. If you are using this repository as the basis for you own homelab or Kubernetes cluster, be aware that none of the sealed secrets here will unseal for you. You will need seal your own secrets and replace mine. As a result, if you try to deploy the applications contained in this repository using my configurations, the application will most likely be broken.
+# Sync critical infrastructure components
+argocd app sync metallb --core
+argocd app sync nginx-ingress --core
+argocd app sync cert-manager --core
+argocd app sync external-secrets --core
+```
+
+Once these core components are deployed, the ArgoCD UI becomes accessible. Remaining applications can be reviewed and synced through the UI. ArgoCD becomes self-managing - any configuration changes are automatically reconciled.
+
+## Secret Management
+
+This repository uses a two-tier secret management strategy:
+
+1. **Bootstrap Secrets** - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) is used only for initial cluster bootstrapping and ArgoCD setup
+2. **Runtime Secrets** - [external-secrets](https://external-secrets.io/) handles all application secrets after bootstrapping, integrating with external secret providers
+
+**Note:** Sealed secrets in this repository are encrypted for this specific cluster. To use this configuration in your own environment, deploy sealed-secrets with your own keys and configure external-secrets for your secret backend.
+
+## Repository Structure
+
+```
+.
+├── argocd/
+│   ├── app-of-apps.yaml            # Root ArgoCD application
+│   ├── applications/               # ArgoCD app definitions
+│   │   ├── setup/                  # Infrastructure apps
+│   │   ├── external/               # Public-facing apps
+│   │   └── internal/               # Internal apps
+│   └── projects/                   # ArgoCD project definitions
+│       ├── setup.yaml              # Infrastructure project
+│       ├── external.yaml           # External apps project
+│       ├── internal.yaml           # Internal apps project
+│       └── private.yaml            # Private apps project
+├── configs/
+│   ├── setup/                      # Infrastructure configurations
+│   ├── external/                   # External app configurations
+│   └── internal/                   # Internal app configurations
+├── omni/
+│   ├── cluster.yaml                # Talos cluster definition (Omni)
+│   ├── omni/                       # Self-hosted Omni setup
+│   │   └── compose.yaml            # Omni on-prem deployment
+│   └── proxmox-provider/           # Proxmox infrastructure provider
+│       ├── compose.yaml            # Provider service
+│       ├── config.yaml             # Proxmox configuration
+│       └── machineclass.yaml       # Machine class definitions
+└── hack/                           # Helper scripts
+    ├── download-helm-chart.sh      # Download Helm charts
+    └── bump-chart-version.sh       # Update chart versions
+```
 
