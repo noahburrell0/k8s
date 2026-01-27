@@ -7,7 +7,7 @@ env:
   PAPERLESS_TIME_ZONE: America/New_York
   PAPERLESS_OCR_LANGUAGE: eng
   PAPERLESS_CONSUMER_POLLING: 60
-  # PAPERLESS_REDIS: redis://paperless-redis-headless:6379
+  PAPERLESS_REDIS: redis://paperless-redis-headless:6379
 
 ingress:
   main:
@@ -57,11 +57,10 @@ persistence:
     mountPath: /usr/src/paperless/export
 
 redis:
-  enabled: false
+  enabled: true
 
   image:
-    pullPolicy: IfNotPresent
-
+    pullPolicy: IfNotPresent    
 
   architecture: standalone
   auth:
