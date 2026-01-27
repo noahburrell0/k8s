@@ -3,13 +3,15 @@ kind: Application
 metadata:
   name: home-assistant
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
 spec:
   project: external
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-  sources:
-  - repoURL: https://github.com/noahburrell0/k8s.git
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
     path: configs/external/home-assistant
   destination:

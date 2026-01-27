@@ -3,12 +3,14 @@ kind: Application
 metadata:
   name: k8s-private
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
 spec:
   project: private
   syncPolicy:
     automated: {}
-  sources:
-  - repoURL: git@github.com:noahburrell0/k8s-private.git
+  source:
+    repoURL: git@github.com:noahburrell0/k8s-private.git
     path: apps
     targetRevision: main
   destination:

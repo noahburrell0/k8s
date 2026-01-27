@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: main-site
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
 spec:
   project: external
   syncPolicy:
