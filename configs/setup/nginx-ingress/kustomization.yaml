@@ -45,6 +45,15 @@ patches:
         path: /kind
         value: 'DaemonSet'
 
+  # Remove unapplicable fields from DaemonSet
+  - target:
+      kind: Deployment
+      name: ingress-nginx-controller
+    patch: |-
+      - op: remove
+        path: spec/minReadySeconds
+      - op: remove
+        path: spec/strategy
   # Remove default svc
   - target:
       kind: Service
