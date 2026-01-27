@@ -20,3 +20,8 @@ longhornAdmissionWebhook:
 
 longhornRecoveryBackend:
   replicas: 0
+
+defaultBackupStore:
+  backupTarget: "s3://longhorn.burrell.tech@us-east-1/"
+  backupTargetCredentialSecret: longhorn-wasabi-sa
+  pollInterval: "180"
