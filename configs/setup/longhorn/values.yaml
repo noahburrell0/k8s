@@ -13,10 +13,10 @@ persistence:
   defaultClassReplicaCount: 1
 
 longhornConversionWebhook:
-  replicas: 1
+  replicas: 0
 
 longhornAdmissionWebhook:
-  replicas: 1
+  replicas: 0
 
 longhornRecoveryBackend:
-  replicas: 1
+  replicas: 0
