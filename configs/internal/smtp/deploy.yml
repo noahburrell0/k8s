@@ -30,7 +30,7 @@ spec:
               port: smtp
           name: smtp
           ports:
-            - containerPort: 25
+            - containerPort: 2525
               name: smtp
               protocol: TCP
           readinessProbe:
