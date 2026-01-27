@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+- name: seafile
+  releaseName: seafile
+  namespace: seafile
+  repo: seafile
+  valuesFile: values.yaml
+- name: memcached
+  releaseName: memcached
+  namespace: seafile
+  repo: memcached
+  valuesFile: memcached-values.yaml
+
+resources:
+- configs/image-pull-secret.yaml
+- configs/seafile-sealed-secret.yaml

@@ -9,24 +9,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - chart: seafile
-    repoURL: https://k8s-at-home.com/charts/
-    targetRevision: 2.2.2
-    helm:
-      valueFiles:
-      - $values/configs/external/seafile/values.yaml
-  - chart: memcached
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 6.1.4
-    helm:
-      valueFiles:
-      - $values/configs/external/seafile/memcached-values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
-  - repoURL: https://github.com/noahburrell0/k8s.git
-    targetRevision: main
-    path: configs/external/seafile/configs
+    path: configs/external/seafile
   destination:
     name: in-cluster
     namespace: seafile

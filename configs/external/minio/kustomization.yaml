@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+- name: minio
+  releaseName: minio
+  namespace: minio-1
+  repo: minio
+  valuesFile: values.yaml
+
+resources:
+- configs/minio-credentials.yaml
