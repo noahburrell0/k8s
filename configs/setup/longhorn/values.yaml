@@ -1,16 +1,16 @@
-ingress:
-  enabled: true
-  host: longhorn.k8s.burrell.tech
-  tls: true
-  tlsSecret: longhorn.k8s.burrell.tech
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,172.16.0.0/12"
-    nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-    external-dns.alpha.kubernetes.io/exclude: 'true'
-    
-persistence:
-  defaultClassReplicaCount: 1
+# ingress:
+#   enabled: true
+#   host: longhorn.k8s.burrell.tech
+#   tls: true
+#   tlsSecret: longhorn.k8s.burrell.tech
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt
+#     nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,172.16.0.0/12"
+#     nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+#     external-dns.alpha.kubernetes.io/exclude: 'true'
 
-longhornConversionWebhook:
-  replicas: 1
+# persistence:
+#   defaultClassReplicaCount: 1
+
+# longhornConversionWebhook:
+#   replicas: 1
