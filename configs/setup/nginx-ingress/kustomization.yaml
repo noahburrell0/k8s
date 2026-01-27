@@ -56,3 +56,11 @@ patches:
       metadata:
         name: DOES NOT MATTER
 
+  # Make admission jobs presync hooks
+  - target:
+      kind: Job
+    patch: |-
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1hook
+        value: 'PreSync'
+
