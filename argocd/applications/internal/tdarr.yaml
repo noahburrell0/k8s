@@ -9,15 +9,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-  - chart: tdarr
-    repoURL: https://k8s-at-home.com/charts/
-    targetRevision: 4.5.2
-    helm:
-      valueFiles:
-      - $values/configs/internal/tdarr/values.yaml
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    ref: values
+    path: config/internal/tdarr
   destination:
     name: in-cluster
     namespace: tdarr
