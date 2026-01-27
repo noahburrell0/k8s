@@ -11,7 +11,7 @@ spec:
   sources:
   - repoURL: https://github.com/noahburrell0/k8s.git
     targetRevision: main
-    path: config/internal/tdarr
+    path: configs/internal/tdarr
   destination:
     name: in-cluster
     namespace: tdarr
