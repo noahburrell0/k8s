@@ -1,3 +1,41 @@
+{{- if .Values.openshift.enabled }}
+{{- if .Values.openshift.ui.route }}
+# https://github.com/openshift/oauth-proxy/blob/master/contrib/sidecar.yaml
+# Create a proxy service account and ensure it will use the route "proxy"
+# Create a secure connection to the proxy via a route
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels: {{- include "longhorn.labels" . | nindent 4 }}
+    app: longhorn-ui
+  name: {{ .Values.openshift.ui.route }}
+  namespace: {{ include "release_namespace" . }}
+spec:
+  to:
+    kind: Service
+    name: longhorn-ui
+  tls:
+    termination: reencrypt
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels: {{- include "longhorn.labels" . | nindent 4 }}
+    app: longhorn-ui
+  name: longhorn-ui
+  namespace: {{ include "release_namespace" . }}
+  annotations:
+    service.alpha.openshift.io/serving-cert-secret-name: longhorn-ui-tls
+spec:
+  ports:
+  - name: longhorn-ui
+    port: {{ .Values.openshift.ui.port | default 443 }}
+    targetPort: {{ .Values.openshift.ui.proxy | default 8443 }}
+  selector:
+    app: longhorn-ui
+---
+{{- end }}
+{{- end }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,26 +53,43 @@ spec:
       labels: {{- include "longhorn.labels" . | nindent 8 }}
         app: longhorn-ui
     spec:
+      serviceAccountName: longhorn-ui-service-account
       affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - longhorn-ui
-              topologyKey: kubernetes.io/hostname
+      {{- toYaml .Values.longhornUI.affinity | nindent 8 }}
       containers:
+      {{- if .Values.openshift.enabled }}
+      {{- if .Values.openshift.ui.route }}
+      - name: oauth-proxy
+        {{- if .Values.image.openshift.oauthProxy.repository }}
+        image: {{ with (coalesce .Values.global.imageRegistry (include "registry_url" .) .Values.image.openshift.oauthProxy.registry) }}{{ . }}/{{ end }}{{ .Values.image.openshift.oauthProxy.repository }}:{{ .Values.image.openshift.oauthProxy.tag }}
+        {{- else }}
+        image: ""
+        {{- end }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.openshift.ui.proxy | default 8443 }}
+          name: public
+        args:
+        - --https-address=:{{ .Values.openshift.ui.proxy | default 8443 }}
+        - --provider=openshift
+        - --openshift-service-account=longhorn-ui-service-account
+        - --upstream=http://localhost:8000
+        - --tls-cert=/etc/tls/private/tls.crt
+        - --tls-key=/etc/tls/private/tls.key
+        - --cookie-secret=SECRET
+        - --openshift-sar={"namespace":"{{ include "release_namespace" . }}","group":"longhorn.io","resource":"setting","verb":"delete"}
+        volumeMounts:
+          - mountPath: /etc/tls/private
+            name: longhorn-ui-tls
+      {{- end }}
+      {{- end }}
       - name: longhorn-ui
-        image: {{ template "registry_url" . }}{{ .Values.image.longhorn.ui.repository }}:{{ .Values.image.longhorn.ui.tag }}
+        image: {{ with (coalesce .Values.global.imageRegistry (include "registry_url" .) .Values.image.longhorn.ui.registry) }}{{ . }}/{{ end }}{{ .Values.image.longhorn.ui.repository }}:{{ .Values.image.longhorn.ui.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         volumeMounts:
-        - name : nginx-cache
+        - name: nginx-cache
           mountPath: /var/cache/nginx/
-        - name : nginx-config
+        - name: nginx-config
           mountPath: /var/config/nginx/
         - name: var-run
           mountPath: /var/run/
@@ -47,35 +102,54 @@ spec:
           - name: LONGHORN_UI_PORT
             value: "8000"
       volumes:
+      {{- if .Values.openshift.enabled }}
+      {{- if .Values.openshift.ui.route }}
+      - name: longhorn-ui-tls
+        secret:
+          secretName: longhorn-ui-tls
+      {{- end }}
+      {{- end }}
       - emptyDir: {}
         name: nginx-cache
       - emptyDir: {}
         name: nginx-config
       - emptyDir: {}
         name: var-run
-      {{- if .Values.privateRegistry.registrySecret }}
+      {{- with (coalesce .Values.global.imagePullSecrets .Values.privateRegistry.registrySecret) }}
       imagePullSecrets:
-      - name: {{ .Values.privateRegistry.registrySecret }}
+        {{- $imagePullSecrets := list }}
+        {{- if kindIs "string" . }}
+          {{- $imagePullSecrets = append $imagePullSecrets (dict "name" .) }}
+        {{- else }}
+          {{- range . }}
+            {{- if kindIs "string" . }}
+                {{- $imagePullSecrets = append $imagePullSecrets (dict "name" .) }}
+            {{- else }}
+                {{- $imagePullSecrets = append $imagePullSecrets . }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+        {{- toYaml $imagePullSecrets | nindent 8 }}
       {{- end }}
       {{- if .Values.longhornUI.priorityClass }}
       priorityClassName: {{ .Values.longhornUI.priorityClass | quote }}
       {{- end }}
-      {{- if or .Values.longhornUI.tolerations .Values.global.cattle.windowsCluster.enabled }}
+      {{- if or .Values.global.tolerations .Values.longhornUI.tolerations .Values.global.cattle.windowsCluster.enabled }}
       tolerations:
         {{- if and .Values.global.cattle.windowsCluster.enabled .Values.global.cattle.windowsCluster.tolerations }}
 {{ toYaml .Values.global.cattle.windowsCluster.tolerations | indent 6 }}
         {{- end }}
-        {{- if .Values.longhornUI.tolerations }}
-{{ toYaml .Values.longhornUI.tolerations | indent 6 }}
+        {{- if or .Values.global.tolerations .Values.longhornUI.tolerations }}
+{{ default .Values.global.tolerations .Values.longhornUI.tolerations | toYaml | indent 6 }}
         {{- end }}
       {{- end }}
-      {{- if or .Values.longhornUI.nodeSelector .Values.global.cattle.windowsCluster.enabled }}
+      {{- if or .Values.global.nodeSelector .Values.longhornUI.nodeSelector .Values.global.cattle.windowsCluster.enabled }}
       nodeSelector:
         {{- if and .Values.global.cattle.windowsCluster.enabled .Values.global.cattle.windowsCluster.nodeSelector }}
 {{ toYaml .Values.global.cattle.windowsCluster.nodeSelector | indent 8 }}
         {{- end }}
-        {{- if .Values.longhornUI.nodeSelector }}
-{{ toYaml .Values.longhornUI.nodeSelector | indent 8 }}
+        {{- if or .Values.global.nodeSelector .Values.longhornUI.nodeSelector }}
+{{ default .Values.global.nodeSelector .Values.longhornUI.nodeSelector | toYaml | indent 8 }}
         {{- end }}
       {{- end }}
 ---
@@ -89,6 +163,10 @@ metadata:
     {{- end }}
   name: longhorn-frontend
   namespace: {{ include "release_namespace" . }}
+  {{- with .Values.service.ui.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   {{- if eq .Values.service.ui.type "Rancher-Proxy" }}
   type: ClusterIP

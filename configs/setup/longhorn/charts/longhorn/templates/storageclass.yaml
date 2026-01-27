@@ -15,7 +15,7 @@ data:
     provisioner: driver.longhorn.io
     allowVolumeExpansion: true
     reclaimPolicy: "{{ .Values.persistence.reclaimPolicy }}"
-    volumeBindingMode: Immediate
+    volumeBindingMode: {{ .Values.persistence.volumeBindingMode | default "Immediate" }}
     parameters:
       numberOfReplicas: "{{ .Values.persistence.defaultClassReplicaCount }}"
       staleReplicaTimeout: "30"
@@ -29,6 +29,9 @@ data:
       {{- if .Values.persistence.migratable }}
       migratable: "{{ .Values.persistence.migratable }}"
       {{- end }}    
+      {{- if .Values.persistence.nfsOptions }}
+      nfsOptions: "{{ .Values.persistence.nfsOptions }}"
+      {{- end }}    
       {{- if .Values.persistence.backingImage.enable }}
       backingImage: {{ .Values.persistence.backingImage.name }}
       backingImageDataSourceType: {{ .Values.persistence.backingImage.dataSourceType }}
@@ -39,6 +42,19 @@ data:
       recurringJobSelector: '{{ .Values.persistence.recurringJobSelector.jobList }}'
       {{- end }}
       dataLocality: {{ .Values.persistence.defaultDataLocality | quote }}
+      {{- if .Values.persistence.defaultDiskSelector.enable }}
+      diskSelector: "{{ .Values.persistence.defaultDiskSelector.selector }}"
+      {{- end }}
       {{- if .Values.persistence.defaultNodeSelector.enable }}
       nodeSelector: "{{ .Values.persistence.defaultNodeSelector.selector }}"
+      {{- end }}
+      {{- if .Values.persistence.unmapMarkSnapChainRemoved }}
+      unmapMarkSnapChainRemoved: "{{ .Values.persistence.unmapMarkSnapChainRemoved }}"
+      {{- end }}
+      {{- if .Values.persistence.disableRevisionCounter }}
+      disableRevisionCounter: "{{ .Values.persistence.disableRevisionCounter }}"
+      dataEngine: "{{ .Values.persistence.dataEngine }}"
+      {{- end }}
+      {{- if .Values.persistence.backupTargetName }}
+      backupTargetName: "{{ .Values.persistence.backupTargetName }}"
       {{- end }}
