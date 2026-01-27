@@ -6,6 +6,7 @@ helmCharts:
   namespace: metallb-system
   releaseName: metallb
   repo: metallb
+  valuesFile: values.yaml
 
 resources:
 - configs/configs.yaml
