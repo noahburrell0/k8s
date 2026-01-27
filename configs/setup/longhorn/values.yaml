@@ -10,3 +10,5 @@ ingress:
     external-dns.alpha.kubernetes.io/exclude: 'true'
 persistence:
   defaultClassReplicaCount: 1
+longhornConversionWebhook:
+  replicas: 1
