@@ -3,7 +3,7 @@ kind: Kustomization
 
 helmCharts:
 - name: minio
-  releaseName: minio
+  releaseName: minio-1
   namespace: minio-1
   repo: minio
   valuesFile: values.yaml
