@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: contact-api-cm
 data:
-  SUBJECT_PREAMBLE: "[NEW WEBSITE MSG]"
+  SUBJECT_PREAMBLE: "[Contact Form]"
   FROM_ADDRESS: "contact@burrell.tech"
   TO_ADDRESS: noah@burrell.tech
   SMTP_SERVER: smtp.smtp
@@ -28,7 +28,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-        - image: 'ghcr.io/noahburrell0/contact-api:v0.1.1'
+        - image: 'ghcr.io/noahburrell0/contact-api:v0.1.2'
           imagePullPolicy: IfNotPresent
           name: contact-api
           ports:
@@ -64,7 +64,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
     external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
     nginx.ingress.kubernetes.io/cors-allow-methods: POST
-    nginx.ingress.kubernetes.io/cors-allow-origin: 'https://burrell.tech,http://localhost,http://192.168.1.2'
+    nginx.ingress.kubernetes.io/cors-allow-origin: 'https://burrell.tech,http://localhost,http://localhost:8080,http://192.168.1.2'
     nginx.ingress.kubernetes.io/enable-cors: 'true'
 
 spec:
