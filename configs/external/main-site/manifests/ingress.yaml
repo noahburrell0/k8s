@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-site
+  labels:
+    app.kubernetes.io/name: main-site
+    app.kubernetes.io/instance: main-site
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/custom-http-errors: "401,403,404,500,501,502,503"
+    nginx.ingress.kubernetes.io/default-backend: main-site-error-pages
+    external-dns.alpha.kubernetes.io/target: "proxied.burrell.tech"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - burrell.tech
+      secretName: burrell.tech-tls
+    - hosts:
+        - www.burrell.tech
+      secretName: www.burrell.tech-tls
+  rules:
+    - host: burrell.tech
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: main-site
+                port:
+                  name: http
+    - host: www.burrell.tech
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: main-site
+                port:
+                  name: http
