@@ -46,7 +46,6 @@ Applications are organized into ArgoCD projects:
 - ![App Status](https://api.burrell.tech/api/badge?name=harbor&revision=true) [harbor](https://goharbor.io/) - Container registry
 - ![App Status](https://api.burrell.tech/api/badge?name=home-assistant&revision=true) [home-assistant](https://www.home-assistant.io/) - Home automation platform
 - ![App Status](https://api.burrell.tech/api/badge?name=main-site&revision=true) [main-site](https://github.com/noahburrell0/burrell-tech) - Personal website
-- ![App Status](https://api.burrell.tech/api/badge?name=minio-1&revision=true) [minio](https://min.io/) - S3-compatible object storage
 - ![App Status](https://api.burrell.tech/api/badge?name=seafile&revision=true) [seafile](https://www.seafile.com/) - File sync and share platform
 
 ### Internal Services
