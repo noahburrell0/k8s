@@ -10,7 +10,7 @@ data:
     server {
       listen 80;
       server_name _;
-      root /git/current;
+      root /git/current/dist;
       index index.html;
 
       location / {
