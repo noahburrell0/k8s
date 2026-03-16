@@ -63,9 +63,13 @@ spec:
               value: current
             - name: GITSYNC_PERIOD
               value: "30s"
+            - name: GITSYNC_SPARSE_CHECKOUT_FILE
+              value: /etc/git-sync/sparse-checkout
           volumeMounts:
             - name: site-content
               mountPath: /git
+            - name: sparse-patterns
+              mountPath: /etc/git-sync
           resources:
             requests:
               cpu: 10m
@@ -82,3 +86,6 @@ spec:
         - name: nginx-config
           configMap:
             name: main-site-nginx-config
+        - name: sparse-patterns
+          configMap:
+            name: git-sync-sparse-checkout

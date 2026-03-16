@@ -25,3 +25,11 @@ data:
         rewrite ^(.*)$ $1.html last;
       }
     }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: git-sync-sparse-checkout
+data:
+  sparse-checkout: |
+    /dist/*
