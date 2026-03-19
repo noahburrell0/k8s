@@ -2,22 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "harbor.core" . }}
-  namespace: {{ .Release.Namespace | quote }}
   labels:
 {{ include "harbor.labels" . | indent 4 }}
-{{- with .Values.core.serviceAnnotations }}
-  annotations:
-  {{- toYaml . | nindent 4 }}
-{{- end }}
 spec:
-{{- if or (eq .Values.expose.ingress.controller "gce") (eq .Values.expose.ingress.controller "alb")  (eq .Values.expose.ingress.controller "f5-bigip") }}
+{{- if or (eq .Values.expose.ingress.controller "gce") (eq .Values.expose.ingress.controller "alb") }}
   type: NodePort
-{{- end }}
-{{- if .Values.ipFamily.policy }}
-  ipFamilyPolicy: {{ .Values.ipFamily.policy }}
-{{- end }}
-{{- if .Values.ipFamily.families }}
-  ipFamilies: {{ toYaml .Values.ipFamily.families | nindent 4 }}
 {{- end }}
   ports:
     - name: {{ ternary "https-web" "http-web" .Values.internalTLS.enabled }}
