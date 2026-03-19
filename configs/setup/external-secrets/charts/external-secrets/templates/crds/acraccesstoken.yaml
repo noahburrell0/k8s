@@ -9,18 +9,19 @@ metadata:
     {{- if and .Values.crds.conversion.enabled .Values.webhook.certManager.enabled .Values.webhook.certManager.addInjectorAnnotations }}
     cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "external-secrets.fullname" . }}-webhook
     {{- end }}
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.19.0
+  labels:
+    external-secrets.io/component: controller
   name: acraccesstokens.generators.external-secrets.io
 spec:
   group: generators.external-secrets.io
   names:
     categories:
-      - acraccesstoken
+      - external-secrets
+      - external-secrets-generators
     kind: ACRAccessToken
     listKind: ACRAccessTokenList
     plural: acraccesstokens
-    shortNames:
-      - acraccesstoken
     singular: acraccesstoken
   scope: Namespaced
   versions:
@@ -28,13 +29,12 @@ spec:
       schema:
         openAPIV3Schema:
           description: |-
-            ACRAccessToken returns a Azure Container Registry token
+            ACRAccessToken returns an Azure Container Registry token
             that can be used for pushing/pulling images.
             Note: by default it will return an ACR Refresh Token with full access
             (depending on the identity).
             This can be scoped down to the repository level using .spec.scope.
             In case scope is defined it will return an ACR Access Token.
-
 
             See docs: https://github.com/Azure/acr/blob/main/docs/AAD-OAuth.md
           properties:
@@ -62,6 +62,7 @@ spec:
                 see: https://github.com/Azure/acr/blob/main/docs/AAD-OAuth.md#overview
               properties:
                 auth:
+                  description: ACRAuth defines the authentication methods for Azure Container Registry.
                   properties:
                     managedIdentity:
                       description: ManagedIdentity uses Azure Managed Identity to authenticate with Azure.
@@ -75,24 +76,33 @@ spec:
                       properties:
                         secretRef:
                           description: |-
-                            Configuration used to authenticate with Azure using static
-                            credentials stored in a Kind=Secret.
+                            AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
+                            It uses static credentials stored in a Kind=Secret.
                           properties:
                             clientId:
                               description: The Azure clientId of the service principle used for authentication.
                               properties:
                                 key:
                                   description: |-
-                                    The key of the entry in the Secret resource's `data` field to be used. Some instances of this field may be
-                                    defaulted, in others it may be required.
+                                    A key in the referenced Secret.
+                                    Some instances of this field may be defaulted, in others it may be required.
+                                  maxLength: 253
+                                  minLength: 1
+                                  pattern: ^[-._a-zA-Z0-9]+$
                                   type: string
                                 name:
                                   description: The name of the Secret resource being referred to.
+                                  maxLength: 253
+                                  minLength: 1
+                                  pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                                   type: string
                                 namespace:
                                   description: |-
-                                    Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults
-                                    to the namespace of the referent.
+                                    The namespace of the Secret resource being referred to.
+                                    Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+                                  maxLength: 63
+                                  minLength: 1
+                                  pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
                                   type: string
                               type: object
                             clientSecret:
@@ -100,16 +110,25 @@ spec:
                               properties:
                                 key:
                                   description: |-
-                                    The key of the entry in the Secret resource's `data` field to be used. Some instances of this field may be
-                                    defaulted, in others it may be required.
+                                    A key in the referenced Secret.
+                                    Some instances of this field may be defaulted, in others it may be required.
+                                  maxLength: 253
+                                  minLength: 1
+                                  pattern: ^[-._a-zA-Z0-9]+$
                                   type: string
                                 name:
                                   description: The name of the Secret resource being referred to.
+                                  maxLength: 253
+                                  minLength: 1
+                                  pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                                   type: string
                                 namespace:
                                   description: |-
-                                    Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults
-                                    to the namespace of the referent.
+                                    The namespace of the Secret resource being referred to.
+                                    Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+                                  maxLength: 63
+                                  minLength: 1
+                                  pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
                                   type: string
                               type: object
                           type: object
@@ -134,11 +153,17 @@ spec:
                               type: array
                             name:
                               description: The name of the ServiceAccount resource being referred to.
+                              maxLength: 253
+                              minLength: 1
+                              pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                               type: string
                             namespace:
                               description: |-
-                                Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults
-                                to the namespace of the referent.
+                                Namespace of the resource being referred to.
+                                Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+                              maxLength: 63
+                              minLength: 1
+                              pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
                               type: string
                           required:
                             - name
@@ -149,7 +174,7 @@ spec:
                   default: PublicCloud
                   description: |-
                     EnvironmentType specifies the Azure cloud environment endpoints to use for
-                    connecting and authenticating with Azure. By default it points to the public cloud AAD endpoint.
+                    connecting and authenticating with Azure. By default, it points to the public cloud AAD endpoint.
                     The following endpoints are available, also see here: https://github.com/Azure/go-autorest/blob/main/autorest/azure/environments.go#L152
                     PublicCloud, USGovernmentCloud, ChinaCloud, GermanCloud
                   enum:
@@ -157,6 +182,7 @@ spec:
                     - USGovernmentCloud
                     - ChinaCloud
                     - GermanCloud
+                    - AzureStackCloud
                   type: string
                 registry:
                   description: |-
@@ -169,11 +195,9 @@ spec:
                     if not provided it will return a refresh token that has full scope.
                     Note: you need to pin it down to the repository level, there is no wildcard available.
 
-
                     examples:
                     repository:my-repository:pull,push
                     repository:my-repository:pull
-
 
                     see docs for details: https://docs.docker.com/registry/spec/auth/scope/
                   type: string
@@ -189,16 +213,4 @@ spec:
       storage: true
       subresources:
         status: {}
-{{- if .Values.crds.conversion.enabled }}
-  conversion:
-    strategy: Webhook
-    webhook:
-      conversionReviewVersions:
-        - v1
-      clientConfig:
-        service:
-          name: {{ include "external-secrets.fullname" . }}-webhook
-          namespace: {{ .Release.Namespace | quote }}
-          path: /convert
-{{- end }}
 {{- end }}
