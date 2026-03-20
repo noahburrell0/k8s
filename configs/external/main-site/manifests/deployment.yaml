@@ -65,6 +65,8 @@ spec:
               value: "30s"
             - name: GITSYNC_SPARSE_CHECKOUT_FILE
               value: /etc/git-sync/sparse-checkout
+            - name: GITSYNC_MAX_FAILURES
+              value: "-1"
           volumeMounts:
             - name: site-content
               mountPath: /git
