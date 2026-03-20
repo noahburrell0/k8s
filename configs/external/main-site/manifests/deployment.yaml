@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: main-site
     app.kubernetes.io/instance: main-site
 spec:
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 3
   selector:
     matchLabels:
