@@ -8,3 +8,7 @@ helmCharts:
   repo: gateway-helm
   valuesFile: values.yaml
   includeCRDs: true
+
+resources:
+- gateway.yaml
+- example.yaml
