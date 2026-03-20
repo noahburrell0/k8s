@@ -68,7 +68,7 @@ persistence:
     enabled: true
     nameOverride: longhorn-data
     storageClass: longhorn
-    size: 50Gi
+    size: 80Gi
     accessMode: ReadWriteOnce
   media:
     enabled: true
