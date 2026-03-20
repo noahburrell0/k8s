@@ -7,3 +7,4 @@ helmCharts:
   namespace: envoy-gateway-system
   repo: gateway-helm
   valuesFile: values.yaml
+  includeCRDs: true
