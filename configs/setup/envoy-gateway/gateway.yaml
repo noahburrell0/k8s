@@ -25,4 +25,5 @@ spec:
         namespaces:
           from: All
   addresses:
-    - 172.19.0.254
+    - type: IPAddress
+      value: 172.19.0.254
