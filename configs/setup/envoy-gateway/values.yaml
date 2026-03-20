@@ -1,0 +1,6 @@
+service:
+  annotations:
+    metallb.universe.tf/address-pool: bgp-pool
+    loadBalancerIP: 172.19.0.254
+  type: LoadBalancer
+  loadBalancerIP: 172.19.0.254

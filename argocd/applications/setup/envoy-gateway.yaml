@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: envoy-gateway
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  project: setup
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/setup/envoy-gateway
+  destination:
+    name: in-cluster
+    namespace: envoy-gateway-system
+
