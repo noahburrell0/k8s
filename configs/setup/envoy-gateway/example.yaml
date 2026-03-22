@@ -59,7 +59,7 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: eg
+      name: envoy
   hostnames:
     - "www.example.com"
   rules:
