@@ -54,33 +54,81 @@ spec:
 
 ---
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: contact-api-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
-    nginx.ingress.kubernetes.io/cors-allow-methods: POST
-    nginx.ingress.kubernetes.io/cors-allow-origin: 'https://burrell.tech,http://localhost,http://localhost:8080,http://192.168.1.2'
-    nginx.ingress.kubernetes.io/enable-cors: 'true'
-
+  name: contact-api
 spec:
-  ingressClassName: nginx
-  rules:
-  - host: api.burrell.tech
-    http:
-      paths:
-      - path: /contact
-        pathType: Exact
-        backend:
-          service:
-            name: contact-api
-            port: 
-              name: http
-  tls:
-  - hosts:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+  hostnames:
     - api.burrell.tech
-    secretName: api.burrell.tech-tls
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /contact
+      backendRefs:
+        - name: contact-api
+          port: 5000
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: contact-api-redirect
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: http
+  hostnames:
+    - api.burrell.tech
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+
+---
+
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: contact-api-cors
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: contact-api
+  cors:
+    allowOrigins:
+      - type: Exact
+        value: "https://burrell.tech"
+      - type: Exact
+        value: "http://localhost"
+      - type: Exact
+        value: "http://localhost:8080"
+      - type: Exact
+        value: "http://192.168.1.2"
+    allowMethods:
+      - POST
+
+---
+
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: contact-api-dns
+spec:
+  endpoints:
+    - dnsName: api.burrell.tech
+      recordType: CNAME
+      targets:
+        - proxied.burrell.tech
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"
