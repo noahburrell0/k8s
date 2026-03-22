@@ -7,3 +7,6 @@ helmCharts:
   namespace: sonarr
   repo: sonarr
   valuesFile: values.yaml
+
+resources:
+- configs/gateway.yaml

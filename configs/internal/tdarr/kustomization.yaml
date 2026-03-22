@@ -7,3 +7,6 @@ helmCharts:
   namespace: tdarr
   repo: tdarr
   valuesFile: values.yaml
+
+resources:
+- configs/gateway.yaml

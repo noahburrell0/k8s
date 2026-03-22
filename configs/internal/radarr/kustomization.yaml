@@ -7,3 +7,6 @@ helmCharts:
   namespace: radarr
   repo: radarr
   valuesFile: values.yaml
+
+resources:
+- configs/gateway.yaml
