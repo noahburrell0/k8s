@@ -1,0 +1,66 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: main-site
+  labels:
+    app.kubernetes.io/name: main-site
+    app.kubernetes.io/instance: main-site
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+  hostnames:
+    - burrell.tech
+    - www.burrell.tech
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: main-site
+          port: 80
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: main-site-redirect
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: http
+  hostnames:
+    - burrell.tech
+    - www.burrell.tech
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+
+---
+
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: main-site-dns
+spec:
+  endpoints:
+    - dnsName: burrell.tech
+      recordType: CNAME
+      targets:
+        - proxied.burrell.tech
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"
+    - dnsName: www.burrell.tech
+      recordType: CNAME
+      targets:
+        - proxied.burrell.tech
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

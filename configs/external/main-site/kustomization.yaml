@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
 - manifests/configmap.yaml
 - manifests/deployment.yaml
-- manifests/ingress.yaml
+- manifests/gateway.yaml
 - manifests/service.yaml
 - error-pages
