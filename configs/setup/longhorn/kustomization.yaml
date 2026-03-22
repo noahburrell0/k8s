@@ -10,3 +10,4 @@ helmCharts:
 
 resources:
 - configs/s3-secrets.yaml
+- configs/gateway.yaml
