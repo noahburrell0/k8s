@@ -26,7 +26,7 @@ data:
     return hs
   resource.links: |
     - url: https://{{ index .resource.spec.hostnames 0 }}
-      title: "{{ index .resource.spec.hostnames 0 }}"
+      title: Open URL
       icon.class: "fa-external-link-alt"
       if: resource.kind == "HTTPRoute"
   url: "https://argocd.k8s.burrell.tech"
