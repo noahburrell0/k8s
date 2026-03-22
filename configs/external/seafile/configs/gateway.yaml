@@ -1,0 +1,65 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: seafile
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+  hostnames:
+    - seafile.burrell.tech
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /accounts/login/
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /sso/?next=/
+            statusCode: 301
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: seafile
+          port: 80
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: seafile-redirect
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: http
+  hostnames:
+    - seafile.burrell.tech
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+
+---
+
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: seafile-dns
+spec:
+  endpoints:
+    - dnsName: seafile.burrell.tech
+      recordType: CNAME
+      targets:
+        - proxied.burrell.tech
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"
