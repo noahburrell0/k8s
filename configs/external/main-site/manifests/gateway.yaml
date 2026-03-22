@@ -80,12 +80,152 @@ spec:
     - match:
         statusCodes:
           - type: Value
+            value: 400
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /400.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 401
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /401.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 403
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /403.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
             value: 404
       redirect:
         hostname: errors.k8s.burrell.tech
         path:
           type: ReplaceFullPath
           replaceFullPath: /404.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 405
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /405.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 407
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /407.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 408
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /408.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 409
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /409.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 410
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /410.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 411
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /411.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 412
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /412.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 413
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /413.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 416
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /416.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 418
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /418.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 429
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /429.html
         statusCode: 302
     - match:
         statusCodes:
@@ -126,6 +266,16 @@ spec:
         path:
           type: ReplaceFullPath
           replaceFullPath: /504.html
+        statusCode: 302
+    - match:
+        statusCodes:
+          - type: Value
+            value: 505
+      redirect:
+        hostname: errors.k8s.burrell.tech
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /505.html
         statusCode: 302
 
 ---
