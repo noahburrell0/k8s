@@ -5,6 +5,7 @@ sources:
   - gateway-tcproute
   - gateway-tlsroute
   - gateway-udproute
+  - crd
 provider: cloudflare
 registry: noop
 # txtPrefix: k8s_
