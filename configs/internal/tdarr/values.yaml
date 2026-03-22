@@ -5,7 +5,7 @@ env:
   THREADS_WORKER_INIT_TIMEOUT: 200000
 
 image:
-  tag: 2.13.01
+  tag: 2.64.02
   repository: haveagitgat/tdarr
 
 service:
