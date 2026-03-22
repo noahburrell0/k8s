@@ -39,7 +39,8 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - kind: Secret
+          - group: ''
+            kind: Secret
             name: envoy-wildcard-tls
       allowedRoutes:
         namespaces:
