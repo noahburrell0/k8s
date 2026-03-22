@@ -10,6 +10,7 @@ patchesStrategicMerge:
 resources:
   - argocd-ingress.yaml
   - argocd-external-ingress.yaml
+  - argocd-gateway.yaml
   - argocd-ldap-secret.yaml
   - argocd-notifications-secret.yaml
   - clusterrole-argocd-update-patch.yaml
