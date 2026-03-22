@@ -62,6 +62,7 @@ spec:
   parentRefs:
     - name: envoy
       namespace: envoy-gateway-system
+      sectionName: https
   hostnames:
     - api.burrell.tech
   rules:

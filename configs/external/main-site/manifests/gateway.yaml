@@ -9,6 +9,7 @@ spec:
   parentRefs:
     - name: envoy
       namespace: envoy-gateway-system
+      sectionName: https
   hostnames:
     - burrell.tech
     - www.burrell.tech

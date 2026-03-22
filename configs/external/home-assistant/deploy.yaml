@@ -137,6 +137,7 @@ spec:
   parentRefs:
     - name: envoy
       namespace: envoy-gateway-system
+      sectionName: https
   hostnames:
     - hass.burrell.tech
   rules:
@@ -158,6 +159,7 @@ spec:
   parentRefs:
     - name: envoy
       namespace: envoy-gateway-system
+      sectionName: https
   hostnames:
     - code.hass.burrell.tech
   rules:
