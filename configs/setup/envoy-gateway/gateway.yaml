@@ -5,6 +5,21 @@ metadata:
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: envoy-wildcard-cert
+spec:
+  secretName: envoy-wildcard-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - burrell.tech
+    - "*.burrell.tech"
+    - "*.home.burrell.tech"
+    - "*.k8s.burrell.tech"
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -21,6 +36,11 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: envoy-wildcard-tls
       allowedRoutes:
         namespaces:
           from: All
