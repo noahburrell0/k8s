@@ -106,14 +106,10 @@ spec:
       name: contact-api
   cors:
     allowOrigins:
-      - type: Exact
-        value: "https://burrell.tech"
-      - type: Exact
-        value: "http://localhost"
-      - type: Exact
-        value: "http://localhost:8080"
-      - type: Exact
-        value: "http://192.168.1.2"
+      - "https://burrell.tech"
+      - "http://localhost"
+      - "http://localhost:8080"
+      - "http://192.168.1.2"
     allowMethods:
       - POST
 
