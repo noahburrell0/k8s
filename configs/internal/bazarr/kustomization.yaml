@@ -7,3 +7,6 @@ helmCharts:
   namespace: bazarr
   repo: bazarr
   valuesFile: values.yaml
+
+resources:
+- configs/gateway.yaml
