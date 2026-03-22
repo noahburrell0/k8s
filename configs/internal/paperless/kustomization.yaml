@@ -7,3 +7,6 @@ helmCharts:
   namespace: paperless
   repo: paperless
   valuesFile: values.yaml
+
+resources:
+- configs/gateway.yaml
