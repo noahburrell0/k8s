@@ -1,0 +1,80 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: Backend
+metadata:
+  name: argocd-server
+spec:
+  endpoints:
+    - fqdn:
+        hostname: argocd-server.argocd.svc.cluster.local
+        port: 443
+  tls:
+    insecureSkipVerify: true
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd-external
+  annotations:
+    external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: https
+  hostnames:
+    - api.burrell.tech
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /api/webhook
+        - path:
+            type: Exact
+            value: /api/badge
+      backendRefs:
+        - group: gateway.envoyproxy.io
+          kind: Backend
+          name: argocd-server
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd-server
+  annotations:
+    external-dns.alpha.kubernetes.io/exclude: 'true'
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: https
+  hostnames:
+    - argocd.k8s.burrell.tech
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - group: gateway.envoyproxy.io
+          kind: Backend
+          name: argocd-server
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: argocd-server-ip-whitelist
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: argocd-server
+  authorization:
+    defaultAction: Deny
+    rules:
+      - name: allow-private-networks
+        action: Allow
+        principal:
+          clientCIDRs:
+            - "192.168.0.0/16"
+            - "172.16.0.0/12"
