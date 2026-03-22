@@ -1,19 +1,9 @@
 externalURL: https://registry.burrell.tech
 
 expose:
-  type: ingress
-  ingress:
-    hosts:
-      core: registry.burrell.tech
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      # cert-manager.io/cluster-issuer: selfsigned
-      external-dns.alpha.kubernetes.io/target: 'proxied.burrell.tech'
-      external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
+  type: clusterIP
   tls:
-    certSource: secret
-    secret:
-      secretName: registry.burrell.tech-tls
+    enabled: false
 
 trivy:
   enabled: false

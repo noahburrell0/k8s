@@ -11,3 +11,4 @@ helmCharts:
 resources:
 - configs/pvcs.yaml
 - configs/secrets.yaml
+- configs/gateway.yaml
