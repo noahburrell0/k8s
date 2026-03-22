@@ -1,9 +1,5 @@
 sources:
   - ingress
-  - gateway-httproute
-  - gateway-tcproute
-  - gateway-tlsroute
-  - gateway-udproute
   - crd
 provider: cloudflare
 registry: noop
