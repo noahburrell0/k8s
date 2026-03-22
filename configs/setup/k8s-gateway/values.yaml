@@ -9,4 +9,4 @@ fallthrough:
   zones:
     - burrell.tech
 
-watchedResources: ["Ingress", "Service", "HTTPRoute", "TLSRoute", "GRPCRoute", "DNSEndpoint"]
+watchedResources: ["Ingress", "Service", "HTTPRoute", "TLSRoute", "GRPCRoute"]
