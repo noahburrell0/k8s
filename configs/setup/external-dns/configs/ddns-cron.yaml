@@ -54,14 +54,10 @@ spec:
             - |
               export CRONJOB_UID=$(kubectl get cronjob ddns -o=jsonpath='{.metadata.uid}')
               cat << EOF > /tmp/ingress.yml && kubectl apply -f /tmp/ingress.yml
-              apiVersion: networking.k8s.io/v1
-              kind: Ingress
+              apiVersion: externaldns.k8s.io/v1alpha1
+              kind: DNSEndpoint
               metadata:
                 name: ip-proxied
-                annotations:
-                  external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_PROXIED'
-                  external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
-                  external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
                 ownerReferences:
                   - apiVersion: batch/v1
                     blockOwnerDeletion: false
@@ -70,17 +66,19 @@ spec:
                     name: ddns
                     uid: $CRONJOB_UID
               spec:
-                rules:
-                - host: '$IP_HOSTNAME_PROXIED'
+                endpoints:
+                  - dnsName: '$IP_HOSTNAME_PROXIED'
+                    recordType: A
+                    targets:
+                      - '$(curl --silent ifconfig.me)'
+                    providerSpecific:
+                      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+                        value: "true"
               ---
-              apiVersion: networking.k8s.io/v1
-              kind: Ingress
+              apiVersion: externaldns.k8s.io/v1alpha1
+              kind: DNSEndpoint
               metadata:
                 name: ip-unproxied
-                annotations:
-                  external-dns.alpha.kubernetes.io/hostname: '$IP_HOSTNAME_UNPROXIED'
-                  external-dns.alpha.kubernetes.io/target: '$(curl --silent ifconfig.me)'
-                  external-dns.alpha.kubernetes.io/cloudflare-proxied: 'false'
                 ownerReferences:
                   - apiVersion: batch/v1
                     blockOwnerDeletion: false
@@ -89,8 +87,14 @@ spec:
                     name: ddns
                     uid: $CRONJOB_UID
               spec:
-                rules:
-                - host: '$IP_HOSTNAME_UNPROXIED'
+                endpoints:
+                  - dnsName: '$IP_HOSTNAME_UNPROXIED'
+                    recordType: A
+                    targets:
+                      - '$(curl --silent ifconfig.me)'
+                    providerSpecific:
+                      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+                        value: "false"
               EOF
             env:
             - name: IP_HOSTNAME_PROXIED
