@@ -10,3 +10,12 @@ helmCharts:
 
 resources:
 - configs/gateway.yaml
+
+patches:
+- target:
+    kind: Deployment
+    name: tdarr
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/1/env/2/value
+      value: "172.19.0.6"
