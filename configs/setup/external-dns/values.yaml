@@ -1,5 +1,10 @@
 sources:
   - ingress
+  - gateway-grpcroute
+  - gateway-httproute
+  - gateway-tcproute
+  - gateway-tlsroute
+  - gateway-udproute
 provider: cloudflare
 registry: noop
 # txtPrefix: k8s_
