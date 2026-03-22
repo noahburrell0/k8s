@@ -26,6 +26,9 @@ metadata:
   name: envoy
 spec:
   gatewayClassName: envoy
+  infrastructure:
+    annotations:
+      metallb.universe.tf/address-pool: bgp-pool
   listeners:
     - name: http
       protocol: HTTP
