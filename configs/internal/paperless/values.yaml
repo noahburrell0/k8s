@@ -8,6 +8,7 @@ env:
   PAPERLESS_OCR_LANGUAGE: eng
   PAPERLESS_CONSUMER_POLLING: 60
   PAPERLESS_REDIS: redis://paperless-redis-headless:6379
+  PAPERLESS_URL: https://paperless.burrell.tech
 
 ingress:
   main:
