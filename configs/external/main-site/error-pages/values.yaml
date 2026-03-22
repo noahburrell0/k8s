@@ -1,6 +1,6 @@
 env:
   TZ: America/Toronto
   SHOW_DETAILS: "false"
-  TEMPLATE_NAME: cats
+  TEMPLATE_NAME: app-down
 image:
   tag: 3.8.1
