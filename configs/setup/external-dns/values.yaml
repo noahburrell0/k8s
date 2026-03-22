@@ -1,6 +1,5 @@
 sources:
   - ingress
-  - gateway-grpcroute
   - gateway-httproute
   - gateway-tcproute
   - gateway-tlsroute
