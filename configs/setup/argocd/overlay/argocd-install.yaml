@@ -25,10 +25,10 @@ data:
     hs.message = "Controller doesn't report resource status"
     return hs
   resource.links: |
-    - url: https://{{ index .spec.hostnames 0 }}
-      title: "{{ index .spec.hostnames 0 }}"
+    - url: https://{{ index .resource.spec.hostnames 0 }}
+      title: "{{ index .resource.spec.hostnames 0 }}"
       icon.class: "fa-external-link-alt"
-      if: kind == "HTTPRoute"
+      if: resource.kind == "HTTPRoute"
   url: "https://argocd.k8s.burrell.tech"
   dex.config: |
     connectors:
