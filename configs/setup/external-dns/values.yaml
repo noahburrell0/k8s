@@ -1,5 +1,4 @@
 sources:
-  - ingress
   - crd
 provider: cloudflare
 registry: noop
