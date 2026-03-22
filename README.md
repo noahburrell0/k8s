@@ -7,7 +7,7 @@ A fully GitOps-managed Kubernetes homelab running on Talos Linux and deployed wi
 **Cluster Platform:** Talos Linux with Omni management
 **GitOps Engine:** ArgoCD (self-managing)
 **Storage:** Longhorn distributed block storage
-**Networking:** MetalLB load balancer, NGINX Ingress
+**Networking:** MetalLB load balancer, Envoy Gateway (Gateway API)
 **DNS & Certificates:** External-DNS + cert-manager with Cloudflare integration
 
 Applications are organized into ArgoCD projects:
@@ -33,11 +33,11 @@ Applications are organized into ArgoCD projects:
 - ![App Status](https://api.burrell.tech/api/badge?name=cert-manager&revision=true) [cert-manager](https://cert-manager.io/) - Automated certificate management with Let's Encrypt
 - ![App Status](https://api.burrell.tech/api/badge?name=external-dns&revision=true) [external-dns](https://github.com/kubernetes-sigs/external-dns) - Automated DNS record management via Cloudflare
 - ![App Status](https://api.burrell.tech/api/badge?name=external-secrets&revision=true) [external-secrets](https://external-secrets.io/) - External secret management integration
-- ![App Status](https://api.burrell.tech/api/badge?name=k8s-gateway&revision=true) [k8s-gateway](https://github.com/ori-edge/k8s_gateway) - DNS gateway for ingress resources
+- ![App Status](https://api.burrell.tech/api/badge?name=envoy-gateway&revision=true) [envoy-gateway](https://gateway.envoyproxy.io/) - Gateway API implementation (Envoy-based ingress)
+- ![App Status](https://api.burrell.tech/api/badge?name=k8s-gateway&revision=true) [k8s-gateway](https://github.com/k8s-gateway/k8s_gateway) - DNS gateway for Gateway API resources
 - ![App Status](https://api.burrell.tech/api/badge?name=longhorn&revision=true) [longhorn](https://longhorn.io/) - Distributed block storage
 - ![App Status](https://api.burrell.tech/api/badge?name=metallb&revision=true) [metallb](https://metallb.universe.tf/) - Bare metal load balancer
 - ![App Status](https://api.burrell.tech/api/badge?name=metrics-server&revision=true) [metrics-server](https://github.com/kubernetes-sigs/metrics-server) - Resource metrics collection
-- ![App Status](https://api.burrell.tech/api/badge?name=nginx-ingress&revision=true) [nginx-ingress](https://github.com/kubernetes/ingress-nginx) - Ingress controller
 - ![App Status](https://api.burrell.tech/api/badge?name=sealed-secrets&revision=true) [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) - Encrypted secrets management
 
 ### External Services
@@ -68,6 +68,8 @@ The cluster runs on Talos Linux and is managed via Omni. Cluster configuration a
 - Kubernetes v1.34.1
 - Omni/Proxmox automatic node provisioner
 - Longhorn distributed storage
+- Gateway API with Envoy Gateway (HTTPRoutes, SecurityPolicy, BackendTrafficPolicy)
+- Gateway merging for shared LoadBalancer IP across multiple domains
 
 ## Bootstrapping ArgoCD
 
@@ -86,7 +88,7 @@ kubectl config set-context --current --namespace=argocd
 
 # Sync critical infrastructure components
 argocd app sync metallb --core
-argocd app sync nginx-ingress --core
+argocd app sync envoy-gateway --core
 argocd app sync cert-manager --core
 argocd app sync external-secrets --core
 ```
