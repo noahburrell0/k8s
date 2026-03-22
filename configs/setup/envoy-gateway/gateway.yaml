@@ -37,6 +37,7 @@ spec:
     - "*.burrell.tech"
     - "*.home.burrell.tech"
     - "*.k8s.burrell.tech"
+    - "*.hass.burrell.tech"
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: ClientTrafficPolicy
