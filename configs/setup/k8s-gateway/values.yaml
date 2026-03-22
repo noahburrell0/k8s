@@ -8,3 +8,5 @@ fallthrough:
   enabled: true
   zones:
     - burrell.tech
+
+watchedResources: ["Ingress", "Service", "HTTPRoute", "TLSRoute", "GRPCRoute", "DNSEndpoint"]
