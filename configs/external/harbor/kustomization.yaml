@@ -12,3 +12,32 @@ resources:
 - configs/pvcs.yaml
 - configs/secrets.yaml
 - configs/gateway.yaml
+
+patches:
+- target:
+    kind: Deployment
+    name: harbor-nginx
+  patch: |
+    $patch: delete
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: harbor-nginx
+- target:
+    kind: Service
+    name: harbor
+  patch: |
+    $patch: delete
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: harbor
+- target:
+    kind: ConfigMap
+    name: harbor-nginx
+  patch: |
+    $patch: delete
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: harbor-nginx
