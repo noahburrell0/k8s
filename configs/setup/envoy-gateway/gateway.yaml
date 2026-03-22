@@ -28,7 +28,6 @@ spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      metallb.universe.tf/address-pool: bgp-pool
       metallb.io/loadBalancerIPs: "172.19.0.254"
   listeners:
     - name: http
