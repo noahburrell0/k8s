@@ -1,6 +1,6 @@
 env:
   TZ: America/Toronto
   SHOW_DETAILS: "false"
-  TEMPLATE_NAME: connection
+  TEMPLATE_NAME: cats
 image:
-  tag: 2.19.0
+  tag: 3.8.1
