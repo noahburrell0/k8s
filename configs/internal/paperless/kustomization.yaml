@@ -10,3 +10,25 @@ helmCharts:
 
 resources:
 - configs/gateway.yaml
+- external-secret.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: paperless
+    patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: paperless
+      spec:
+        template:
+          spec:
+            containers:
+              - name: paperless
+                env:
+                  - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+                    valueFrom:
+                      secretKeyRef:
+                        name: auth0-config
+                        key: PAPERLESS_SOCIALACCOUNT_PROVIDERS
