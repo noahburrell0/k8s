@@ -15,7 +15,7 @@ env:
     {
       "auth0": {
           "AUTH0_URL": "https://auth.burrell.tech",
-          "OAUTH_PKCE_ENABLED": "True",
+          "OAUTH_PKCE_ENABLED": True,
       }
     }
   PAPERLESS_SOCIAL_AUTO_SIGNUP: "true"
