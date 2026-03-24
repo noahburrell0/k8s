@@ -13,6 +13,7 @@ env:
   PAPERLESS_DISABLE_REGULAR_LOGIN: "True"
   PAPERLESS_REDIRECT_LOGIN_TO_SSO: "True"
   PAPERLESS_SOCIAL_AUTO_SIGNUP: "True"
+  PAPERLESS_LOGOUT_REDIRECT_URL: https://auth.burrell.tech/oidc/logout
 
 ingress:
   main:
