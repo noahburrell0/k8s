@@ -9,6 +9,7 @@ env:
   PAPERLESS_CONSUMER_POLLING: 60
   PAPERLESS_REDIS: redis://paperless-redis-headless:6379
   PAPERLESS_URL: https://paperless.burrell.tech
+  PAPERLESS_APPS: allauth.socialaccount.providers.auth0
   PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
   PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
   PAPERLESS_SOCIALACCOUNT_PROVIDERS: '{"auth0":{"AUTH0_URL":"https://auth.burrell.tech","OAUTH_PKCE_ENABLED":True}}'
