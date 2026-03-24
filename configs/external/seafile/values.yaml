@@ -18,6 +18,11 @@ env:
       secretKeyRef:
         name: seafile-external-secret
         key: DB_ROOT_PASSWD
+  JWT_PRIVATE_KEY:
+    valueFrom:
+      secretKeyRef:
+        name: seafile-external-secret
+        key: JWT_PRIVATE_KEY
 
 ingress:
   main:
