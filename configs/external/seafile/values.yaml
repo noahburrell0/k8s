@@ -1,9 +1,9 @@
 image:
-  repository: docker.seadrive.org/seafileltd/seafile-pro-mc
-  tag: 11.0.19
+  repository: seafileltd/seafile-pro-mc
+  tag: 12.0.21
 
-imagePullSecrets:
-  - name: image-pull-secret
+# imagePullSecrets:
+#   - name: image-pull-secret
 
 env:
   SEAFILE_ADMIN_EMAIL: noah@burrell.tech
