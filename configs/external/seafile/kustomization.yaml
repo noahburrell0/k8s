@@ -15,5 +15,5 @@ helmCharts:
 
 resources:
 - configs/image-pull-secret.yaml
-- configs/seafile-sealed-secret.yaml
+- configs/seafile-external-secret.yaml
 - configs/gateway.yaml

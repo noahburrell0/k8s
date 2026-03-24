@@ -11,12 +11,12 @@ env:
   SEAFILE_ADMIN_PASSWORD:
     valueFrom:
       secretKeyRef:
-        name: seafile-sealed-secret
+        name: seafile-external-secret
         key: SEAFILE_ADMIN_PASSWORD
   DB_ROOT_PASSWD:
     valueFrom:
       secretKeyRef:
-        name: seafile-sealed-secret
+        name: seafile-external-secret
         key: DB_ROOT_PASSWD
 
 ingress:
@@ -43,7 +43,7 @@ mariadb:
   auth:
     database: seafile
     username: seafile
-    existingSecret: seafile-sealed-secret
+    existingSecret: seafile-external-secret
   primary:
     persistence:
       enabled: true
