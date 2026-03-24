@@ -1,6 +1,6 @@
 image:
   repository: docker.seadrive.org/seafileltd/seafile-pro-mc
-  tag: 10.0.1
+  tag: 10.0.18
 
 imagePullSecrets:
   - name: image-pull-secret
