@@ -10,7 +10,7 @@ helmCharts:
 
 resources:
 - configs/gateway.yaml
-- external-secret.yaml
+- configs/external-secret.yaml
 
 patches:
   - target:
