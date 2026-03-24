@@ -9,10 +9,10 @@ env:
   PAPERLESS_CONSUMER_POLLING: 60
   PAPERLESS_REDIS: redis://paperless-redis-headless:6379
   PAPERLESS_URL: https://paperless.burrell.tech
-  PAPERLESS_APPS: allauth.socialaccount.providers.auth0
-  PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
-  PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
-  PAPERLESS_SOCIAL_AUTO_SIGNUP: "true"
+  PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
+  PAPERLESS_DISABLE_REGULAR_LOGIN: "True"
+  PAPERLESS_REDIRECT_LOGIN_TO_SSO: "True"
+  PAPERLESS_SOCIAL_AUTO_SIGNUP: "True"
 
 ingress:
   main:
