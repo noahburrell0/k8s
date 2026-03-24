@@ -12,7 +12,13 @@ env:
   PAPERLESS_APPS: allauth.socialaccount.providers.auth0
   PAPERLESS_DISABLE_REGULAR_LOGIN: "true"
   PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true"
-  PAPERLESS_SOCIALACCOUNT_PROVIDERS: '{"auth0":{"AUTH0_URL":"https://auth.burrell.tech","OAUTH_PKCE_ENABLED":True}}'
+  PAPERLESS_SOCIALACCOUNT_PROVIDERS: |
+    {
+      "auth0": {
+        "AUTH0_URL": "https://auth.burrell.tech",
+        "OAUTH_PKCE_ENABLED": True
+      }
+    }
   PAPERLESS_SOCIAL_AUTO_SIGNUP: "true"
 
 ingress:
