@@ -9,7 +9,6 @@ helmCharts:
   valuesFile: values.yaml
 
 resources:
-- configs/image-pull-secret.yaml
 - configs/seafile-external-secret.yaml
 - configs/gateway.yaml
 - configs/redis.yaml
