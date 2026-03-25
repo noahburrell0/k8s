@@ -16,6 +16,7 @@ env:
   SEAFILE_MYSQL_DB_USER: "seafile"
   SEAFILE_MYSQL_DB_SEAFILE_DB_NAME: "seafile_db"
   REDIS_HOST: "seafile-redis"
+  REDIS_PORT: "6379"
   INIT_SEAFILE_ADMIN_PASSWORD:
     valueFrom:
       secretKeyRef:
