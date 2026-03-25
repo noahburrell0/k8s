@@ -16,7 +16,7 @@ env:
       secretKeyRef:
         name: seafile-external-secret
         key: SEAFILE_ADMIN_PASSWORD
-  DB_ROOT_PASSWD:
+  INIT_SEAFILE_MYSQL_ROOT_PASSWORD:
     valueFrom:
       secretKeyRef:
         name: seafile-external-secret
