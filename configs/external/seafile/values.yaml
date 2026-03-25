@@ -8,6 +8,8 @@ image:
 env:
   SEAFILE_ADMIN_EMAIL: noah@burrell.tech
   SEAFILE_SERVER_HOSTNAME: seafile.burrell.tech
+  SEAFILE_SERVER_PROTOCOL: https
+  FORCE_HTTPS_IN_CONF: "true"
   SEAFILE_ADMIN_PASSWORD:
     valueFrom:
       secretKeyRef:
