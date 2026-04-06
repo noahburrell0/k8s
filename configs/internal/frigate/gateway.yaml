@@ -32,6 +32,8 @@ spec:
         port: 8971
   tls:
     insecureSkipVerify: true
+    minVersion: "1.2"
+    maxVersion: "1.2"
     alpnProtocols:
       - http/1.1
 
