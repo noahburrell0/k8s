@@ -79,7 +79,7 @@ spec:
         - name: media
           nfs:
             server: "192.168.1.10"
-            path: /Media
+            path: /Media/frigate
         - name: tmpfs
           emptyDir:
             medium: Memory
