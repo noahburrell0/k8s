@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frigate
+  labels:
+    app.kubernetes.io/name: frigate
+    app.kubernetes.io/instance: frigate
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8971
+      targetPort: http
+      protocol: TCP
+    - name: http-internal
+      port: 5000
+      targetPort: http-internal
+      protocol: TCP
+    - name: rtsp
+      port: 8554
+      targetPort: rtsp
+      protocol: TCP
+    - name: webrtc-tcp
+      port: 8555
+      targetPort: webrtc-tcp
+      protocol: TCP
+    - name: webrtc-udp
+      port: 8555
+      targetPort: webrtc-udp
+      protocol: UDP
+  selector:
+    app.kubernetes.io/name: frigate
+    app.kubernetes.io/instance: frigate
