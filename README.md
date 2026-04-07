@@ -54,8 +54,7 @@ Applications are organized into ArgoCD projects:
 - ![App Status](https://api.burrell.tech/api/badge?name=nzbget&revision=true) [nzbget](https://nzbget.net/) - Usenet downloader
 - ![App Status](https://api.burrell.tech/api/badge?name=paperless&revision=true) [paperless](https://docs.paperless-ngx.com/) - Document management system
 - ![App Status](https://api.burrell.tech/api/badge?name=radarr&revision=true) [radarr](https://radarr.video/) - Movie collection manager
-- ![App Status](https://api.burrell.tech/api/badge?name=frigate&revision=true) [frigate](https://frigate.video/) - Network video recorder with real-time object detection
-- ![App Status](https://api.burrell.tech/api/badge?name=shinobi&revision=true) [shinobi](https://shinobi.video/) - Video surveillance platform
+- ![App Status](https://api.burrell.tech/api/badge?name=frigate&revision=true) [frigate](https://frigate.video/) - Network video recorder
 - ![App Status](https://api.burrell.tech/api/badge?name=smtp&revision=true) [smtp](https://github.com/djjudas21/smtp-relay) - SMTP relay service
 - ![App Status](https://api.burrell.tech/api/badge?name=sonarr&revision=true) [sonarr](https://sonarr.tv/) - TV series collection manager
 - ![App Status](https://api.burrell.tech/api/badge?name=tdarr&revision=true) [tdarr](https://tdarr.io/) - Media transcoding automation
