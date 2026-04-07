@@ -71,6 +71,27 @@ spec:
             periodSeconds: 10
           securityContext:
             privileged: true
+        - name: s3-backup
+          image: rclone/rclone:latest
+          command: ["/bin/sh", "/scripts/backup.sh"]
+          envFrom:
+            - secretRef:
+                name: frigate-s3-credentials
+          env:
+            - name: TZ
+              value: America/Panama
+          volumeMounts:
+            - name: media
+              mountPath: /media/frigate
+              readOnly: true
+            - name: s3-backup-script
+              mountPath: /scripts
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
       terminationGracePeriodSeconds: 30
       volumes:
         - name: config
@@ -88,3 +109,7 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: 512Mi
+        - name: s3-backup-script
+          configMap:
+            name: frigate-s3-backup-script
+            defaultMode: 0755
