@@ -17,7 +17,7 @@ data:
 
     while true; do
       echo "[$(date)] Syncing recordings to S3..."
-      rclone copy /media/frigate/ "s3:${S3_BUCKET}/" \
+      rclone copy /media/frigate/ ":s3:${S3_BUCKET}/" \
         --min-age "${MIN_AGE}" \
         --transfers 4 \
         --checkers 8 \
