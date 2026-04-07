@@ -7,18 +7,22 @@ data:
     #!/bin/sh
     set -e
 
-    SYNC_INTERVAL="${SYNC_INTERVAL:-60}"
+    SYNC_INTERVAL="${SYNC_INTERVAL:-300}"
     MIN_AGE="${MIN_AGE:-2m}"
+    MAX_AGE="${MAX_AGE:-20m}"
 
     echo "Starting S3 backup sidecar"
     echo "  Interval: ${SYNC_INTERVAL}s"
     echo "  Min age:  ${MIN_AGE}"
+    echo "  Max age:  ${MAX_AGE}"
     echo "  Bucket:   ${S3_BUCKET}"
 
     while true; do
       echo "[$(date)] Syncing recordings to S3..."
       rclone copy /media/frigate/ ":s3:${S3_BUCKET}/" \
         --min-age "${MIN_AGE}" \
+        --max-age "${MAX_AGE}" \
+        --no-traverse \
         --transfers 4 \
         --checkers 8 \
         --log-level INFO \
