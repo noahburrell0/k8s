@@ -7,7 +7,7 @@ data:
     #!/bin/sh
     set -e
 
-    SYNC_INTERVAL="${SYNC_INTERVAL:-300}"
+    SYNC_INTERVAL="${SYNC_INTERVAL:-60}"
     MIN_AGE="${MIN_AGE:-2m}"
     MAX_AGE="${MAX_AGE:-20m}"
 
