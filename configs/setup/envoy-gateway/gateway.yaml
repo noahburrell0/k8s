@@ -48,6 +48,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: envoy
+  timeout:
+    http:
+      streamIdleTimeout: 0s
   headers:
     earlyRequestHeaders:
       set:
