@@ -60,6 +60,21 @@ spec:
 ---
 
 apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: frigate-timeouts
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: frigate
+  timeout:
+    http:
+      streamIdleTimeout: 0s
+
+---
+
+apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
   name: frigate-whitelist
