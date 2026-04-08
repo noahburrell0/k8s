@@ -60,7 +60,7 @@ spec:
 ---
 
 apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: ClientTrafficPolicy
+kind: BackendTrafficPolicy
 metadata:
   name: frigate-timeouts
 spec:
@@ -70,7 +70,8 @@ spec:
       name: frigate
   timeout:
     http:
-      streamIdleTimeout: 0s
+      requestTimeout: 0s
+      connectionIdleTimeout: 0s
 
 ---
 
