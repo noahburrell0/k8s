@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kitchenowl
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  project: internal
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/noahburrell0/k8s.git
+    targetRevision: main
+    path: configs/internal/kitchenowl
+  destination:
+    name: in-cluster
+    namespace: kitchenowl
