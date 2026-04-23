@@ -6,3 +6,4 @@ resources:
 - configs/service.yaml
 - configs/gateway.yaml
 - configs/pvc.yaml
+- configs/external-secret.yaml

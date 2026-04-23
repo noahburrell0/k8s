@@ -25,6 +25,9 @@ spec:
         ports:
         - containerPort: 5000
           name: http
+        envFrom:
+        - secretRef:
+            name: kitchenowl-secrets
         env:
         - name: FRONT_URL
           value: "https://kitchenowl.home.burrell.tech"
@@ -65,4 +68,4 @@ spec:
           name: http
         env:
         - name: BACK_URL
-          value: "https://kitchenowl.home.burrell.tech"
+          value: kitchenowl.home.burrell.tech:443
