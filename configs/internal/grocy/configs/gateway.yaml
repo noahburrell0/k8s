@@ -1,0 +1,61 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grocy
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: https
+  hostnames:
+    - grocy.home.burrell.tech
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: grocy
+          port: 80
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grocy-redirect
+spec:
+  parentRefs:
+    - name: envoy
+      namespace: envoy-gateway-system
+      sectionName: http
+  hostnames:
+    - grocy.home.burrell.tech
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+
+---
+
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: grocy-whitelist
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: grocy
+  authorization:
+    defaultAction: Deny
+    rules:
+      - name: allow-private
+        action: Allow
+        principal:
+          clientCIDRs:
+            - 192.168.0.0/16
+            - 172.16.0.0/12
+            - 10.0.0.0/8

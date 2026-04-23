@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grocy
+  labels:
+    app.kubernetes.io/name: grocy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: grocy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: grocy
+    spec:
+      containers:
+      - name: grocy
+        image: linuxserver/grocy:latest
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: TZ
+          value: America/Panama
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: grocy-config

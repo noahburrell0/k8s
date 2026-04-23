@@ -55,6 +55,7 @@ Applications are organized into ArgoCD projects:
 - ![App Status](https://api.burrell.tech/api/badge?name=paperless&revision=true) [paperless](https://docs.paperless-ngx.com/) - Document management system
 - ![App Status](https://api.burrell.tech/api/badge?name=radarr&revision=true) [radarr](https://radarr.video/) - Movie collection manager
 - ![App Status](https://api.burrell.tech/api/badge?name=frigate&revision=true) [frigate](https://frigate.video/) - Network video recorder
+- ![App Status](https://api.burrell.tech/api/badge?name=grocy&revision=true) [grocy](https://grocy.info/) - Kitchen inventory and grocery management
 - ![App Status](https://api.burrell.tech/api/badge?name=kitchenowl&revision=true) [kitchenowl](https://kitchenowl.org/) - Grocery list and recipe manager
 - ![App Status](https://api.burrell.tech/api/badge?name=smtp&revision=true) [smtp](https://github.com/djjudas21/smtp-relay) - SMTP relay service
 - ![App Status](https://api.burrell.tech/api/badge?name=sonarr&revision=true) [sonarr](https://sonarr.tv/) - TV series collection manager
