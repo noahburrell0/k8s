@@ -68,4 +68,4 @@ spec:
           name: http
         env:
         - name: BACK_URL
-          value: kitchenowl.home.burrell.tech:443
+          value: kitchenowl-backend:5000
