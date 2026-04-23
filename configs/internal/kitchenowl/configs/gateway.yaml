@@ -13,13 +13,6 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /api
-      backendRefs:
-        - name: kitchenowl-backend
-          port: 5000
-    - matches:
-        - path:
-            type: PathPrefix
             value: /
       backendRefs:
         - name: kitchenowl-web
