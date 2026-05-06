@@ -10,6 +10,20 @@ spec:
   tls:
     insecureSkipVerify: true
 ---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: Backend
+metadata:
+  name: argocd-server-grpc
+spec:
+  endpoints:
+    - fqdn:
+        hostname: argocd-server.argocd.svc.cluster.local
+        port: 443
+  tls:
+    insecureSkipVerify: true
+    alpnProtocols:
+      - h2
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -55,26 +69,19 @@ spec:
         - path:
             type: PathPrefix
             value: /
+          headers:
+            - name: content-type
+              type: Exact
+              value: application/grpc
       backendRefs:
         - group: gateway.envoyproxy.io
           kind: Backend
-          name: argocd-server
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: GRPCRoute
-metadata:
-  name: argocd-server
-  annotations:
-    external-dns.alpha.kubernetes.io/exclude: 'true'
-spec:
-  parentRefs:
-    - name: envoy
-      namespace: envoy-gateway-system
-      sectionName: https
-  hostnames:
-    - argocd.k8s.burrell.tech
-  rules:
-    - backendRefs:
+          name: argocd-server-grpc
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
         - group: gateway.envoyproxy.io
           kind: Backend
           name: argocd-server
@@ -87,9 +94,6 @@ spec:
   targetRefs:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      name: argocd-server
-    - group: gateway.networking.k8s.io
-      kind: GRPCRoute
       name: argocd-server
   authorization:
     defaultAction: Deny
