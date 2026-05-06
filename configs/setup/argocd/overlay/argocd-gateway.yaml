@@ -3,12 +3,12 @@ kind: Backend
 metadata:
   name: argocd-server
 spec:
-  appProtocols:
-    - gateway.envoyproxy.io/h2c
   endpoints:
     - fqdn:
         hostname: argocd-server.argocd.svc.cluster.local
-        port: 80
+        port: 443
+  tls:
+    insecureSkipVerify: true
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
