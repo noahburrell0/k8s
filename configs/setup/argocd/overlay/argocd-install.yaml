@@ -4,6 +4,7 @@ metadata:
   name: argocd-cmd-params-cm
 data:
   server.enable.gzip: "true"
+  server.insecure: "true"
   application.namespaces: "argocd"
 
 ---
