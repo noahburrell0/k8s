@@ -9,18 +9,6 @@ spec:
         port: 443
   tls:
     insecureSkipVerify: true
----
-apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: Backend
-metadata:
-  name: argocd-server-grpc
-spec:
-  endpoints:
-    - fqdn:
-        hostname: argocd-server.argocd.svc.cluster.local
-        port: 443
-  tls:
-    insecureSkipVerify: true
     alpnProtocols:
       - h2
 ---
@@ -91,7 +79,7 @@ spec:
     - backendRefs:
         - group: gateway.envoyproxy.io
           kind: Backend
-          name: argocd-server-grpc
+          name: argocd-server
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
