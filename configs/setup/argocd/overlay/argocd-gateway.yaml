@@ -80,20 +80,6 @@ spec:
           name: argocd-server
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: BackendTrafficPolicy
-metadata:
-  name: argocd-server-h2
-spec:
-  targetRefs:
-    - group: gateway.networking.k8s.io
-      kind: GRPCRoute
-      name: argocd-server
-  http2:
-    initialConnectionWindowSize: 1Mi
-    initialStreamWindowSize: 64Ki
-    maxConcurrentStreams: 100
----
-apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
   name: argocd-server-ip-whitelist
