@@ -17,6 +17,11 @@ resources:
 namespace: argocd
 
 patches:
+  # SSO Support for mobile app
+  - path: patch-dex-server.yaml
+    target:
+      kind: Deployment
+      name: argocd-dex-server
   # Add pod exec functionality to CR to enable websocket terminal in ArgoCD
   - target:
       kind: ClusterRole
