@@ -55,8 +55,6 @@ Applications are organized into ArgoCD projects:
 - ![App Status](https://api.burrell.tech/api/badge?name=paperless&revision=true) [paperless](https://docs.paperless-ngx.com/) - Document management system
 - ![App Status](https://api.burrell.tech/api/badge?name=radarr&revision=true) [radarr](https://radarr.video/) - Movie collection manager
 - ![App Status](https://api.burrell.tech/api/badge?name=frigate&revision=true) [frigate](https://frigate.video/) - Network video recorder
-- ![App Status](https://api.burrell.tech/api/badge?name=grocy&revision=true) [grocy](https://grocy.info/) - Kitchen inventory and grocery management
-- ![App Status](https://api.burrell.tech/api/badge?name=kitchenowl&revision=true) [kitchenowl](https://kitchenowl.org/) - Grocery list and recipe manager
 - ![App Status](https://api.burrell.tech/api/badge?name=smtp&revision=true) [smtp](https://github.com/djjudas21/smtp-relay) - SMTP relay service
 - ![App Status](https://api.burrell.tech/api/badge?name=sonarr&revision=true) [sonarr](https://sonarr.tv/) - TV series collection manager
 - ![App Status](https://api.burrell.tech/api/badge?name=tdarr&revision=true) [tdarr](https://tdarr.io/) - Media transcoding automation
@@ -72,6 +70,12 @@ The cluster runs on Talos Linux and is managed via Omni. Cluster configuration a
 - Longhorn distributed storage
 - Gateway API with Envoy Gateway (HTTPRoutes, SecurityPolicy, BackendTrafficPolicy)
 - Gateway merging for shared LoadBalancer IP across multiple domains
+
+Changes to `cluster.yaml` can be applied with:
+
+```bash
+omnictl cluster template sync -v -f omni/cluster.yaml
+```
 
 ## Bootstrapping ArgoCD
 

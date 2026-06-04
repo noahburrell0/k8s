@@ -19,6 +19,8 @@ services:
     command: >
       --account-id=${OMNI_ACCOUNT_UUID} 
       --name=${NAME} 
+      --eula-accept-name=NoahBurrell
+      --eula-accept-email=noahburrell0@gmail.com 
       --cert=/tls.crt
       --key=/tls.key
       --machine-api-cert=/tls.crt

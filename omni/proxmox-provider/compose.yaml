@@ -1,6 +1,6 @@
 services:
   omni-infra-provider-proxmox:
-    image: ghcr.io/siderolabs/omni-infra-provider-proxmox:latest
+    image: ghcr.io/siderolabs/omni-infra-provider-proxmox:v0.1.0
     container_name: omni-infra-provider-proxmox
     env_file:
       - .env
