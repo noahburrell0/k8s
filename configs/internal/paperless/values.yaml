@@ -7,6 +7,8 @@ env:
   PAPERLESS_TIME_ZONE: America/New_York
   PAPERLESS_OCR_LANGUAGE: eng
   PAPERLESS_CONSUMER_POLLING: 60
+  PAPERLESS_CONSUMER_POLLING_RETRY_COUNT: 10
+  PAPERLESS_CONSUMER_POLLING_DELAY: 60
   PAPERLESS_REDIS: redis://paperless-redis-headless:6379
   PAPERLESS_URL: https://paperless.burrell.tech
   PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
