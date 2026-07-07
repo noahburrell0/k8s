@@ -54,7 +54,7 @@ spec:
           image: registry.k8s.io/git-sync/git-sync:v4.6.0
           env:
             - name: GITSYNC_REPO
-              value: https://github.com/noahburrell0/burrell-tech.git
+              value: git@github.com:noahburrell0/burrell-tech.git
             - name: GITSYNC_REF
               value: main
             - name: GITSYNC_ROOT
@@ -72,6 +72,9 @@ spec:
               mountPath: /git
             - name: sparse-patterns
               mountPath: /etc/git-sync
+            - name: git-sync-ssh
+              mountPath: /etc/git-secret
+              readOnly: true
           resources:
             requests:
               cpu: 10m
@@ -79,8 +82,15 @@ spec:
             limits:
               memory: 128Mi
           securityContext:
-            runAsUser: 65534
-            runAsGroup: 65534
+            # 65533 is git-sync's built-in nonroot user; it exists in the image's
+            # /etc/passwd, which OpenSSH requires (uid 65534 does not, and would
+            # otherwise need GITSYNC_ADD_USER=true).
+            runAsUser: 65533
+            runAsGroup: 65533
+
+      # fsGroup makes the root-owned, 0400 SSH key readable by git-sync's group.
+      securityContext:
+        fsGroup: 65533
 
       volumes:
         - name: site-content
@@ -91,3 +101,8 @@ spec:
         - name: sparse-patterns
           configMap:
             name: git-sync-sparse-checkout
+        - name: git-sync-ssh
+          secret:
+            secretName: git-sync-ssh
+            # 0400 = not group/world readable, as OpenSSH requires for a key.
+            defaultMode: 0400
