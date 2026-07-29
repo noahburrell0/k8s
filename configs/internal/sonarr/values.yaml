@@ -1,7 +1,7 @@
 image:
   pullPolicy: IfNotPresent
   repository: ghcr.io/home-operations/sonarr
-  tag: 4.0.16.2943
+  tag: 4.0.19
 
 env:
   TZ: America/Toronto
